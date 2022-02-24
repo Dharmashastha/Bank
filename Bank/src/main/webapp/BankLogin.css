@@ -1,0 +1,66 @@
+@charset "UTF-8";
+div
+{
+text-align: center;
+font-size:20px;
+height:400px;
+width:300px;
+margin-left:700px;
+position:inherit;
+}
+form
+{
+	margin-bottom:100;
+	height: 300px;
+}
+fieldset
+{	
+	margin-left:200px;
+	background-color:yellow;
+	margin-top:230px;
+	width:300px;
+	height:400px;
+	border:none;
+}
+input[type=text]
+{
+height:30px;	
+width: 100%;
+box-sizing: border-box;	
+}
+
+input[type=password]
+{
+height:30px;	
+width: 100%;
+box-sizing: border-box;	
+}
+
+label {
+	font-style: italic;
+}
+input[type=submit]
+{
+font-style: italic;	
+}
+
+input[type=reset]
+{
+font-style: oblique;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
