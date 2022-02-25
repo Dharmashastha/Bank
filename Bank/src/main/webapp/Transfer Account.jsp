@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <style>
+div{
+text-align: center;
+}
 a{
 background-color: #4CAF04; 
   border: none;
@@ -23,7 +26,9 @@ background-color: #4CAF04;
 <title>Transfer Account</title>
 </head>
 <body>
-<a href="CustomerOptions.jsp" style="float: right;">Home</a>
+<div>
+<a href="Transfer Account.jsp">Transfer to Account</a><br>
+</div>
 <label for="account">From AccountNo</label><br>
 <input type="text" id="account" placeholder="AccountNo"><br>
 <label for="account">To AccountNo</label><br>

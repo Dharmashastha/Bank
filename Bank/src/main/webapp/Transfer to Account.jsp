@@ -23,7 +23,7 @@ background-color: #4CAF04;
 <title>Transfer to Account</title>
 </head>
 <body>
-<a href="AdminOptions.jsp" style="float: right;">Home</a>
+<%@include file="Menu.jsp" %>
 <label for="account">From AccountNo</label><br>
 <input type="text" id="account" placeholder="AccountNo"><br>
 <label for="account">To AccountNo</label><br>

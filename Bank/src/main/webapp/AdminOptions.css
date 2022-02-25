@@ -1,7 +1,7 @@
 @charset "UTF-8";
 div
 {
-	text-align: center;
+	text-align: center;	
 }
 a{
   background-color: #4CAF04; 
@@ -11,7 +11,7 @@ a{
   text-align: center;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin :4px 2px;	
   cursor: pointer;
   transition-duration: 0.4s;
   text-decoration: none;

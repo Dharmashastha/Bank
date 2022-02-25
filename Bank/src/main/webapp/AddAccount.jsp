@@ -23,16 +23,19 @@ background-color: #4CAF04;
 <title>AddAccount</title>
 </head>
 <body>
-<a href="AdminOptions.jsp" style="float: right;">Home</a>
+<form action="AddClient">
+<%@include file="Menu.jsp" %>
 <label for="AccNo">AccountNo</label><br>
-<input type="text" id="AccNo" placeholder="AccountNo"><br>
+<input type="text" id="AccNo" name="accountNo" placeholder="AccountNo"><br>
 <label for="balance">Balance</label><br>
-<input type="text" id="balance" placeholder="Balance"><br>
+<input type="text" id="balance"  name="balance" placeholder="Balance"><br>
 <label for="custId">customerId</label><br>
-<input type="text" id="custId" placeholder="customerId"><br>
+<input type="text" id="custId" name="customerId" placeholder="customerId"><br>
 <label for="status">Status</label><br>
 <input type="radio" name="yesno" id="status">Active
 <input type="radio" name="yesno" id="status">InActived
 <br><input type="submit" value="Register">
+<input type="hidden" name="Details" value="account">
+</form>
 </body>
 </html>

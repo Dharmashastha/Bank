@@ -23,7 +23,7 @@ background-color: #4CAF04;
 <title>Amount</title>
 </head>
 <body>
-<a href="AdminOptions.jsp" style="float: right;">Home</a>
+<%@include file="Menu.jsp" %>
 <label for="custId">CustomerId</label><br>
 <input type="text" id="custId" placeholder="customerId"><br>
 <label for="AccountNo">AccountNo</label><br>

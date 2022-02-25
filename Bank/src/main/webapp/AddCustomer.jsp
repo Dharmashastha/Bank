@@ -41,14 +41,17 @@ div
 </head>
 <body>
 <div>
-<a href="AdminOptions.jsp" style="float: right;">Home</a>
+<form action="AddClient">
+<%@include file="Menu.jsp" %>
 <label for="custName">CustomerName</label><br>
-<input type="text" id="custName" placeholder="customerName"><br>
+<input type="text" id="custName" name="custName" placeholder="customerName"><br>
 <label for="dob">Date of Birth</label><br>
-<input type="date" id="dob"><br>
+<input type="date" id="dob" name="dob"><br>
 <label for="address">Address</label><br>
-<input type="text" id="address"><br>
-<input type="submit" value="Register">
+<input type="text" id="address" name="address"><br>
+<input type="submit" value="Register" id="register">
+<input type="hidden" name="Details" value="customer">
+</form>
 </div>
 </body>
 </html>
