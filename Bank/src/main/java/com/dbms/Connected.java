@@ -6,11 +6,6 @@ import com.test.CustomException;
 
 public interface Connected 
 {
-	public long customerId=100000;
-	public long accountNo=20000;
-	public long addNewCustomerId();
-	public long addNewAccountNo();
-	public double setMinBalance() throws CustomException;
 	public Map<Long,CustomerInfo> writeCustomerFile
 	(Map<Long,CustomerInfo> custMap,Map<Long,Map<Long,AccountInfo>> accMap) throws CustomException;
 	public Map<Long,Map<Long,AccountInfo>> writeAccountFile
@@ -22,6 +17,7 @@ public interface Connected
 	public void createNewTableQuery(String newTable) throws CustomException;
 	public void insertCustInfo(String insert,String custName,String dob,String address,long customerId) throws CustomException;
 	public void insertAccInfo(String insert,long accountNo,double balance,long customerId,boolean status) throws CustomException;
-	public void updatePrepared(String update) throws CustomException;
-	public void selectWherePrepared(String customer,String account) throws CustomException;
+	public void updatePrepared(double balance,long accountNo) throws CustomException;
+	public Map<Long,CustomerInfo> getCustomerDb() throws CustomException;
+	public Map<Long,Map<Long, AccountInfo>> getAccountDb() throws CustomException;
 }

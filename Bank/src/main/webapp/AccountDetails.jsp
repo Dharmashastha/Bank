@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@ background-color: #4CAF04;
   width: 100%;
 }
 
-#AccountDetails tr, #AccountDetails th {
+#AccountDetails td, #AccountDetails th {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -44,25 +45,28 @@ background-color: #4CAF04;
 <%@include file="Menu.jsp" %>
 <a href="AddAccount.jsp" style="float: right;">Add Account</a>
 <a href="" style="float: right;">Deactivated Account</a>
+<form action="ShowDetails" method="post">
 <table id="AccountDetails">
 <tr>
+	<th>Select</th>
 	<th>AccountNo</th>
 	<th>Balance</th>
 	<th>CustomerId</th>
 	<th>Status</th>
 </tr>
+<c:forEach items="${accMap}" var="current">
+<c:forEach items="${current.value}" var="current1"> 
 <tr>
-	<th>20001</th>
-	<th>2000.00</th>
-	<th>100001</th>
-	<th>Active</th>
+       <td><input type="checkbox" name="name1" /> </td>
+      <td><c:out value="${current1.key}"></c:out></td>
+      <td><c:out value="${current1.value.getBalance()}"></c:out></td>
+       <td><c:out value="${current.key}" ></c:out></td>
+       <td><c:out value="${current1.value.isStatus()}" ></c:out></td>
+      
 </tr>
-<tr>
-	<th>20002</th>
-	<th>5000.00</th>
-	<th>100002</th>
-	<th>Active</th>
-</tr>
+</c:forEach>
+</c:forEach> 
 </table>
+</form>
 </body>
 </html>

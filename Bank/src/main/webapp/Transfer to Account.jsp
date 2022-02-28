@@ -31,6 +31,5 @@ background-color: #4CAF04;
 <label for="Amount">Transfer Amount</label><br>
 <input type="text" id="Amount" placeholder="Amount"><br>
 <input type="submit">
-
 </body>
 </html>

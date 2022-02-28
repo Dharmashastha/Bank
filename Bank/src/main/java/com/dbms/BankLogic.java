@@ -1,8 +1,5 @@
 package com.dbms;
 
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -10,22 +7,16 @@ import java.util.Properties;
 import com.test.CustomException;
 import com.test.HelperUtil;
 import com.test.InputCenter;
-import com.test.PersistantLayer;
 
 public class BankLogic {
 	
-	public PersistantLayer layCall=new PersistantLayer();
 	InputCenter inputCall=new InputCenter();
 	Storage storageCall=new Storage();
 	
 	Properties property=new Properties();
 	
 	public Connected connect;
-	//AccountInfo acInfo;
 	
-	//public long customerId=100000;
-	//public long accountNo=20000;
-
 	public Map<Long,CustomerInfo> customerMap=new HashMap<>();
 	public Map<Long,Map<Long,AccountInfo>> accountMap=new HashMap<>();
 
@@ -46,9 +37,9 @@ public BankLogic(boolean flag) {
 	
 	try {
 		Class<?> conCall=Class.forName(path);
-		Constructor<?> constr=conCall.getDeclaredConstructor(String.class);
-		Object stored=constr.newInstance();
-		connect=(Connected) stored;
+		Object saved=conCall.getDeclaredConstructor().newInstance();
+		
+		connect=(Connected) saved;
 	} catch (Exception e) {
 		e.printStackTrace();
 	} 
@@ -151,6 +142,7 @@ public double deposit(long customerId,long accountNo,double deposit) throws Cust
 	{	
 	double balance=checkBalance(customerId, accountNo)+deposit;
 	acInfo.setBalance(balance);
+	//dbDeposit(customerId, accountNo, balance);
 	return balance;
 	}
 	throw new CustomException("Deposit Negative Amount"); 
@@ -205,10 +197,36 @@ public void readFileInfo() throws CustomException
 {
 	storageCall.customerMap=connect.getCustomerFile();
 	storageCall.accountMap=connect.getAccountFile();
-	layCall.customerId=connect.getCustomerIdFile();
-	layCall.accountNo=connect.getAccountNoFile();
+	AutoGenerate.customerId=connect.getCustomerIdFile();
+	AutoGenerate.accountNo=connect.getAccountNoFile();
 	customerMap=storageCall.customerMap;
 	accountMap=storageCall.accountMap;
-	
+}
+
+public void writeDbInfo() throws CustomException
+{
+	customerMap=connect.getCustomerDb();
+	accountMap=connect.getAccountDb();
+	storageCall.cacheFile(customerMap, accountMap);
+}
+
+public void readDbInfo() throws CustomException
+{
+	customerMap=storageCall.customerMap;
+	accountMap=storageCall.accountMap;	
+}
+
+public void dbDeposit(long customerId,long accountNo,double deposit) throws CustomException
+{
+	readDbInfo();
+	double balance=deposit(customerId, accountNo, deposit);
+	connect.updatePrepared(balance, accountNo);
+}
+
+public void dbWithdraw(long customerId,long accountNo,double withdraw) throws CustomException
+{
+	readDbInfo();
+	double balance=withdraw(customerId, accountNo, withdraw);
+	connect.updatePrepared(balance, accountNo);
 }
 }

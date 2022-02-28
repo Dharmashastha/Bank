@@ -9,7 +9,7 @@ div
 {
 	text-align: center;	
 }
-a{
+input[type=submit]{
   background-color: #4CAF04; 
   border: none;
   color: white;
@@ -28,12 +28,14 @@ a{
 </head>
 <body>
 <div>
-<a href="CustomerDetails.jsp">CustomerDetails</a>
-<a href="AccountDetails.jsp" >AccountDetails</a>
-<a href="Amount.jsp">Deposit</a>
-<a href="Amount.jsp">Withdraw</a>
-<a href="Transfer to Account.jsp">Transfer to Account</a>
+<form action="ShowDetails" method="post">
+<input type="submit" value="CustomerDetails">
+<input type="submit" value="AccountDetails">
+<input type="submit" value="Deposit">
+<input type="submit" value="WithDraw">
+<input type="submit" value="Transfer to Account">
 <a href="BankLogin.jsp" style="float: right;">LogOut</a>
+</form>
 </div>
 </body>
 </html>

@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.Map;
 
 import com.dbms.AccountInfo;
+import com.dbms.AutoGenerate;
 import com.dbms.Connected;
 import com.dbms.CustomerInfo;
 
@@ -16,29 +17,6 @@ import com.dbms.CustomerInfo;
 
 public class PersistantLayer implements Connected
 {
-
-public long customerId=100000;
-public long accountNo=20000;
-
-public long addNewCustomerId()
-{	
-return ++customerId;		
-}
-
-public long addNewAccountNo()
-{
-return ++accountNo;	
-}
-
-public double setMinBalance() throws CustomException
-{
-	AccountInfo account= new AccountInfo();
-	HelperUtil.nullCheckFile(account);
-	account.setBalance(1000.00);
-return 	account.getBalance();
-}
-	
-	
 	
 public Map<Long,CustomerInfo> writeCustomerFile(Map<Long,CustomerInfo> custMap,Map<Long,Map<Long,AccountInfo>> accMap) throws CustomException
 {
@@ -49,8 +27,8 @@ public Map<Long,CustomerInfo> writeCustomerFile(Map<Long,CustomerInfo> custMap,M
 	{
 			oos.writeObject(custMap);
 			oos.writeObject(accMap);
-			oos.writeLong(customerId);
-			oos.writeLong(accountNo);
+			oos.writeLong(AutoGenerate.customerId);
+			oos.writeLong(AutoGenerate.accountNo);
 			
 	}
 	catch(IOException e)
@@ -70,8 +48,8 @@ public Map<Long,Map<Long,AccountInfo>> writeAccountFile(Map<Long,CustomerInfo> c
 	{
 			oos.writeObject(custMap);
 			oos.writeObject(accMap);
-			oos.writeLong(customerId);
-			oos.writeLong(accountNo);
+			oos.writeLong(AutoGenerate.customerId);
+			oos.writeLong(AutoGenerate.accountNo);
 			
 	}
 	catch(IOException e)
@@ -139,13 +117,8 @@ public long getAccountNoFile() throws CustomException
 public void createNewTableQuery(String newTable) throws CustomException {	
 }
 
-@Override
-public void updatePrepared(String update) throws CustomException {
-}
 
-@Override
-public void selectWherePrepared(String customer, String account) throws CustomException {
-}
+
 
 @Override
 public void insertCustInfo(String insert, String custName, String dob, String address, long customerId)
@@ -155,6 +128,22 @@ public void insertCustInfo(String insert, String custName, String dob, String ad
 @Override
 public void insertAccInfo(String insert, long accountNo, double balance, long customerId, boolean status)
 		throws CustomException {
+}
+
+@Override
+public Map<Long, CustomerInfo> getCustomerDb() throws CustomException {
+	return null;
+}
+
+
+@Override
+public Map<Long, Map<Long, AccountInfo>> getAccountDb() throws CustomException {
+	return null;
+}
+
+
+@Override
+public void updatePrepared(double balance, long accountNo) throws CustomException {
 }
 
 }

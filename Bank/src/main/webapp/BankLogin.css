@@ -41,12 +41,30 @@ label {
 }
 input[type=submit]
 {
-font-style: italic;	
+cursor:pointer;
+font-style: italic;
+box-sizing: content-box;
+background-color: #4CAF04;
+box-sizing: border-box;
+font-size:20px;
+border: infobackground;
+padding:15px 32px;
+margin-top: 5px;
+display: inline-block;	
 }
 
 input[type=reset]
 {
-font-style: oblique;	
+cursor:pointer;
+font-style: italic;
+box-sizing: content-box;
+background-color: #4CAF04;
+box-sizing: border-box;
+font-size:20px;
+border: infobackground;
+padding:15px 32px;
+margin-top: 5px;
+display: inline-block;	
 }
 
 

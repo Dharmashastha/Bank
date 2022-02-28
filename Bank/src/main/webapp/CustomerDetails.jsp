@@ -45,6 +45,7 @@ background-color: #4CAF04;
 <a href="AddCustomer.jsp" style="float: right;">Add Customer</a>
 <table id="CustomerDetails">
 <tr>
+	
 	<th>CustomerId</th>
 	<th>CustomerName</th>
 	<th>Date of Birth</th>

@@ -1,7 +1,7 @@
 package com.test;
 
-import com.dbms.ConnectionUtlity;
-import com.dbms.BankQuery;
+//import com.dbms.ConnectionUtlity;
+//import com.dbms.BankQuery;
 
 public class DbmsOutput {
 
@@ -9,7 +9,7 @@ public class DbmsOutput {
 		// TODO Auto-generated method stub
 	
 		InputCenter inputCall=new InputCenter();
-		BankQuery bankCall=new BankQuery();
+	//	BankQuery bankCall=new BankQuery();
 		//try {Class.forName("com.mysql.cj.jdbc.Driver");} 
 		//catch (ClassNotFoundException e) {e.printStackTrace();}
 		

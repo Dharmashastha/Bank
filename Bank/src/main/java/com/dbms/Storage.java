@@ -12,5 +12,4 @@ public void cacheFile(Map<Long,CustomerInfo> customerMap,Map<Long,Map<Long,Accou
 	this.customerMap=customerMap;
 	this.accountMap=accountMap;	
 }
-
 }

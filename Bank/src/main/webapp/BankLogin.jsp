@@ -14,9 +14,9 @@
 <img src="profile.png" style="height: 200px; width: 200px;">
 <br><br>
 <label for="UserID">UserID</label><br>
-<input type="text" name="Username" id="UserID" maxlength=20 placeholder="UserID" ><br>
+<input type="text" name="Username" id="UserID" maxlength=20 placeholder="UserID" required="required"><br>
 <label for="password">Password</label><br>
-<input type="password" name="Password" id="password" maxlength=8 placeholder="Password"><br>
+<input type="password" name="Password" id="password" maxlength=8 placeholder="Password" required="required"><br>
 <br><input type="submit">
 <input type="reset">
 </fieldset>

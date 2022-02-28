@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import com.test.CustomException;
@@ -162,17 +161,14 @@ public void insertAccInfo(String insert,long accountNo,double balance,long custo
 		}
 }
 
-public void updatePrepared(String update) throws CustomException 
+public void updatePrepared(double balance,long accountNo) throws CustomException 
 	{
+		String update="UPDATE AccountInfo SET balance=? WHERE AccountNo=?";
 		//String update= "UPDATE Employee SET EmployeeName=? WHERE EmployeeId=?";
 		try(PreparedStatement state=ConnectionUtlity.getConnection().prepareStatement(update);)
 		{
-			System.out.println("Enter the EmployeeName:");
-			String name=inputCall.getString();
-			state.setString(1, name);
-			System.out.println("Enter the EmployeeId:");
-			int id=inputCall.getInt();
-			state.setInt(2, id);
+			state.setDouble(1,balance);
+			state.setLong(2,accountNo);
 			int check=state.executeUpdate();
 			if(check != 0)
 			{
@@ -225,92 +221,81 @@ public void selectPrepared() throws CustomException
 		}
 	}*/
 
-public void selectWherePrepared(String  customer,String account) throws CustomException
-	{
-		//String  select= "SELECT EmployeeName FROM Employee WHERE EmployeeId=105";
-		
-		Map<Long,CustomerInfo> custMap=new HashMap<Long, CustomerInfo>();
+public Map<Long,CustomerInfo> getCustomerDb() throws CustomException
+{
+	Map<Long,CustomerInfo> custMap=new HashMap<>();
 	
-		Map<Long, Map<Long, AccountInfo>> accMap=new HashMap<Long, Map<Long,AccountInfo>>();
-		
-		Map<Long,AccountInfo> tempMap;
-		
-		try(PreparedStatement state=ConnectionUtlity.getConnection().prepareStatement(customer);)
+	String customer = "select *from CustomerInfo;";
+	
+	try(PreparedStatement state=ConnectionUtlity.getConnection().prepareStatement(customer);)
+	{
+		try(ResultSet rs= state.executeQuery();)
 		{
-			try(ResultSet rs= state.executeQuery();)
+			while(rs.next())
 			{
-				while(rs.next())
-				{
-				CustomerInfo custCall=new CustomerInfo();
-			//	System.out.println(rs.getString(rs.getString("customerName")+" "+rs.getString("dob")+" "+rs.getString("address")+" "+rs.getLong("customerId")));
-				String custName=rs.getString(1);
-				String dob=rs.getString(2);
-				String address=rs.getString(3);
-				long custId=rs.getLong(4);
-				custCall.setCustomerName(custName);
-				custCall.setDob(dob);
-				custCall.setAddress(address);
-				custCall.setCustomerId(custId);
-				custMap.put(custId, custCall);
-				
-				}
-				System.out.println(custMap);
-			}	
-		}
-			catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		try(PreparedStatement stateAcc=ConnectionUtlity.getConnection().prepareStatement(account);)
-		{
-			try(ResultSet rs= stateAcc.executeQuery();)
-			{
-				while(rs.next())
-				{
-				AccountInfo accCall=new AccountInfo();
-			//	System.out.println(rs.getLong(0)+" "+rs.getDouble(1)+" "+rs.getLong(2)+" "+rs.getBoolean(3));
-				long accNo=rs.getLong(1);
-				double balance=rs.getDouble(2);
-				long custId=rs.getLong(3);
-				boolean status=rs.getBoolean(4);
-				accCall.setAccountNo(accNo);
-				accCall.setBalance(balance);
-				accCall.setCustomerId(custId);
-				accCall.setStatus(status);
-				tempMap=accMap.get(custId);
-				
-				if(tempMap == null)
-				{
-					tempMap=new HashMap<>();
-					accMap.put(custId, tempMap);
-				}
-				tempMap.put(accNo, accCall);
-				System.out.println(tempMap);
-				}
-				
-			}	
-		}
+			CustomerInfo custCall=new CustomerInfo();
+		//	System.out.println(rs.getString(rs.getString("customerName")+" "+rs.getString("dob")+" "+rs.getString("address")+" "+rs.getLong("customerId")));
+			String custName=rs.getString(1);
+			String dob=rs.getString(2);
+			String address=rs.getString(3);
+			long custId=rs.getLong(4);
+			custCall.setCustomerName(custName);
+			custCall.setDob(dob);
+			custCall.setAddress(address);
+			custCall.setCustomerId(custId);
+			custMap.put(custId, custCall);
+			AutoGenerate.customerId=custId;
+			}
+		}	
+	}
 		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		storeCall.cacheFile(custMap, accMap);
+		e.printStackTrace();
+	}
+return custMap;	
 }
 
 
-@Override
-public long addNewCustomerId() {
-	return 0;
+public Map<Long,Map<Long, AccountInfo>> getAccountDb() throws CustomException
+{
+
+	String account = "select *from AccountInfo;";
+	
+	Map<Long, Map<Long, AccountInfo>> accMap=new HashMap<>();
+	
+	Map<Long,AccountInfo> tempMap;
+	
+	try(PreparedStatement stateAcc=ConnectionUtlity.getConnection().prepareStatement(account);)
+	{
+		try(ResultSet rs= stateAcc.executeQuery();)
+		{
+			while(rs.next())
+			{
+			AccountInfo accCall=new AccountInfo();
+			long accNo=rs.getLong(1);
+			double balance=rs.getDouble(2);
+			long custId=rs.getLong(3);
+			boolean status=rs.getBoolean(4);
+			accCall.setAccountNo(accNo);
+			accCall.setBalance(balance);
+			accCall.setCustomerId(custId);
+			accCall.setStatus(status);
+			tempMap=accMap.get(custId);
+			AutoGenerate.accountNo=accNo;
+			if(tempMap == null)
+			{
+				tempMap=new HashMap<>();
+				accMap.put(custId, tempMap);
+			}
+			tempMap.put(accNo, accCall);
+			}
+		}	
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+return accMap;		
 }
 
-@Override
-public long addNewAccountNo() {
-	return 0;
-}
-
-@Override
-public double setMinBalance() throws CustomException {
-	return 0;
-}
 
 @Override
 public Map<Long, CustomerInfo> writeCustomerFile(Map<Long, CustomerInfo> custMap,

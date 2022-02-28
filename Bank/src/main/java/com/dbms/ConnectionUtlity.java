@@ -16,9 +16,12 @@ public enum ConnectionUtlity {
 	private static Connection connect=null;
 	
 	
+	
 public static Connection getConnection() throws CustomException {
+	
 	try
 	{
+		
 		if(connect == null)
 		{
 			HelperUtil.checkString(dbUrl);
