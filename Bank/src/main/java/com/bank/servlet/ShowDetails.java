@@ -27,20 +27,45 @@ public class ShowDetails extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+		String page=request.getParameter("page");
 		try {
-			logicCall.writeDbInfo();
-		} catch (CustomException e) {
-			e.printStackTrace();
-		}
+				logicCall.writeDbInfo();
+			} catch (CustomException e) {
+				e.printStackTrace();
+			}
 			try {
 				logicCall.readDbInfo();
 			} catch (CustomException e) {
 				e.printStackTrace();
 			}
-			request.setAttribute("cusMap", logicCall.customerMap);	
-			request.setAttribute("accMap", logicCall.accountMap);
-			RequestDispatcher requ=request.getRequestDispatcher("AccountDetails.jsp");
-			requ.forward(request, response);
+			
+			if(page.equals("CustomerDetails"))
+			{
+				request.setAttribute("cusMap", logicCall.customerMap);
+				RequestDispatcher req=request.getRequestDispatcher("CustomerDetails.jsp");
+				req.forward(request, response);
+			}
+			else if(page.equals("AccountDetails"))
+			{
+				request.setAttribute("accMap", logicCall.accountMap);
+				RequestDispatcher req=request.getRequestDispatcher("AccountDetails.jsp");
+				req.forward(request, response);
+			}
+			else if(page.equals("Deposit"))
+			{
+				RequestDispatcher req=request.getRequestDispatcher("Amount.jsp");
+				req.forward(request, response);
+			}
+			else if(page.equals("WithDraw"))
+			{
+				RequestDispatcher req=request.getRequestDispatcher("Amount.jsp");
+				req.forward(request, response);
+			}
+			else if(page.equals("Transfer to Account"))
+			{
+				RequestDispatcher req=request.getRequestDispatcher("TransfertoAccount.jsp");
+				req.forward(request, response);
+			}			
 	}
 
 }

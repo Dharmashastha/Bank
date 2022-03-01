@@ -23,17 +23,16 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//doGet(request, response);
-	
-		String id=request.getParameter("Username");
-		String password=request.getParameter("Password");
+		
 		
 		boolean check=false;
 		
+		String id=request.getParameter("Username");
+		String password=request.getParameter("Password");
 		if(id.equals("1")&&password.equals("24"))
 		{
 			check=true;
 		}
-		
 		if(check)
 		{
 			RequestDispatcher requ=request.getRequestDispatcher("AdminOptions.jsp");
@@ -44,9 +43,6 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher requ=request.getRequestDispatcher("CustomerOptions.jsp");
 			requ.forward(request, response);
 		}
-		
-		
-		
 		
 	}
 

@@ -58,21 +58,20 @@ div
 </style>
 </head>
 <body>
-
 <div>
-<form action="AddClient" method="post">
 <%@include file="Menu.jsp" %>
 <fieldset>
+<form action="AddClient" method="post">
 <label for="custName">CustomerName</label><br>
 <input type="text" id="custName" name="custName" placeholder="customerName" required="required"><br>
 <label for="dob">Date of Birth</label><br>
 <input type="date" id="dob" name="dob" required="required"><br>
 <label for="address">Address</label><br>
 <input type="text" id="address" name="address" required="required"><br><br>
-<input type="submit" value="Register" id="register">
+<input type="submit" value="Register">
 <input type="hidden" name="Details" value="customer">
-</fieldset>
 </form>
+</fieldset>
 </div>
 </body>
 </html>

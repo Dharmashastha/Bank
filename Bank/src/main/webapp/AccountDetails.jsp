@@ -29,6 +29,7 @@ background-color: #4CAF04;
 #AccountDetails td, #AccountDetails th {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: center;
 }
 
 #AccountDetails th {
@@ -57,12 +58,11 @@ background-color: #4CAF04;
 <c:forEach items="${accMap}" var="current">
 <c:forEach items="${current.value}" var="current1"> 
 <tr>
-       <td><input type="checkbox" name="name1" /> </td>
+       <td><input type="checkbox" name="name" /> </td>
       <td><c:out value="${current1.key}"></c:out></td>
       <td><c:out value="${current1.value.getBalance()}"></c:out></td>
        <td><c:out value="${current.key}" ></c:out></td>
-       <td><c:out value="${current1.value.isStatus()}" ></c:out></td>
-      
+       <td><c:out value="${current1.value.isStatus()}" ></c:out></td>      
 </tr>
 </c:forEach>
 </c:forEach> 

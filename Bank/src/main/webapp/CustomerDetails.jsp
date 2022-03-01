@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +26,10 @@ background-color: #4CAF04;
   width: 100%;
 }
 
-#CustomerDetails tr, #CustomerDetails th {
+#CustomerDetails td, #CustomerDetails th {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: center;
 }
 
 #CustomerDetails th {
@@ -51,18 +53,14 @@ background-color: #4CAF04;
 	<th>Date of Birth</th>
 	<th>Address</th>
 </tr>
+<c:forEach items="${cusMap}" var="current">
 <tr>
-	<th>100001</th>
-	<th>Dharma</th>
-	<th>24/05/2000</th>
-	<th>Chennai</th>
+       <td><c:out value="${current.key}"></c:out></td>
+       <td><c:out value="${current.value.getCustomerName()}"></c:out></td>
+       <td><c:out value="${current.value.getDob()}" ></c:out></td>
+       <td><c:out value="${current.value.getAddress()}" ></c:out></td>
 </tr>
-<tr>
-	<th>100002</th>
-	<th>Bharath</th>
-	<th>14/08/1997</th>
-	<th>Tuticorin</th>
-</tr>
+</c:forEach>
 </table>
 </body>
 </html>

@@ -19,7 +19,7 @@ label{
   font-family: sans-serif;
   font-style: italic;
 }
-input[type=number]
+input[type=text]
 {
 width:95%;
 padding:10px;
@@ -49,21 +49,27 @@ fieldset
 	height:150px;
 	border:none;
 }
+input[type=number]
+{
+width:95%;
+padding:10px;
+border:0;
+box-shadow:0 0 15px 4px rgba(0,0,0,0.06);	
+font-style: italic;
+}
 </style>
-<title>AddAccount</title>
+<title>TransfertoAccount</title>
 </head>
 <body>
 <%@include file="Menu.jsp" %>
 <fieldset>
-<form action="AddClient" method="post">
-<label for="custId">CustomerId</label><br>
-<input type="number" id="custId" name="customerId" placeholder="customerId" min="100001" max="200000" required><br>
-<!--label for="status">Status</label><br>
-<input type="radio" name="yesno" id="status" value="true">Active
-<input type="radio" name="yesno" id="status" value="false">InActived-->
-<br><input type="submit" value="Register">
-<input type="hidden" name="Details" value="account">
-</form>
+<label for="account">From AccountNo</label><br>
+<input type="text" id="account" placeholder="AccountNo" required><br>
+<label for="account">To AccountNo</label><br>
+<input type="text" id="account" placeholder="AccountNo" required><br>
+<label for="Amount">Transfer Amount</label><br>
+<input type="number" id="Amount" placeholder="Amount" min="100" maxlength="100000" required><br>
+<input type="submit">
 </fieldset>
 </body>
 </html>

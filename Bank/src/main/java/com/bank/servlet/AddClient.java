@@ -32,13 +32,17 @@ public class AddClient extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+		
 		String client=request.getParameter("Details");
+		
+		//System.out.println(client);
 		
 		try {
 			logicCall.writeDbInfo();
-		} catch (CustomException e1) {
-			e1.printStackTrace();
+		} catch (CustomException e) {
+			e.printStackTrace();
 		}
+		
 		if(client.equals("customer"))
 		{
 			
@@ -55,6 +59,7 @@ public class AddClient extends HttpServlet {
 			RequestDispatcher requ=request.getRequestDispatcher("AddCustomer.jsp");
 			requ.forward(request, response);
 		}
+		
 		if(client.equals("account"))
 		{
 			AccountInfo accCall=new AccountInfo();
@@ -62,8 +67,8 @@ public class AddClient extends HttpServlet {
 			double balance=0;
 			try {
 				balance = autoCall.setMinBalance();
-			} catch (CustomException e1) {
-				e1.printStackTrace();
+			} catch (CustomException e) {
+				e.printStackTrace();
 			}
 			long customerId=Long.parseLong(request.getParameter("customerId"));
 			boolean status=accCall.isStatus();
@@ -75,10 +80,7 @@ public class AddClient extends HttpServlet {
 			}
 			RequestDispatcher requ=request.getRequestDispatcher("AddAccount.jsp");
 			requ.forward(request, response);
-		}
-		
-		
-		
+		}	
 	}
 
 }
