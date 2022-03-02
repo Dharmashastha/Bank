@@ -16,6 +16,7 @@
   <servlet-name>LoginServlet</servlet-name>
    <servlet-class>com.bank.servlet.LoginServlet</servlet-class>
 	 </servlet>  
+	 
 	  <servlet>
   <servlet-name>AddClient</servlet-name>
    <servlet-class>com.bank.servlet.AddClient</servlet-class>
@@ -24,21 +25,32 @@
 	   <servlet>
   <servlet-name>ShowDetails</servlet-name>
    <servlet-class>com.bank.servlet.ShowDetails</servlet-class>
-	 </servlet> 
+	 </servlet>
+	 <servlet>
+	 
+  <servlet-name>Amount</servlet-name>
+   <servlet-class>com.bank.servlet.Amount</servlet-class>
+	 </servlet>
+	  
 	 
   <servlet-mapping>
   <servlet-name>LoginServlet</servlet-name>
-  <url-pattern>/LoginServlet</url-pattern>
+  <url-pattern>/loginservlet</url-pattern>
   </servlet-mapping>
   
     <servlet-mapping>
   <servlet-name>AddClient</servlet-name>
-  <url-pattern>/AddClient</url-pattern>
+  <url-pattern>/addclient</url-pattern>
   </servlet-mapping>
   
       <servlet-mapping>
   <servlet-name>ShowDetails</servlet-name>
-  <url-pattern>/ShowDetails</url-pattern>
+  <url-pattern>/showdetails</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  <servlet-name>Amount</servlet-name>
+  <url-pattern>/amount</url-pattern>
   </servlet-mapping>
  
 </web-app>

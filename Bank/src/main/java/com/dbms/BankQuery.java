@@ -182,6 +182,31 @@ public void updatePrepared(double balance,long accountNo) throws CustomException
 			e.printStackTrace();
 		}
 	}
+
+public void updateCustomerInfo(String customerName,String dob,String address,long customerId) throws CustomException 
+{
+	String update="UPDATE CustomerInfo SET customerName=?,dob=?,address=? WHERE customerId=?";
+	//String update= "UPDATE Employee SET EmployeeName=? WHERE EmployeeId=?";
+	try(PreparedStatement state=ConnectionUtlity.getConnection().prepareStatement(update);)
+	{
+		state.setString(1,customerName);
+		state.setString(2,dob);
+		state.setString(3,address);
+		state.setLong(4,customerId);
+		
+		int check=state.executeUpdate();
+		if(check != 0)
+		{
+			System.out.println(check+" Row Updated.");
+		}
+		else
+		{
+			System.out.println("No data");
+		}	
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+}
 	
 /*public void deletePrepared() throws CustomException 
 	{

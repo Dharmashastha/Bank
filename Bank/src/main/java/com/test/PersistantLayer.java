@@ -146,4 +146,10 @@ public Map<Long, Map<Long, AccountInfo>> getAccountDb() throws CustomException {
 public void updatePrepared(double balance, long accountNo) throws CustomException {
 }
 
+
+@Override
+public void updateCustomerInfo(String customerName, String dob, String address, long customerId)
+		throws CustomException {
+}
+
 }

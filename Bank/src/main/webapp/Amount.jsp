@@ -31,6 +31,14 @@ input[type=radio]
 {	
 font-style: italic;
 }
+input[type=number]
+{
+width:95%;
+padding:10px;
+border:0;
+box-shadow:0 0 15px 4px rgba(0,0,0,0.06);	
+font-style: italic;
+}
 input[type=submit]
 {
 cursor:pointer;
@@ -59,16 +67,18 @@ fieldset
 <body>
 <%@include file="Menu.jsp" %>
 <fieldset>
+<form action="amount" method="post">
 <label for="custId">CustomerId</label><br>
 <input type="text" id="custId" placeholder="customerId" name="custId"><br>
 <label for="AccountNo">AccountNo</label><br>
 <input type="text" id="AccountNo" placeholder="AccountNo" name="accNo"><br>
 <label for="amount">Deposit/Withdraw</label><br>
-<input type="radio" name="yesno" id="amount"><i>Deposit</i>
-<input type="radio" name="yesno" id="amount"><i>Withdraw</i><br>
+<input type="radio" name="yesno" id="amount" value="true"><i>Deposit</i>
+<input type="radio" name="yesno" id="amount" value="false"><i>Withdraw</i><br>
 <label for="amount">Amount</label><br>
-<input type="text" id="amount" placeholder="Amount" name="amount"><br>
+<input type="number" id="amount" placeholder="Amount" name="amount" min="100" maxlength="100000"><br>
 <input type="submit">
+</form>
 </fieldset>
 </body>
 </html>

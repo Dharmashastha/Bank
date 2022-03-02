@@ -20,6 +20,19 @@ background-color: #4CAF04;
   text-decoration: none;
   font-family: sans-serif;
 }
+button[type=submit]
+{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 2px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 #CustomerDetails {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -45,6 +58,7 @@ background-color: #4CAF04;
 <body>
 <%@include file="Menu.jsp" %>
 <a href="AddCustomer.jsp" style="float: right;">Add Customer</a>
+<form action="action" method="post">
 <table id="CustomerDetails">
 <tr>
 	
@@ -55,12 +69,15 @@ background-color: #4CAF04;
 </tr>
 <c:forEach items="${cusMap}" var="current">
 <tr>
-       <td><c:out value="${current.key}"></c:out></td>
+	
+       <td><button type="submit" formaction="AddCustomer.jsp" name="id" value="<c:out value="${current.key}" ></c:out>">
+<c:out value="${current.key}" ></c:out> </button></td>
        <td><c:out value="${current.value.getCustomerName()}"></c:out></td>
        <td><c:out value="${current.value.getDob()}" ></c:out></td>
        <td><c:out value="${current.value.getAddress()}" ></c:out></td>
 </tr>
 </c:forEach>
 </table>
+</form>
 </body>
 </html>

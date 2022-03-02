@@ -61,7 +61,7 @@ div
 <div>
 <%@include file="Menu.jsp" %>
 <fieldset>
-<form action="AddClient" method="post">
+<form action="addclient" method="post">
 <label for="custName">CustomerName</label><br>
 <input type="text" id="custName" name="custName" placeholder="customerName" required="required"><br>
 <label for="dob">Date of Birth</label><br>
@@ -69,6 +69,7 @@ div
 <label for="address">Address</label><br>
 <input type="text" id="address" name="address" required="required"><br><br>
 <input type="submit" value="Register">
+<input type="hidden" name="id" value="<% String s=request.getParameter("id");%><% out.print(s);%>">
 <input type="hidden" name="Details" value="customer">
 </form>
 </fieldset>

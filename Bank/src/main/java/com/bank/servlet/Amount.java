@@ -1,6 +1,8 @@
 package com.bank.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +27,6 @@ public class Amount extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 		
-		long customerId=Long.parseLong(request.getParameter("custId"));
-		long accountNo=Long.parseLong(request.getParameter("accNo"));
-		
-		double amount=Double.parseDouble(request.getParameter("amount"));
 		try {
 			logicCall.writeDbInfo();
 		} catch (CustomException e) {
@@ -40,8 +38,24 @@ public class Amount extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		long customerId=Long.parseLong(request.getParameter("custId"));
+		long accountNo=Long.parseLong(request.getParameter("accNo"));
+		boolean check=Boolean.parseBoolean(request.getParameter("yesno"));
+		double amount=Double.parseDouble(request.getParameter("amount"));
+	
 		try {
-			logicCall.deposit(customerId, accountNo, amount);
+		if(check)
+		{
+			logicCall.dbDeposit(customerId, accountNo, amount);
+			RequestDispatcher req=request.getRequestDispatcher("Amount.jsp");
+			req.forward(request, response);
+		}
+		else
+		{
+			logicCall.dbWithdraw(customerId, accountNo, amount);
+			RequestDispatcher req=request.getRequestDispatcher("Amount.jsp");
+			req.forward(request, response);
+		}
 		} catch (CustomException e) {
 			e.printStackTrace();
 		}

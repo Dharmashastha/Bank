@@ -42,7 +42,7 @@ a{
 </head>
 <body>
 <div>
-<form action="ShowDetails" method="post">
+<form action="showdetails" method="post">
 <input type="submit" value="CustomerDetails" name="page">
 <input type="submit" value="AccountDetails" name="page">
 <input type="submit" value="Deposit" name="page">

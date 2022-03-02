@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
 		
 		String id=request.getParameter("Username");
 		String password=request.getParameter("Password");
+		
 		if(id.equals("1")&&password.equals("24"))
 		{
 			check=true;

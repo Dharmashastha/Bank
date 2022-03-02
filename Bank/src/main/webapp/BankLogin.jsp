@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Bank Login Page</title>
+<title>BankLoginPage</title>
 <link rel="stylesheet" type="text/css" href="BankLogin.css">
 </head>
 <body background="Login.png">
 <div>
-<form action="LoginServlet" method="post" name="loginpage">
+<form action="loginservlet" method="post" name="loginpage">
 <fieldset>
 <img src="profile.png" style="height: 200px; width: 200px;">
 <br><br>

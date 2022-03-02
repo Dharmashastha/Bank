@@ -45,8 +45,8 @@ background-color: #4CAF04;
 <body>
 <%@include file="Menu.jsp" %>
 <a href="AddAccount.jsp" style="float: right;">Add Account</a>
-<a href="" style="float: right;">Deactivated Account</a>
-<form action="ShowDetails" method="post">
+<a href="Deactivated.jsp" style="float: right;">Deactivated Account</a>
+<form action="showdetails" method="post">
 <table id="AccountDetails">
 <tr>
 	<th>Select</th>
@@ -58,7 +58,7 @@ background-color: #4CAF04;
 <c:forEach items="${accMap}" var="current">
 <c:forEach items="${current.value}" var="current1"> 
 <tr>
-       <td><input type="checkbox" name="name" /> </td>
+       <td><input type="checkbox" name="name"/> </td>
       <td><c:out value="${current1.key}"></c:out></td>
       <td><c:out value="${current1.value.getBalance()}"></c:out></td>
        <td><c:out value="${current.key}" ></c:out></td>

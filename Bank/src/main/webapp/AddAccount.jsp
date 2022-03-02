@@ -55,7 +55,7 @@ fieldset
 <body>
 <%@include file="Menu.jsp" %>
 <fieldset>
-<form action="AddClient" method="post">
+<form action="addclient" method="post">
 <label for="custId">CustomerId</label><br>
 <input type="number" id="custId" name="customerId" placeholder="customerId" min="100001" max="200000" required><br>
 <!--label for="status">Status</label><br>
