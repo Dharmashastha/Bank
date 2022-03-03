@@ -85,6 +85,8 @@ font-style: italic;
 <fieldset>
 <label for="account">From AccountNo</label><br>
 <input type="text" id="account" placeholder="AccountNo" required><br>
+<label for="customer">To CustomerId</label><br>
+<input type="text" id="customer" placeholder="customerid" required><br>
 <label for="account">To AccountNo</label><br>
 <input type="text" id="account" placeholder="AccountNo" required><br>
 <label for="Amount">Transfer Amount</label><br>

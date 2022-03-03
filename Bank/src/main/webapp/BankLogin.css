@@ -19,7 +19,7 @@ fieldset
 	background-color:yellow;
 	margin-top:230px;
 	width:300px;
-	height:450px;
+	height:500px;
 	border:none;
 }
 input[type=text]
@@ -43,28 +43,28 @@ input[type=submit]
 {
 cursor:pointer;
 font-style: italic;
-box-sizing: content-box;
 background-color: #4CAF04;
 box-sizing: border-box;
 font-size:20px;
 border: infobackground;
 padding:15px 32px;
 margin-top: 5px;
-display: inline-block;	
+display: inline-block;
+width: 100%;	
 }
 
 input[type=reset]
 {
 cursor:pointer;
 font-style: italic;
-box-sizing: content-box;
-background-color: #4CAF04;
 box-sizing: border-box;
+background-color: #4CAF04;
 font-size:20px;
 border: infobackground;
 padding:15px 32px;
 margin-top: 5px;
 display: inline-block;	
+width: 100%;
 }
 
 

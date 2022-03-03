@@ -63,13 +63,19 @@ font-style: italic;
 <body>
 <%@include file="Menu.jsp" %>
 <fieldset>
+<form action="transferamount" method="post">
+<label for="customer">From CustomerId</label><br>
+<input type="text" id="customer" placeholder="customerId" required name="fromcust"><br>
 <label for="account">From AccountNo</label><br>
-<input type="text" id="account" placeholder="AccountNo" required><br>
+<input type="text" id="account" placeholder="AccountNo" required name="fromacc"><br>
+<label for="customer">To CustomerId</label><br>
+<input type="text" id="customer" placeholder="customerId" required name="tocust"><br>
 <label for="account">To AccountNo</label><br>
-<input type="text" id="account" placeholder="AccountNo" required><br>
+<input type="text" id="account" placeholder="AccountNo" required name="toacc"><br>
 <label for="Amount">Transfer Amount</label><br>
-<input type="number" id="Amount" placeholder="Amount" min="100" maxlength="100000" required><br>
+<input type="number" id="Amount" placeholder="Amount" min="100" maxlength="100000" required name="amount"><br>
 <input type="submit">
+</form>
 </fieldset>
 </body>
 </html>

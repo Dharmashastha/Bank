@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.dbms.BankLogic;
 import com.test.CustomException;
 
-public class Amount extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class TransferAmount extends HttpServlet {
 	
-    public Amount() {
+	private static final long serialVersionUID = 1L;
+       
+		
+	
+    public TransferAmount() {
         super();
     }
 
@@ -33,29 +36,20 @@ public class Amount extends HttpServlet {
 		catch (CustomException e) {
 			e.printStackTrace();
 		}
-		long customerId=Long.parseLong(request.getParameter("custId"));
-		long accountNo=Long.parseLong(request.getParameter("accNo"));
-		boolean check=Boolean.parseBoolean(request.getParameter("yesno"));
+		long fromCustomer=Long.parseLong(request.getParameter("fromcust"));
+		long fromAccount=Long.parseLong(request.getParameter("fromacc"));
+		long toCustomer=Long.parseLong(request.getParameter("tocust"));
+		long toAccount=Long.parseLong(request.getParameter("toacc"));
 		double amount=Double.parseDouble(request.getParameter("amount"));
-	
+		
 		try {
-		if(check)
-		{
-			logicCall.dbDeposit(customerId, accountNo, amount);
-			RequestDispatcher req=request.getRequestDispatcher("Amount.jsp");
-			req.forward(request, response);
-		}
-		else
-		{
-			logicCall.dbWithdraw(customerId, accountNo, amount);
-			RequestDispatcher req=request.getRequestDispatcher("Amount.jsp");
-			req.forward(request, response);
-		}
+			logicCall.dbWithdraw(fromCustomer, fromAccount, amount);
+			logicCall.dbDeposit(toCustomer, toAccount, amount);
 		} catch (CustomException e) {
 			e.printStackTrace();
 		}
-		
-		
+		RequestDispatcher req=request.getRequestDispatcher("TransfertoAccount.jsp");
+		req.forward(request, response);
 		
 	}
 

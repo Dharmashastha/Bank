@@ -26,10 +26,15 @@
   <servlet-name>ShowDetails</servlet-name>
    <servlet-class>com.bank.servlet.ShowDetails</servlet-class>
 	 </servlet>
-	 <servlet>
 	 
+	 <servlet> 
   <servlet-name>Amount</servlet-name>
    <servlet-class>com.bank.servlet.Amount</servlet-class>
+	 </servlet>
+	 
+	 <servlet> 
+  <servlet-name>TransferAmount</servlet-name>
+   <servlet-class>com.bank.servlet.TransferAmount</servlet-class>
 	 </servlet>
 	  
 	 
@@ -51,6 +56,11 @@
   <servlet-mapping>
   <servlet-name>Amount</servlet-name>
   <url-pattern>/amount</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  <servlet-name>TransferAmount</servlet-name>
+  <url-pattern>/transferamount</url-pattern>
   </servlet-mapping>
  
 </web-app>

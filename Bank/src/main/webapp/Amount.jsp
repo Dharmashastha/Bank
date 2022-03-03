@@ -69,14 +69,14 @@ fieldset
 <fieldset>
 <form action="amount" method="post">
 <label for="custId">CustomerId</label><br>
-<input type="text" id="custId" placeholder="customerId" name="custId"><br>
+<input type="text" id="custId" placeholder="customerId" name="custId" required><br>
 <label for="AccountNo">AccountNo</label><br>
-<input type="text" id="AccountNo" placeholder="AccountNo" name="accNo"><br>
+<input type="text" id="AccountNo" placeholder="AccountNo" name="accNo" required><br>
 <label for="amount">Deposit/Withdraw</label><br>
-<input type="radio" name="yesno" id="amount" value="true"><i>Deposit</i>
-<input type="radio" name="yesno" id="amount" value="false"><i>Withdraw</i><br>
+<input type="radio" name="yesno" id="amount" value="true" required><i>Deposit</i>
+<input type="radio" name="yesno" id="amount" value="false" required><i>Withdraw</i><br>
 <label for="amount">Amount</label><br>
-<input type="number" id="amount" placeholder="Amount" name="amount" min="100" maxlength="100000"><br>
+<input type="number" id="amount" placeholder="Amount" name="amount" min="100" maxlength="100000" required><br>
 <input type="submit">
 </form>
 </fieldset>

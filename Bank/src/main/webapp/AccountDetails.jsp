@@ -20,6 +20,19 @@ background-color: #4CAF04;
   text-decoration: none;
   font-family: sans-serif;
 }
+button[type=submit]
+{
+  background-color: #4CAF04;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 #AccountDetails {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -45,7 +58,7 @@ background-color: #4CAF04;
 <body>
 <%@include file="Menu.jsp" %>
 <a href="AddAccount.jsp" style="float: right;">Add Account</a>
-<a href="Deactivated.jsp" style="float: right;">Deactivated Account</a>
+<button type="submit" style="float: right;">Deactivated Account</button>
 <form action="showdetails" method="post">
 <table id="AccountDetails">
 <tr>
@@ -58,11 +71,11 @@ background-color: #4CAF04;
 <c:forEach items="${accMap}" var="current">
 <c:forEach items="${current.value}" var="current1"> 
 <tr>
-       <td><input type="checkbox" name="name"/> </td>
+      <td><input type="checkbox" name="accountNo" value="<c:out value="${current1.key}"></c:out>"/></td>
       <td><c:out value="${current1.key}"></c:out></td>
       <td><c:out value="${current1.value.getBalance()}"></c:out></td>
-       <td><c:out value="${current.key}" ></c:out></td>
-       <td><c:out value="${current1.value.isStatus()}" ></c:out></td>      
+      <td><c:out value="${current.key}" ></c:out></td>
+      <td><c:out value="${current1.value.isStatus()}" ></c:out></td>      
 </tr>
 </c:forEach>
 </c:forEach> 

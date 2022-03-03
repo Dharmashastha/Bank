@@ -22,7 +22,7 @@ background-color: #4CAF04;
 }
 button[type=submit]
 {
-  background-color: #4CAF50;
+  background-color: #4CAF04;
   border: none;
   color: white;
   padding: 2px 15px;

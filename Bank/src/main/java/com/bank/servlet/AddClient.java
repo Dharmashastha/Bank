@@ -18,8 +18,7 @@ public class AddClient extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-    BankLogic logicCall=new BankLogic(true);
-    AutoGenerate autoCall=new AutoGenerate();
+    
     
     
     public AddClient() {
@@ -33,6 +32,9 @@ public class AddClient extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 		
+		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
+		AutoGenerate autoCall=(AutoGenerate) request.getServletContext().getAttribute("autoCall");
+		
 		String client=request.getParameter("Details");
 		String id=request.getParameter("id");
 		String customerName=request.getParameter("custName");
@@ -40,12 +42,7 @@ public class AddClient extends HttpServlet {
 		String address=request.getParameter("address");
 		long customerId=autoCall.addNewCustomerId();
 		
-		try {
-			logicCall.writeDbInfo();
-		} catch (CustomException e) {
-			e.printStackTrace();
-		}
-		if(id==null)
+		if(id==null || id.equals("null"))
 		{
 		if(client.equals("customer"))
 		{

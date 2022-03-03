@@ -15,8 +15,6 @@ import com.test.CustomException;
 public class ShowDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	BankLogic logicCall=new BankLogic(true);
-	
     public ShowDetails() {
         super();
     }
@@ -27,21 +25,23 @@ public class ShowDetails extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+		
+		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
+		//System.out.println("logicCall"+logicCall);
 		String page=request.getParameter("page");
+		
+		//String accountNo=request.getParameter("accountNo");
+		//System.out.println(accountNo);
 		try {
-				logicCall.writeDbInfo();
-			} catch (CustomException e) {
-				e.printStackTrace();
-			}
-			try {
-				logicCall.readDbInfo();
-			} catch (CustomException e) {
-				e.printStackTrace();
-			}
-			
+			logicCall.writeDbInfo();
+			logicCall.readDbInfo();
+		}
+		catch (CustomException e) {
+			e.printStackTrace();
+		}
 			if(page.equals("CustomerDetails"))
 			{
-				request.setAttribute("cusMap", logicCall.customerMap);
+				request.setAttribute("cusMap",logicCall.customerMap);
 				RequestDispatcher req=request.getRequestDispatcher("CustomerDetails.jsp");
 				req.forward(request, response);
 			}
@@ -65,7 +65,8 @@ public class ShowDetails extends HttpServlet {
 			{
 				RequestDispatcher req=request.getRequestDispatcher("TransfertoAccount.jsp");
 				req.forward(request, response);
-			}			
+			}
+			
 	}
 
 }
