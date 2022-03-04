@@ -27,11 +27,10 @@ public class ShowDetails extends HttpServlet {
 		doGet(request, response);
 		
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
-		//System.out.println("logicCall"+logicCall);
+		//System.out.println("logicCall:"+logicCall);
 		String page=request.getParameter("page");
 		
-		//String accountNo=request.getParameter("accountNo");
-		//System.out.println(accountNo);
+		
 		try {
 			logicCall.writeDbInfo();
 			logicCall.readDbInfo();
@@ -51,17 +50,12 @@ public class ShowDetails extends HttpServlet {
 				RequestDispatcher req=request.getRequestDispatcher("AccountDetails.jsp");
 				req.forward(request, response);
 			}
-			else if(page.equals("Deposit"))
+			else if(page.equals("Deposit/WithDraw"))
 			{
 				RequestDispatcher req=request.getRequestDispatcher("Amount.jsp");
 				req.forward(request, response);
 			}
-			else if(page.equals("WithDraw"))
-			{
-				RequestDispatcher req=request.getRequestDispatcher("Amount.jsp");
-				req.forward(request, response);
-			}
-			else if(page.equals("Transfer to Account"))
+			else if(page.equals("TransferAmount"))
 			{
 				RequestDispatcher req=request.getRequestDispatcher("TransfertoAccount.jsp");
 				req.forward(request, response);

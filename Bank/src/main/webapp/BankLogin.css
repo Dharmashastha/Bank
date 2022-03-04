@@ -43,7 +43,7 @@ input[type=submit]
 {
 cursor:pointer;
 font-style: italic;
-background-color: #4CAF04;
+background-color: #008CBA;
 box-sizing: border-box;
 font-size:20px;
 border: infobackground;
@@ -58,7 +58,7 @@ input[type=reset]
 cursor:pointer;
 font-style: italic;
 box-sizing: border-box;
-background-color: #4CAF04;
+background-color: #008CBA;
 font-size:20px;
 border: infobackground;
 padding:15px 32px;

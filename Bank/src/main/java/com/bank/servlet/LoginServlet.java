@@ -1,6 +1,7 @@
 package com.bank.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dbms.AutoGenerate;
 import com.dbms.BankLogic;
+import com.test.CustomException;
 
 
 public class LoginServlet extends HttpServlet {
@@ -43,25 +45,33 @@ public void init(ServletConfig config)
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//doGet(request, response);
 		
+		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
+		PrintWriter out=response.getWriter();
+	
 		
-		boolean check=false;
-		
-		String id=request.getParameter("Username");
+		String userId=(request.getParameter("UserId"));
 		String password=request.getParameter("Password");
-		
-		if(id.equals("1")&&password.equals("24"))
-		{
-			check=true;
+		int roleId = 0;
+		try {
+			roleId=logicCall.connect.getRoleId(userId, password);
+		} catch (CustomException e) {
+			e.printStackTrace();
 		}
-		if(check)
+		
+		
+		if(roleId == 1)
+		{
+			RequestDispatcher requ=request.getRequestDispatcher("CustomerOptions.jsp");
+			requ.forward(request, response);
+		}
+		else if(roleId == 2)
 		{
 			RequestDispatcher requ=request.getRequestDispatcher("AdminOptions.jsp");
 			requ.forward(request, response);
 		}
 		else
 		{
-			RequestDispatcher requ=request.getRequestDispatcher("CustomerOptions.jsp");
-			requ.forward(request, response);
+			out.print("UserId And Password Invalid");
 		}
 		
 	}

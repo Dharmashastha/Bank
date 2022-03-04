@@ -18,7 +18,9 @@ public interface Connected
 	public void insertCustInfo(String insert,String custName,String dob,String address,long customerId) throws CustomException;
 	public void insertAccInfo(String insert,long accountNo,double balance,long customerId,boolean status) throws CustomException;
 	public void updatePrepared(double balance,long accountNo) throws CustomException;
-	public void updateCustomerInfo(String customerName,String dob,String address,long customerId) throws CustomException; 
+	public void updateCustomerInfo(String customerName,String dob,String address,long customerId) throws CustomException;
+	public void updateStatus(long accountNo) throws CustomException;
 	public Map<Long,CustomerInfo> getCustomerDb() throws CustomException;
 	public Map<Long,Map<Long, AccountInfo>> getAccountDb() throws CustomException;
+	public int getRoleId(String userId,String password) throws CustomException;
 }

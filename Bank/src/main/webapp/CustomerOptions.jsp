@@ -9,7 +9,7 @@
 </head>
 <body>
 <div>
-<a href="TransferAccount.jsp">Transfer to Account</a>
+<a href="TransferAccount.jsp">TransferAmount</a>
 <a href="BankLogin.jsp" style="float: right;">LogOut</a>
 </div>
 </body>

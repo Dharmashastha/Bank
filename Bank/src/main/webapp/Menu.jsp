@@ -10,7 +10,7 @@ div
 	text-align: center;	
 }
 input[type=submit]{
-  background-color: #4CAF04; 
+  background-color: #008CBA; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -22,9 +22,17 @@ input[type=submit]{
   transition-duration: 0.4s;
   text-decoration: none;
   font-family: sans-serif;
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
+input[type=submit]:hover
+{
+	background-color: #008CBA;
+ 	color: white;
 }
 a{
-  background-color: #4CAF04; 
+  background-color: #008CBA; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -45,9 +53,8 @@ a{
 <form action="showdetails" method="post">
 <input type="submit" value="CustomerDetails" name="page">
 <input type="submit" value="AccountDetails" name="page">
-<input type="submit" value="Deposit" name="page">
-<input type="submit" value="WithDraw" name="page">
-<input type="submit" value="Transfer to Account" name="page">
+<input type="submit" value="Deposit/WithDraw" name="page">
+<input type="submit" value="TransferAmount" name="page">
 <a href="BankLogin.jsp" style="float: right;">LogOut</a>
 </form>
 </div>

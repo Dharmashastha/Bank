@@ -36,6 +36,11 @@
   <servlet-name>TransferAmount</servlet-name>
    <servlet-class>com.bank.servlet.TransferAmount</servlet-class>
 	 </servlet>
+	 
+	 <servlet> 
+  <servlet-name>Deactivated</servlet-name>
+   <servlet-class>com.bank.servlet.Deactivated</servlet-class>
+	 </servlet>
 	  
 	 
   <servlet-mapping>
@@ -61,6 +66,11 @@
   <servlet-mapping>
   <servlet-name>TransferAmount</servlet-name>
   <url-pattern>/transferamount</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  <servlet-name>Deactivated</servlet-name>
+  <url-pattern>/deactivated</url-pattern>
   </servlet-mapping>
  
 </web-app>

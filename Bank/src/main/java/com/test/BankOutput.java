@@ -240,7 +240,7 @@ case 9:
 }
 case 10:
 {
-	//CREATE TABLE Login(customerId INT,Password VARCHAR(10),RoleId INT,FOREIGN KEY (customerId) REFERENCES CustomerInfo(customerId),FOREIGN KEY (RoleId) REFERENCES Role(RoleId));
+	//CREATE TABLE Login(UserId INT,customerId INT,Password VARCHAR(10),RoleId INT,FOREIGN KEY (customerId) REFERENCES CustomerInfo(customerId),FOREIGN KEY (RoleId) REFERENCES Role(RoleId),PRIMARY KEY(UserId));
 	//CREATE TABLE Role(RoleId INT,RoleName VARCHAR(10),PRIMARY KEY(RoleId));
 
 	//"CREATE TABLE CustomerInfo(customerName VARCHAR(30),dob VARCHAR(30),address VARCHAR(30),customerId INT NOT NULL AUTO_INCREMENT,PRIMARY KEY(customerId));";

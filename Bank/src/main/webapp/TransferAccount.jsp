@@ -10,7 +10,8 @@ text-align: center;
 }
 
 a{
-  background-color: #4CAF04; 
+
+  background-color: #008CBA; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -24,7 +25,7 @@ a{
   font-style: italic;
 }
 label{
-  background-color: #4CAF04; 
+  background-color: #008CBA; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -50,7 +51,7 @@ input[type=submit]
 cursor:pointer;
 font-style: italic;
 box-sizing: content-box;
-background-color: #4CAF04;
+background-color: #008CBA;
 box-sizing: border-box;
 font-size:20px;
 border: infobackground;
@@ -75,12 +76,16 @@ border:0;
 box-shadow:0 0 15px 4px rgba(0,0,0,0.06);	
 font-style: italic;
 }
+#transfer{
+margin-left: 110px;
+}
 </style>
-<title>TransferAccount</title>
+<title>TransferAmount</title>
 </head>
 <body>
 <div>
-<a href="TransferAccount.jsp">Transfer to Account</a><br>
+<a href="BankLogin.jsp" style="float: right;">LogOut</a>
+<a id="transfer" href="TransferAccount.jsp">TransferAmount</a><br>
 </div>
 <fieldset>
 <label for="account">From AccountNo</label><br>
@@ -91,7 +96,7 @@ font-style: italic;
 <input type="text" id="account" placeholder="AccountNo" required><br>
 <label for="Amount">Transfer Amount</label><br>
 <input type="number" id="Amount" placeholder="Amount" min="100" maxlength="100000" required><br>
-<input type="submit">
+<br><input type="submit">
 </fieldset>
 </body>
 </html>

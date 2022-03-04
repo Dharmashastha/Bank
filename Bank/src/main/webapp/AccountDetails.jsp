@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.Import"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
@@ -7,7 +8,7 @@
 <meta charset="UTF-8">
 <style>
 a{
-background-color: #4CAF04; 
+  background-color: #008CBA; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -22,7 +23,7 @@ background-color: #4CAF04;
 }
 button[type=submit]
 {
-  background-color: #4CAF04;
+  background-color: #008CBA;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -58,24 +59,25 @@ button[type=submit]
 <body>
 <%@include file="Menu.jsp" %>
 <a href="AddAccount.jsp" style="float: right;">Add Account</a>
-<button type="submit" style="float: right;">Deactivated Account</button>
 <form action="showdetails" method="post">
+<button type="submit" formaction="deactivated" formmethod="post" style="float: right;">Deactivated Account</button>
+
 <table id="AccountDetails">
 <tr>
 	<th>Select</th>
 	<th>AccountNo</th>
 	<th>Balance</th>
 	<th>CustomerId</th>
-	<th>Status</th>
 </tr>
 <c:forEach items="${accMap}" var="current">
 <c:forEach items="${current.value}" var="current1"> 
 <tr>
-      <td><input type="checkbox" name="accountNo" value="<c:out value="${current1.key}"></c:out>"/></td>
+	  
+      <td><input type="checkbox"  name="accountNo" value="${current1.key}"/></td>
       <td><c:out value="${current1.key}"></c:out></td>
       <td><c:out value="${current1.value.getBalance()}"></c:out></td>
       <td><c:out value="${current.key}" ></c:out></td>
-      <td><c:out value="${current1.value.isStatus()}" ></c:out></td>      
+      
 </tr>
 </c:forEach>
 </c:forEach> 

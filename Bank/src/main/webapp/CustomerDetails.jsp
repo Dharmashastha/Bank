@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <style>
 a{
-background-color: #4CAF04; 
+background-color: #008CBA; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -22,7 +22,7 @@ background-color: #4CAF04;
 }
 button[type=submit]
 {
-  background-color: #4CAF04;
+  background-color: #008CBA;
   border: none;
   color: white;
   padding: 2px 15px;

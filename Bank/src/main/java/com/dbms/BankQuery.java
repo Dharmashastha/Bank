@@ -305,7 +305,7 @@ return custMap;
 public Map<Long,Map<Long, AccountInfo>> getAccountDb() throws CustomException
 {
 
-	String account = "select *from AccountInfo;";
+	String account = "select *from AccountInfo WHERE status=true;";
 	
 	Map<Long, Map<Long, AccountInfo>> accMap=new HashMap<>();
 	
@@ -321,13 +321,14 @@ public Map<Long,Map<Long, AccountInfo>> getAccountDb() throws CustomException
 			long accNo=rs.getLong(1);
 			double balance=rs.getDouble(2);
 			long custId=rs.getLong(3);
-			boolean status=rs.getBoolean(4);
+			boolean status=rs.getBoolean(4);	
 			accCall.setAccountNo(accNo);
 			accCall.setBalance(balance);
 			accCall.setCustomerId(custId);
 			accCall.setStatus(status);
 			tempMap=accMap.get(custId);
 			AutoGenerate.accountNo=accNo;
+			
 			if(tempMap == null)
 			{
 				tempMap=new HashMap<>();
@@ -335,12 +336,36 @@ public Map<Long,Map<Long, AccountInfo>> getAccountDb() throws CustomException
 			}
 			tempMap.put(accNo, accCall);
 			}
+			
 		}	
 	}
 	catch (SQLException e) {
 		e.printStackTrace();
 	}
 return accMap;		
+}
+
+public int getRoleId(String userId,String password) throws CustomException
+{
+	
+	String role="SELECT RoleId FROM Login WHERE UserId=? AND Password=?";
+	int roleId = 0;
+	try(PreparedStatement state=ConnectionUtlity.getConnection().prepareStatement(role);)
+	{
+		state.setString(1, userId);
+		state.setString(2, password);		
+		try(ResultSet rs= state.executeQuery();)
+		{
+			while(rs.next())
+			{
+				roleId=rs.getInt(1);
+			}
+		}	
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+return roleId;
 }
 
 

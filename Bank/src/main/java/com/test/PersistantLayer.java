@@ -152,4 +152,15 @@ public void updateCustomerInfo(String customerName, String dob, String address, 
 		throws CustomException {
 }
 
+
+@Override
+public int getRoleId(String userId,String password) throws CustomException{
+	return 0;
+}
+
+
+@Override
+public void updateStatus(long accountNo) throws CustomException {
+}
+
 }

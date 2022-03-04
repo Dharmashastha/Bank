@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <style>
 label{
-  background-color: #4CAF04; 
+  background-color: #008CBA; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -32,7 +32,7 @@ input[type=submit]
 cursor:pointer;
 font-style: italic;
 box-sizing: content-box;
-background-color: #4CAF04;
+background-color: #008CBA;
 box-sizing: border-box;
 font-size:20px;
 border: infobackground;
@@ -58,7 +58,7 @@ box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 font-style: italic;
 }
 </style>
-<title>TransfertoAccount</title>
+<title>TransferAmount</title>
 </head>
 <body>
 <%@include file="Menu.jsp" %>
