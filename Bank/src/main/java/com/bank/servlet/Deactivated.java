@@ -38,6 +38,8 @@ public class Deactivated extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		RequestDispatcher req=request.getRequestDispatcher("AdminOptions.jsp");
+		req.forward(request, response);
 	}
 
 }

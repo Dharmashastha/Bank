@@ -8,9 +8,9 @@
 <meta charset="UTF-8">
 <style>
 a{
-  background-color: #008CBA; 
-  border: none;
-  color: white;
+  background-color: white; 
+  border: 2px solid #f44336;
+  color: black;
   padding: 15px 32px;
   text-align: center;
   display: inline-block;
@@ -21,11 +21,16 @@ a{
   text-decoration: none;
   font-family: sans-serif;
 }
+a:hover
+{
+	background-color: #f44336;
+	color: white;
+}
 button[type=submit]
 {
-  background-color: #008CBA;
-  border: none;
-  color: white;
+  background-color: white;
+  border: 2px solid #f44336;
+  color: black;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -33,6 +38,11 @@ button[type=submit]
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+}
+button[type=submit]:hover
+{
+	background-color:#f44336;
+	color: white; 
 }
 #AccountDetails {
   font-family: Arial, Helvetica, sans-serif;

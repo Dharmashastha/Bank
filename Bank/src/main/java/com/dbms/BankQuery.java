@@ -368,7 +368,27 @@ public int getRoleId(String userId,String password) throws CustomException
 return roleId;
 }
 
-
+public long getCustomerId(long accountNo) throws CustomException
+{
+	
+	String customer="SELECT customerId FROM AccountInfo WHERE AccountNo=?";
+	long customerId = 0;
+	try(PreparedStatement state=ConnectionUtlity.getConnection().prepareStatement(customer);)
+	{
+		state.setLong(1, accountNo);		
+		try(ResultSet rs= state.executeQuery();)
+		{
+			while(rs.next())
+			{
+				customerId=rs.getLong(1);
+			}
+		}	
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+return customerId;
+}
 @Override
 public Map<Long, CustomerInfo> writeCustomerFile(Map<Long, CustomerInfo> custMap,
 		Map<Long, Map<Long, AccountInfo>> accMap) throws CustomException {

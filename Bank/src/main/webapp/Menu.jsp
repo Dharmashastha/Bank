@@ -10,9 +10,7 @@ div
 	text-align: center;	
 }
 input[type=submit]{
-  background-color: #008CBA; 
-  border: none;
-  color: white;
+  text-transform: uppercase;
   padding: 15px 32px;
   text-align: center;
   display: inline-block;
@@ -31,20 +29,6 @@ input[type=submit]:hover
 	background-color: #008CBA;
  	color: white;
 }
-a{
-  background-color: #008CBA; 
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  margin :4px 2px;	
-  cursor: pointer;
-  transition-duration: 0.4s;
-  text-decoration: none;
-  font-family: sans-serif;
-}
 </style>
 <title>Menu</title>
 </head>
@@ -55,7 +39,7 @@ a{
 <input type="submit" value="AccountDetails" name="page">
 <input type="submit" value="Deposit/WithDraw" name="page">
 <input type="submit" value="TransferAmount" name="page">
-<a href="BankLogin.jsp" style="float: right;">LogOut</a>
+<input type="submit" style="float: right;" value="LogOut" name="page">
 </form>
 </div>
 </body>

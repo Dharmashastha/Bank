@@ -163,4 +163,10 @@ public int getRoleId(String userId,String password) throws CustomException{
 public void updateStatus(long accountNo) throws CustomException {
 }
 
+
+@Override
+public long getCustomerId(long accountNo) throws CustomException {
+	return 0;
+}
+
 }

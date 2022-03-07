@@ -11,9 +11,9 @@ text-align: center;
 
 a{
 
-  background-color: #008CBA; 
-  border: none;
-  color: white;
+  background-color: white; 
+  border: 2px solid #008CBA;
+  color: black;
   padding: 15px 32px;
   text-align: center;
   display: inline-block;
@@ -24,8 +24,13 @@ a{
   font-family: sans-serif;
   font-style: italic;
 }
+a:hover
+{
+	background-color: #008CBA;
+	color: white;
+}
 label{
-  background-color: #008CBA; 
+  background-color: #f44336; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -51,14 +56,19 @@ input[type=submit]
 cursor:pointer;
 font-style: italic;
 box-sizing: content-box;
-background-color: #008CBA;
+background-color: white;
 box-sizing: border-box;
 font-size:20px;
-border: infobackground;
+border: 2px solid #008CBA;
 padding:15px 32px;
 margin-top: 5px;
 display: inline-block;	
-color: white;
+color: black;
+}
+input[type=submit]:hover
+{
+	background-color: #008CBA;
+	color : white;
 }
 fieldset
 {	
@@ -87,16 +97,16 @@ margin-left: 110px;
 <a href="BankLogin.jsp" style="float: right;">LogOut</a>
 <a id="transfer" href="TransferAccount.jsp">TransferAmount</a><br>
 </div>
+<form action="transferamount" method="post">
 <fieldset>
 <label for="account">From AccountNo</label><br>
-<input type="text" id="account" placeholder="AccountNo" required><br>
+<input type="text" id="account" placeholder="AccountNo" required name="fromAccNo"><br>
 <label for="customer">To CustomerId</label><br>
-<input type="text" id="customer" placeholder="customerid" required><br>
-<label for="account">To AccountNo</label><br>
-<input type="text" id="account" placeholder="AccountNo" required><br>
+<input type="text" id="account" placeholder="AccountNo" required name="toAccNo"><br>
 <label for="Amount">Transfer Amount</label><br>
-<input type="number" id="Amount" placeholder="Amount" min="100" maxlength="100000" required><br>
-<br><input type="submit">
+<input type="number" id="Amount" placeholder="Amount" min="100" maxlength="100000" required name="Amount"><br>
+<br><input type="submit" name="page" value="Submit">
 </fieldset>
+</form>
 </body>
 </html>

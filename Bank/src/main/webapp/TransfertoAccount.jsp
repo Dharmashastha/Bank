@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <style>
 label{
-  background-color: #008CBA; 
+  background-color: #f44336; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -64,17 +64,13 @@ font-style: italic;
 <%@include file="Menu.jsp" %>
 <fieldset>
 <form action="transferamount" method="post">
-<label for="customer">From CustomerId</label><br>
-<input type="text" id="customer" placeholder="customerId" required name="fromcust"><br>
 <label for="account">From AccountNo</label><br>
 <input type="text" id="account" placeholder="AccountNo" required name="fromacc"><br>
-<label for="customer">To CustomerId</label><br>
-<input type="text" id="customer" placeholder="customerId" required name="tocust"><br>
 <label for="account">To AccountNo</label><br>
 <input type="text" id="account" placeholder="AccountNo" required name="toacc"><br>
 <label for="Amount">Transfer Amount</label><br>
 <input type="number" id="Amount" placeholder="Amount" min="100" maxlength="100000" required name="amount"><br>
-<input type="submit">
+<br><input type="submit" name="page" value="submit">
 </form>
 </fieldset>
 </body>

@@ -7,9 +7,9 @@
 <meta charset="UTF-8">
 <style>
 a{
-background-color: #008CBA; 
-  border: none;
-  color: white;
+  background-color: white;
+  color: black;
+  border: 2px solid #f44336;
   padding: 15px 32px;
   text-align: center;
   display: inline-block;
@@ -19,12 +19,18 @@ background-color: #008CBA;
   transition-duration: 0.4s;
   text-decoration: none;
   font-family: sans-serif;
+
+}
+a:hover
+{
+	background-color: #f44336;
+ 	color: white;
 }
 button[type=submit]
 {
-  background-color: #008CBA;
-  border: none;
-  color: white;
+  background-color: white;
+  color: black;
+  border: 2px solid #04AA6D;
   padding: 2px 15px;
   text-align: center;
   text-decoration: none;
@@ -32,6 +38,12 @@ button[type=submit]
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+   transition-duration: 0.4s;
+}
+button[type=submit]:hover
+{
+	background-color: #04AA6D;
+ 	color: white;
 }
 #CustomerDetails {
   font-family: Arial, Helvetica, sans-serif;

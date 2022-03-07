@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <style>
 label{
-  background-color: #008CBA; 
+  background-color: #f44336; 
   border: none;
   color: white;
   padding: 15px 32px;

@@ -7,7 +7,7 @@
 <title>AddCustomer</title>
 <style>
 label {
-  background-color: #008CBA; 
+  background-color: #f44336; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -33,7 +33,7 @@ input[type=submit]
 cursor:pointer;
 font-style: italic;
 box-sizing: content-box;
-background-color: #008CBA;
+background-color: #f44336;
 box-sizing: border-box;
 font-size:20px;
 border: infobackground;

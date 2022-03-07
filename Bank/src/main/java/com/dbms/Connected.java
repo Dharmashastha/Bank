@@ -23,4 +23,5 @@ public interface Connected
 	public Map<Long,CustomerInfo> getCustomerDb() throws CustomException;
 	public Map<Long,Map<Long, AccountInfo>> getAccountDb() throws CustomException;
 	public int getRoleId(String userId,String password) throws CustomException;
+	public long getCustomerId(long accountNo) throws CustomException;
 }

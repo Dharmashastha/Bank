@@ -27,8 +27,12 @@ public class TransferAmount extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+		String page=request.getParameter("page");
+		
 		
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
+		if(page.equals("submit"))
+		{	
 		try {
 			logicCall.writeDbInfo();
 			logicCall.readDbInfo();
@@ -36,12 +40,18 @@ public class TransferAmount extends HttpServlet {
 		catch (CustomException e) {
 			e.printStackTrace();
 		}
-		long fromCustomer=Long.parseLong(request.getParameter("fromcust"));
 		long fromAccount=Long.parseLong(request.getParameter("fromacc"));
-		long toCustomer=Long.parseLong(request.getParameter("tocust"));
+		long fromCustomer = 0;
+		long toCustomer = 0;
 		long toAccount=Long.parseLong(request.getParameter("toacc"));
-		double amount=Double.parseDouble(request.getParameter("amount"));
 		
+		double amount=Double.parseDouble(request.getParameter("amount"));
+		try {
+			fromCustomer = logicCall.connect.getCustomerId(fromAccount);
+			toCustomer=logicCall.connect.getCustomerId(toAccount);
+		} catch (CustomException e1) {
+			e1.printStackTrace();
+		}
 		try {
 			logicCall.dbWithdraw(fromCustomer, fromAccount, amount);
 			logicCall.dbDeposit(toCustomer, toAccount, amount);
@@ -50,7 +60,37 @@ public class TransferAmount extends HttpServlet {
 		}
 		RequestDispatcher req=request.getRequestDispatcher("TransfertoAccount.jsp");
 		req.forward(request, response);
-		
+		}
+		else if(page.equals("Submit"))
+		{
+			try {
+				logicCall.writeDbInfo();
+				logicCall.readDbInfo();
+			}
+			catch (CustomException e) {
+				e.printStackTrace();
+			}
+			long fromAccount=Long.parseLong(request.getParameter("fromAccNo"));
+			long fromCustomer = 0;
+			long toCustomer = 0;
+			long toAccount=Long.parseLong(request.getParameter("toAccNo"));
+			
+			double amount=Double.parseDouble(request.getParameter("Amount"));
+			try {
+				fromCustomer = logicCall.connect.getCustomerId(fromAccount);
+				toCustomer=logicCall.connect.getCustomerId(toAccount);
+			} catch (CustomException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				logicCall.dbWithdraw(fromCustomer, fromAccount, amount);
+				logicCall.dbDeposit(toCustomer, toAccount, amount);
+			} catch (CustomException e) {
+				e.printStackTrace();
+			}
+			RequestDispatcher req=request.getRequestDispatcher("TransferAccount.jsp");
+			req.forward(request, response);
+			}	
+		}
+			
 	}
-
-}

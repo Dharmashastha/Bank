@@ -19,8 +19,6 @@ public class LoginServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
        
-	
-	
     public LoginServlet() {
         super();
     }
@@ -47,7 +45,7 @@ public void init(ServletConfig config)
 		
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
 		PrintWriter out=response.getWriter();
-	
+		
 		
 		String userId=(request.getParameter("UserId"));
 		String password=request.getParameter("Password");

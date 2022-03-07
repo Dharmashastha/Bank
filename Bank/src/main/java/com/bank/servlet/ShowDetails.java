@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dbms.BankLogic;
 import com.test.CustomException;
@@ -30,6 +31,7 @@ public class ShowDetails extends HttpServlet {
 		//System.out.println("logicCall:"+logicCall);
 		String page=request.getParameter("page");
 		
+		HttpSession session=request.getSession();
 		
 		try {
 			logicCall.writeDbInfo();
@@ -59,6 +61,12 @@ public class ShowDetails extends HttpServlet {
 			{
 				RequestDispatcher req=request.getRequestDispatcher("TransfertoAccount.jsp");
 				req.forward(request, response);
+			}
+			else if(page.equals("LogOut"))
+			{
+				RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+				req.forward(request, response);
+				session.invalidate();
 			}
 			
 	}

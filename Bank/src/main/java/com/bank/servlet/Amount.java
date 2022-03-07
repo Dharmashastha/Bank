@@ -26,6 +26,7 @@ public class Amount extends HttpServlet {
 		doGet(request, response);
 		
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
+		long customerId = 0;
 		try {
 			logicCall.writeDbInfo();
 			logicCall.readDbInfo();
@@ -33,8 +34,13 @@ public class Amount extends HttpServlet {
 		catch (CustomException e) {
 			e.printStackTrace();
 		}
-		long customerId=Long.parseLong(request.getParameter("custId"));
+		
 		long accountNo=Long.parseLong(request.getParameter("accNo"));
+		try {
+			customerId = logicCall.connect.getCustomerId(accountNo);
+		} catch (CustomException e1) {
+			e1.printStackTrace();
+		}
 		boolean check=Boolean.parseBoolean(request.getParameter("yesno"));
 		double amount=Double.parseDouble(request.getParameter("amount"));
 	
@@ -53,10 +59,7 @@ public class Amount extends HttpServlet {
 		}
 		} catch (CustomException e) {
 			e.printStackTrace();
-		}
-		
-		
-		
+		}	
 	}
 
 }

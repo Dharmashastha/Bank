@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <style>
 label{
-  background-color: #008CBA; 
+  background-color: #f44336; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -62,22 +62,28 @@ fieldset
 	border:none;
 }
 </style>
+<script type="text/javascript">
+function timeMsg() {
+var t=setTimeout("myFunction()",200);
+}
+function myFunction() {
+	alert("Transaction Successful.");
+}
+</script>
 <title>Amount</title>
 </head>
 <body>
 <%@include file="Menu.jsp" %>
 <fieldset>
 <form action="amount" method="post">
-<label for="custId">CustomerId</label><br>
-<input type="text" id="custId" placeholder="customerId" name="custId" required><br>
 <label for="AccountNo">AccountNo</label><br>
-<input type="text" id="AccountNo" placeholder="AccountNo" name="accNo" required><br>
+<input type="text" id="AccountNo" placeholder="AccountNo" required name="accNo">
 <label for="amount">Deposit/Withdraw</label><br>
 <input type="radio" name="yesno" id="amount" value="true" required><i>Deposit</i>
 <input type="radio" name="yesno" id="amount" value="false" required><i>Withdraw</i><br>
 <label for="amount">Amount</label><br>
 <input type="number" id="amount" placeholder="Amount" name="amount" min="100" maxlength="100000" required><br>
-<input type="submit">
+<br><input type="submit" onclick="timeMsg()">
 </form>
 </fieldset>
 </body>
