@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>           
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,11 +66,27 @@ font-style: italic;
 <fieldset>
 <form action="transferamount" method="post">
 <label for="account">From AccountNo</label><br>
-<input type="text" id="account" placeholder="AccountNo" required name="fromacc"><br>
+<select id="account" name="fromacc" style="width: 100px;">
+<c:forEach items="${accMap}" var="current">
+<c:forEach items="${current.value}" var="current1">
+<c:if test="${current1.value.isStatus()}">
+<option value="<c:out value="${current1.key}" />"><c:out value="${current1.key}" /></option>
+</c:if>
+</c:forEach>
+</c:forEach>
+</select>
 <label for="account">To AccountNo</label><br>
-<input type="text" id="account" placeholder="AccountNo" required name="toacc"><br>
+<select id="account" name="toacc" style="width: 100px;">
+<c:forEach items="${accMap}" var="current">
+<c:forEach items="${current.value}" var="current1">
+<c:if test="${current1.value.isStatus()}">
+<option value="<c:out value="${current1.key}" />"><c:out value="${current1.key}" /></option>
+</c:if>
+</c:forEach>
+</c:forEach>
+</select>
 <label for="Amount">Transfer Amount</label><br>
-<input type="number" id="Amount" placeholder="Amount" min="100" maxlength="100000" required name="amount"><br>
+<input type="number" id="Amount" placeholder="Amount" min="100" max="100000" required name="amount"><br>
 <br><input type="submit" name="page" value="submit">
 </form>
 </fieldset>

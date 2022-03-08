@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import com.test.CustomException;
 import com.test.InputCenter;
 
@@ -205,6 +206,28 @@ public void updateStatus(long accountNo) throws CustomException
 	}
 }
 
+public void updateStatusActive(long accountNo) throws CustomException 
+{
+	String update="UPDATE AccountInfo SET status=? WHERE AccountNo=?";
+	//String update= "UPDATE Employee SET EmployeeName=? WHERE EmployeeId=?";
+	try(PreparedStatement state=ConnectionUtlity.getConnection().prepareStatement(update);)
+	{
+		state.setBoolean(1,true);
+		state.setLong(2,accountNo);
+		int check=state.executeUpdate();
+		if(check != 0)
+		{
+			System.out.println(check+" Row Updated.");
+		}
+		else
+		{
+			System.out.println("No data");
+		}	
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+}
+
 public void updateCustomerInfo(String customerName,String dob,String address,long customerId) throws CustomException 
 {
 	String update="UPDATE CustomerInfo SET customerName=?,dob=?,address=? WHERE customerId=?";
@@ -305,7 +328,7 @@ return custMap;
 public Map<Long,Map<Long, AccountInfo>> getAccountDb() throws CustomException
 {
 
-	String account = "select *from AccountInfo WHERE status=true;";
+	String account = "select *from AccountInfo;";
 	
 	Map<Long, Map<Long, AccountInfo>> accMap=new HashMap<>();
 	

@@ -28,9 +28,9 @@ public class TransferAmount extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 		String page=request.getParameter("page");
-		
-		
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
+
+		
 		if(page.equals("submit"))
 		{	
 		try {
@@ -63,6 +63,7 @@ public class TransferAmount extends HttpServlet {
 		}
 		else if(page.equals("Submit"))
 		{
+			
 			try {
 				logicCall.writeDbInfo();
 				logicCall.readDbInfo();

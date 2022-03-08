@@ -169,4 +169,12 @@ public long getCustomerId(long accountNo) throws CustomException {
 	return 0;
 }
 
+
+@Override
+public void updateStatusActive(long accountNo) throws CustomException {
+	
+}
+
+
+
 }

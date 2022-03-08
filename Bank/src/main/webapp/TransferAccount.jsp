@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,6 @@
 div{
 text-align: center;
 }
-
 a{
 
   background-color: white; 
@@ -73,7 +73,7 @@ input[type=submit]:hover
 fieldset
 {	
 	text-align: center;
-	margin-left:800px;
+	margin-left:750px;
 	width:200px;
 	height:150px;
 	border:none;
@@ -86,27 +86,39 @@ border:0;
 box-shadow:0 0 15px 4px rgba(0,0,0,0.06);	
 font-style: italic;
 }
-#transfer{
-margin-left: 110px;
-}
 </style>
 <title>TransferAmount</title>
 </head>
 <body>
+<%@include file="CustomerOptions.jsp" %>
+<form action="transferamount" method="post" style="">
 <div>
-<a href="BankLogin.jsp" style="float: right;">LogOut</a>
-<a id="transfer" href="TransferAccount.jsp">TransferAmount</a><br>
-</div>
-<form action="transferamount" method="post">
 <fieldset>
 <label for="account">From AccountNo</label><br>
-<input type="text" id="account" placeholder="AccountNo" required name="fromAccNo"><br>
-<label for="customer">To CustomerId</label><br>
-<input type="text" id="account" placeholder="AccountNo" required name="toAccNo"><br>
+<select id="account" name="fromAccNo" style="width: 100px;">
+<c:forEach items="${accMap}" var="current">
+<c:forEach items="${current.value}" var="current1">
+<c:if test="${current1.value.isStatus()}">
+<option value="<c:out value="${current1.key}" />"><c:out value="${current1.key}" /></option>
+</c:if>
+</c:forEach>
+</c:forEach>
+</select>
+<label for="account">To AccountNo</label><br>
+<select id="account" name="toAccNo" style="width: 100px;">
+<c:forEach items="${accMap}" var="current">
+<c:forEach items="${current.value}" var="current1">
+<c:if test="${current1.value.isStatus()}">
+<option value="<c:out value="${current1.key}" />"><c:out value="${current1.key}" /></option>
+</c:if>
+</c:forEach>
+</c:forEach>
+</select>
 <label for="Amount">Transfer Amount</label><br>
-<input type="number" id="Amount" placeholder="Amount" min="100" maxlength="100000" required name="Amount"><br>
+<input type="number" id="Amount" placeholder="Amount" min="100" max="100000" required name="Amount"><br>
 <br><input type="submit" name="page" value="Submit">
 </fieldset>
+</div>
 </form>
 </body>
 </html>

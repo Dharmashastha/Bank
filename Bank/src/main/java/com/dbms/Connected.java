@@ -20,6 +20,7 @@ public interface Connected
 	public void updatePrepared(double balance,long accountNo) throws CustomException;
 	public void updateCustomerInfo(String customerName,String dob,String address,long customerId) throws CustomException;
 	public void updateStatus(long accountNo) throws CustomException;
+	public void updateStatusActive(long accountNo) throws CustomException; 
 	public Map<Long,CustomerInfo> getCustomerDb() throws CustomException;
 	public Map<Long,Map<Long, AccountInfo>> getAccountDb() throws CustomException;
 	public int getRoleId(String userId,String password) throws CustomException;

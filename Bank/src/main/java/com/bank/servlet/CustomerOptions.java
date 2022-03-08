@@ -11,11 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.dbms.BankLogic;
 import com.test.CustomException;
 
-public class Deactivated extends HttpServlet {
-	
+public class CustomerOptions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Deactivated() {
+    public CustomerOptions() {
         super();
     }
 
@@ -27,36 +26,22 @@ public class Deactivated extends HttpServlet {
 		doGet(request, response);
 		
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
+		try {
+			logicCall.writeDbInfo();
+			logicCall.readDbInfo();
+		}
+		catch (CustomException e) {
+			e.printStackTrace();
+		}
+		request.setAttribute("accMap", logicCall.accountMap);
 		
 		String page=request.getParameter("page");
 		
-		if(page.equals("deactivated"))
-		{	
-		String[] accountNo=request.getParameterValues("accountNo");
-		for(String no:accountNo)
+		if(page.equals("TransferAmount"))
 		{
-			long accNo=Long.parseLong(no);
-			try {
-				logicCall.connect.updateStatus(accNo);
-			} catch (CustomException e) {
-				e.printStackTrace();
-			}
-		}
-		RequestDispatcher req=request.getRequestDispatcher("AdminOptions.jsp");
-		req.forward(request, response);
-		}
-		else if(page.equals("deactivatedaccountdetails"))
-		{
-			try {
-				logicCall.writeDbInfo();
-				logicCall.readDbInfo();
-			}
-			catch (CustomException e) {
-				e.printStackTrace();
-			}
-			request.setAttribute("accMap", logicCall.accountMap);
-			RequestDispatcher req=request.getRequestDispatcher("ActiveAccount.jsp");
+			RequestDispatcher req=request.getRequestDispatcher("TransferAccount.jsp");
 			req.forward(request, response);
 		}
 	}
+
 }

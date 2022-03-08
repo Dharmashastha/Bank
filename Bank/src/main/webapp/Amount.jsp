@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>       
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <style>
 label{
@@ -63,12 +65,6 @@ fieldset
 }
 </style>
 <script type="text/javascript">
-function timeMsg() {
-var t=setTimeout("myFunction()",200);
-}
-function myFunction() {
-	alert("Transaction Successful.");
-}
 </script>
 <title>Amount</title>
 </head>
@@ -77,13 +73,21 @@ function myFunction() {
 <fieldset>
 <form action="amount" method="post">
 <label for="AccountNo">AccountNo</label><br>
-<input type="text" id="AccountNo" placeholder="AccountNo" required name="accNo">
+<select id="account" name="accNo" style="width: 100px;">
+<c:forEach items="${accMap}" var="current">
+<c:forEach items="${current.value}" var="current1">
+<c:if test="${current1.value.isStatus()}">
+<option value="<c:out value="${current1.key}" />"><c:out value="${current1.key}" /></option>
+</c:if>
+</c:forEach>
+</c:forEach>
+</select>
 <label for="amount">Deposit/Withdraw</label><br>
 <input type="radio" name="yesno" id="amount" value="true" required><i>Deposit</i>
 <input type="radio" name="yesno" id="amount" value="false" required><i>Withdraw</i><br>
 <label for="amount">Amount</label><br>
-<input type="number" id="amount" placeholder="Amount" name="amount" min="100" maxlength="100000" required><br>
-<br><input type="submit" onclick="timeMsg()">
+<input type="number" id="amount" placeholder="Amount" name="amount" min="100" max="100000" required><br>
+<br><input type="submit"> 
 </form>
 </fieldset>
 </body>

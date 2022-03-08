@@ -41,6 +41,14 @@
   <servlet-name>Deactivated</servlet-name>
    <servlet-class>com.bank.servlet.Deactivated</servlet-class>
 	 </servlet>
+	 <servlet> 
+  <servlet-name>ActiveAccount</servlet-name>
+   <servlet-class>com.bank.servlet.ActiveAccount</servlet-class>
+	 </servlet>
+	 <servlet> 
+  <servlet-name>CustomerOptions</servlet-name>
+   <servlet-class>com.bank.servlet.CustomerOptions</servlet-class>
+	 </servlet>
 	  
 	 
   <servlet-mapping>
@@ -72,5 +80,14 @@
   <servlet-name>Deactivated</servlet-name>
   <url-pattern>/deactivated</url-pattern>
   </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ActiveAccount</servlet-name>
+  <url-pattern>/activeaccount</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  <servlet-name>CustomerOptions</servlet-name>
+  <url-pattern>/customeroptions</url-pattern>
+  </servlet-mapping>	
  
 </web-app>

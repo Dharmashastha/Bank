@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +9,10 @@
 </head>
 <body>
 <div>
-<a href="TransferAccount.jsp">TransferAmount</a>
+<form action="customeroptions" method="post">
+<input type="submit" value="TransferAmount" name="page">
 <a href="BankLogin.jsp" style="float: right;">LogOut</a>
+</form>
 </div>
 </body>
 </html>

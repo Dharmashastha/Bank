@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dbms.AutoGenerate;
 import com.dbms.BankLogic;
@@ -45,11 +46,16 @@ public void init(ServletConfig config)
 		
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
 		PrintWriter out=response.getWriter();
-		
+		HttpSession session=request.getSession();
 		
 		String userId=(request.getParameter("UserId"));
 		String password=request.getParameter("Password");
+		
+		session.setAttribute("userId", userId);
+		session.setAttribute("password", password);
+		
 		int roleId = 0;
+		
 		try {
 			roleId=logicCall.connect.getRoleId(userId, password);
 		} catch (CustomException e) {
