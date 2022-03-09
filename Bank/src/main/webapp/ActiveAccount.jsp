@@ -50,7 +50,7 @@ button[type=submit]:hover
 <body>
 <%@include file="Menu.jsp" %>
 <form action="activeaccount" method="post" >
-<button type="submit" formaction="activeaccount" formmethod="post" style="float: right;">Activated Account</button>
+<button type="submit" formaction="activeaccount" formmethod="post" style="float: right;">Activate Account</button>
 <table id="AccountDetails">
 <tr>
 	<th>Select</th>

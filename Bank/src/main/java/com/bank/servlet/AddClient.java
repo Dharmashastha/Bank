@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dbms.AccountInfo;
 import com.dbms.AutoGenerate;
@@ -31,6 +32,15 @@ public class AddClient extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+		
+		HttpSession session=request.getSession();
+		
+		if(session.getAttribute("userId")==null)
+		{
+			RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+			req.forward(request, response);	
+		}
+		else {
 		
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
 		AutoGenerate autoCall=(AutoGenerate) request.getServletContext().getAttribute("autoCall");
@@ -93,6 +103,7 @@ public class AddClient extends HttpServlet {
 			}
 		}
 		
+	}
 	}
 
 }

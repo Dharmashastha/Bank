@@ -412,6 +412,29 @@ public long getCustomerId(long accountNo) throws CustomException
 	}
 return customerId;
 }
+
+public long getCustomer(String userId) throws CustomException
+{
+	
+	String customer="SELECT customerId FROM Login WHERE UserId=?";
+	long customerId = 0;
+	try(PreparedStatement state=ConnectionUtlity.getConnection().prepareStatement(customer);)
+	{
+		state.setString(1, userId);		
+		try(ResultSet rs= state.executeQuery();)
+		{
+			while(rs.next())
+			{
+				customerId=rs.getLong(1);
+			}
+		}	
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+return customerId;
+}
+
 @Override
 public Map<Long, CustomerInfo> writeCustomerFile(Map<Long, CustomerInfo> custMap,
 		Map<Long, Map<Long, AccountInfo>> accMap) throws CustomException {

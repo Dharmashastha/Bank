@@ -30,10 +30,16 @@ public class ShowDetails extends HttpServlet {
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
 		//System.out.println("logicCall:"+logicCall);
 		String page=request.getParameter("page");
+		
 		HttpSession session=request.getSession();
 		
-				
-	
+			if(session.getAttribute("userId")==null)
+			{
+				RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+				req.forward(request, response);	
+			}
+			else
+			{	
 		try {
 			logicCall.writeDbInfo();
 			logicCall.readDbInfo();
@@ -43,6 +49,7 @@ public class ShowDetails extends HttpServlet {
 		}
 		request.setAttribute("cusMap",logicCall.customerMap);
 		request.setAttribute("accMap", logicCall.accountMap);
+		
 			if(page.equals("CustomerDetails"))
 			{
 				
@@ -74,7 +81,7 @@ public class ShowDetails extends HttpServlet {
 				RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
 				req.forward(request, response);
 			}
-			
+			}	
 	}
 
 }

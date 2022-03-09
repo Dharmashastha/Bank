@@ -10,8 +10,9 @@
 <body>
 <div>
 <form action="customeroptions" method="post">
+<input type="submit" value="AccountDetails" name="page">
 <input type="submit" value="TransferAmount" name="page">
-<a href="BankLogin.jsp" style="float: right;">LogOut</a>
+<input type="submit" value="LogOut" name="page" style="float: right;">
 </form>
 </div>
 </body>

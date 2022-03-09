@@ -54,24 +54,39 @@ public void init(ServletConfig config)
 		session.setAttribute("userId", userId);
 		session.setAttribute("password", password);
 		
-		int roleId = 0;
+		try {
+			logicCall.writeDbInfo();
+			logicCall.readDbInfo();
+		}
+		catch (CustomException e) {
+			e.printStackTrace();
+		}
+		request.setAttribute("cusMap",logicCall.customerMap);
+		request.setAttribute("accMap", logicCall.accountMap);		
 		
+		int roleId = 0;
+		long customerId = 0;
 		try {
 			roleId=logicCall.connect.getRoleId(userId, password);
+			customerId = logicCall.connect.getCustomer(userId);
 		} catch (CustomException e) {
 			e.printStackTrace();
 		}
-		
+		RequestDispatcher requ=request.getRequestDispatcher("CustomerDetails.jsp");
+		requ.forward(request, response);
+		session.setAttribute("customerId", customerId);
 		
 		if(roleId == 1)
 		{
-			RequestDispatcher requ=request.getRequestDispatcher("CustomerOptions.jsp");
-			requ.forward(request, response);
+			
+			RequestDispatcher req=request.getRequestDispatcher("CustomerOptions.jsp");
+			req.forward(request, response);
 		}
 		else if(roleId == 2)
 		{
-			RequestDispatcher requ=request.getRequestDispatcher("AdminOptions.jsp");
-			requ.forward(request, response);
+			RequestDispatcher req=request.getRequestDispatcher("AdminOptions.jsp");
+			req.forward(request, response);
+			
 		}
 		else
 		{

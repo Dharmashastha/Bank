@@ -176,5 +176,11 @@ public void updateStatusActive(long accountNo) throws CustomException {
 }
 
 
+@Override
+public long getCustomer(String userId) throws CustomException {
+	return 0;
+}
+
+
 
 }

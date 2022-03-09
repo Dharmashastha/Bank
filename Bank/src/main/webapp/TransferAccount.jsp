@@ -96,19 +96,19 @@ font-style: italic;
 <fieldset>
 <label for="account">From AccountNo</label><br>
 <select id="account" name="fromAccNo" style="width: 100px;">
-<c:forEach items="${accMap}" var="current">
-<c:forEach items="${current.value}" var="current1">
-<c:if test="${current1.value.isStatus()}">
-<option value="<c:out value="${current1.key}" />"><c:out value="${current1.key}" /></option>
+<c:forEach items="${accountMap}" var="current">
+<c:if test="${current.value.isStatus()}">
+<option value="<c:out value="${current.key}" />"><c:out value="${current.key}" /></option>
 </c:if>
 </c:forEach>
-</c:forEach>
 </select>
+<%long id= (long)session.getAttribute("customerId");%>
+
 <label for="account">To AccountNo</label><br>
 <select id="account" name="toAccNo" style="width: 100px;">
 <c:forEach items="${accMap}" var="current">
 <c:forEach items="${current.value}" var="current1">
-<c:if test="${current1.value.isStatus()}">
+<c:if test="${current1.value.isStatus() && current.key != id}">
 <option value="<c:out value="${current1.key}" />"><c:out value="${current1.key}" /></option>
 </c:if>
 </c:forEach>

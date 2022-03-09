@@ -56,6 +56,15 @@ div
 }
 
 </style>
+<script type="text/javascript">
+/* function onTrim() {
+	var a=document.getElementById("custName").value;
+	a=a.trim();
+		document.getElementById("custName").value=a;
+	
+} */
+
+</script>
 </head>
 <body>
 <div>
@@ -63,11 +72,14 @@ div
 <fieldset>
 <form action="addclient" method="post">
 <label for="custName">CustomerName</label><br>
-<input type="text" id="custName" name="custName" placeholder="customerName" required="required"><br>
+<%String name=request.getParameter("name");
+  String dob=request.getParameter("dob");
+  String address=request.getParameter("address"); %>
+<input type="text" id="custName" name="custName" placeholder="customerName" required="required" value="<%if(name != null){out.print(name);}%>"><br>
 <label for="dob">Date of Birth</label><br>
-<input type="date" id="dob" name="dob" required="required"><br>
+<input type="date" id="dob" name="dob" required="required" value="<%if(dob != null){out.print(dob);}%>"><br>
 <label for="address">Address</label><br>
-<input type="text" id="address" name="address" required="required"><br><br>
+<input type="text" id="address" name="address" required="required" value="<%if(address != null){out.print(address);}%>"><br><br>
 <input type="submit" value="Register">
 <input type="hidden" name="id" value="<% String s=request.getParameter("id");%><% out.print(s);%>">
 <input type="hidden" name="Details" value="customer">

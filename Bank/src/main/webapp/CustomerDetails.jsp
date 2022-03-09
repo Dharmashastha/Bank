@@ -82,7 +82,7 @@ button[type=submit]:hover
 <c:forEach items="${cusMap}" var="current">
 <tr>
 	
-       <td><button type="submit" formaction="AddCustomer.jsp" name="id" value="<c:out value="${current.key}" ></c:out>">
+       <td><button type="submit" formaction="AddCustomer.jsp?name=${current.value.getCustomerName()}&dob=${current.value.getDob()}&address=${current.value.getAddress()}" name="id" value="<c:out value="${current.key}" ></c:out>">
 <c:out value="${current.key}" ></c:out> </button></td>
        <td><c:out value="${current.value.getCustomerName()}"></c:out></td>
        <td><c:out value="${current.value.getDob()}" ></c:out></td>
