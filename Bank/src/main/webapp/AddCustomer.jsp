@@ -82,7 +82,6 @@ div
 <input type="text" id="address" name="address" required="required" value="<%if(address != null){out.print(address);}%>"><br><br>
 <input type="submit" value="Register">
 <input type="hidden" name="id" value="<% String s=request.getParameter("id");%><% out.print(s);%>">
-<input type="hidden" name="Details" value="customer">
 </form>
 </fieldset>
 </div>

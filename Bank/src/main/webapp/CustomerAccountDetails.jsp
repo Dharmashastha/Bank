@@ -29,7 +29,7 @@
 </style>
 </head>
 <body>
-<%@include file="CustomerOptions.jsp" %>
+<%@include file="CustomerOptions.jsp" %><br>
 <form action="customeroptions" method="post">
 <table id="AccountDetails">
 <tr>

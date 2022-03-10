@@ -42,18 +42,14 @@ public class CustomerOptions extends HttpServlet {
 		try {
 			logicCall.writeDbInfo();
 			logicCall.readDbInfo();
-		}
-		catch (CustomException e) {
-			e.printStackTrace();
-		}
 		
 		
-		long id=(long) session.getAttribute("customerId");
-		Map<Long,AccountInfo> accountMap=logicCall.accountMap.get(id);
-		request.setAttribute("accMap", logicCall.accountMap);
-		request.setAttribute("accountMap", accountMap);
+			long id=(long) session.getAttribute("customerId");
+			Map<Long,AccountInfo> accountMap=logicCall.accountMap.get(id);
+			request.setAttribute("accMap", logicCall.accountMap);
+			request.setAttribute("accountMap", accountMap);
 		
-		String page=request.getParameter("page");
+			String page=request.getParameter("page");
 		
 		if(page.equals("TransferAmount"))
 		{
@@ -73,6 +69,12 @@ public class CustomerOptions extends HttpServlet {
 		}
 		
 		}
+		catch (CustomException e) {
+			e.printStackTrace();
+			RequestDispatcher req=request.getRequestDispatcher("CustomerOptions.jsp");
+			req.forward(request, response);
+		}
+		
 	}
-
+	}
 }

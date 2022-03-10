@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dbms.BankLogic;
 import com.test.CustomException;
+import com.test.HelperUtil;
 
 public class ActiveAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -39,26 +40,29 @@ public class ActiveAccount extends HttpServlet {
 		else
 		{
 		BankLogic logicCall = (BankLogic) request.getServletContext().getAttribute("logicCall");
-		
-		String[] accountNo=request.getParameterValues("accountno");
+		request.setAttribute("accMap", logicCall.accountMap);
+		try {
+				String[] accountNo=request.getParameterValues("accountno");
+				HelperUtil.checkStringArray(accountNo);
 			for(String no:accountNo) 
 			{
+					HelperUtil.checkString(no);
 					long accNo=Long.parseLong(no);
-			try {
-					logicCall.connect.updateStatusActive(accNo); 
-					logicCall.writeDbInfo();
-					logicCall.readDbInfo();
-				
-					request.setAttribute("cusMap",logicCall.customerMap);
-					request.setAttribute("accMap", logicCall.accountMap);
-				} 
+					logicCall.connect.updateStatusActive(accNo);
+			}
+				logicCall.writeDbInfo();
+				logicCall.readDbInfo();
+				request.setAttribute("accMap", logicCall.accountMap);
+			}
 			catch (CustomException e) {
-					e.printStackTrace();
-				}
+				e.printStackTrace();
 			}
-			RequestDispatcher req = request.getRequestDispatcher("ActiveAccount.jsp");
-			req.forward(request, response);
+			finally {
+				RequestDispatcher req = request.getRequestDispatcher("ActiveAccount.jsp");
+				req.forward(request, response);
 			}
+		}
+		
 	}
 
 }

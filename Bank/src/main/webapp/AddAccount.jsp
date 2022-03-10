@@ -55,14 +55,12 @@ fieldset
 <body>
 <%@include file="Menu.jsp" %>
 <fieldset>
-<form action="addclient" method="post">
+<form action="addaccount" method="post">
 <label for="custId">CustomerId</label><br>
-<input type="number" id="custId" name="customerId" placeholder="customerId" min="100001" max="200000" required><br>
-<!--label for="status">Status</label><br>
-<input type="radio" name="yesno" id="status" value="true">Active
-<input type="radio" name="yesno" id="status" value="false">InActived-->
+<%String id=request.getParameter("customerId"); %>
+<input type="number" id="custId" name="customerId" placeholder="customerId" min="100001" max="200000" required value="<%if(id != null){out.print(Long.parseLong(id));}%>"><br>
 <br><input type="submit" value="Register">
-<input type="hidden" name="Details" value="account">
+<input type="hidden" name="accno" value="<% String s=request.getParameter("accno");%><% out.print(s);%>">
 </form>
 </fieldset>
 </body>

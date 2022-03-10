@@ -30,7 +30,7 @@ public class ShowDetails extends HttpServlet {
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
 		//System.out.println("logicCall:"+logicCall);
 		String page=request.getParameter("page");
-		
+				
 		HttpSession session=request.getSession();
 		
 			if(session.getAttribute("userId")==null)
@@ -40,15 +40,12 @@ public class ShowDetails extends HttpServlet {
 			}
 			else
 			{	
-		try {
-			logicCall.writeDbInfo();
-			logicCall.readDbInfo();
-		}
-		catch (CustomException e) {
-			e.printStackTrace();
-		}
-		request.setAttribute("cusMap",logicCall.customerMap);
-		request.setAttribute("accMap", logicCall.accountMap);
+			try {
+				logicCall.writeDbInfo();
+				logicCall.readDbInfo();
+		
+				request.setAttribute("cusMap",logicCall.customerMap);
+				request.setAttribute("accMap", logicCall.accountMap);
 		
 			if(page.equals("CustomerDetails"))
 			{
@@ -73,15 +70,16 @@ public class ShowDetails extends HttpServlet {
 			}
 			else if(page.equals("LogOut"))
 			{
-				/*if(session.getAttribute("userId") != null && session.getAttribute("password") != null && session != null)
-				{*/
 				session.invalidate();
-				/* } */
-				
 				RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
 				req.forward(request, response);
 			}
-			}	
-	}
-
+			}
+			catch (CustomException e) {
+				e.printStackTrace();
+				RequestDispatcher requ=request.getRequestDispatcher("AdminOptions.jsp");
+				requ.forward(request, response);
+			}
+			}
+	   }
 }

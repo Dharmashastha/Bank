@@ -9,17 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dbms.AccountInfo;
 import com.dbms.AutoGenerate;
 import com.dbms.BankLogic;
 import com.test.CustomException;
 import com.test.HelperUtil;
 
-
-public class AddClient extends HttpServlet {
-	
+public class AddAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    public AddClient() {
+       
+    public AddAccount() {
         super();
     }
 
@@ -29,49 +28,49 @@ public class AddClient extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-		
 		HttpSession session=request.getSession();
 		
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
 		AutoGenerate autoCall=(AutoGenerate) request.getServletContext().getAttribute("autoCall");
 		
-		String id=request.getParameter("id");
+		
+		String accNo=request.getParameter("accno");	
 		
 		if(session.getAttribute("userId")==null)
 		{
 			RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
 			req.forward(request, response);	
 		}
-		else {	
+		else {
 		try {
-			String customerName=request.getParameter("custName");
-			String dateOfBirth=request.getParameter("dob");
-			String address=request.getParameter("address");
-			long customerId=autoCall.addNewCustomerId();
-
-			HelperUtil.checkString(customerName);
-			HelperUtil.checkString(dateOfBirth);
-			HelperUtil.checkString(address);		
-		
-		if(id==null || id.equals("null"))
+			String cusId=request.getParameter("customerId");
+			HelperUtil.checkString(cusId);
+		if(accNo == null || accNo.equals("null"))
 		{
-			String insert="INSERT INTO CustomerInfo VALUES(?,?,?,?)";
-			logicCall.connect.insertCustInfo(insert, customerName, dateOfBirth, address, customerId);				
+				AccountInfo accCall=new AccountInfo();
+				long accountNo=autoCall.addNewAccountNo();
+				double balance=0;
+				balance = autoCall.setMinBalance();
+				long custId=Long.parseLong(cusId);
+				boolean status=accCall.isStatus();
+				String insert="INSERT INTO AccountInfo VALUES(?,?,?,?)";
+				logicCall.connect.insertAccInfo(insert, accountNo, balance, custId, status);
 		}	
-		else  
-		{	
-				long custId=Long.parseLong(id);
-				logicCall.connect.updateCustomerInfo(customerName, dateOfBirth, address, custId);
+		else
+		{
+				long accountNo=Long.parseLong(accNo);
+				long custId=Long.parseLong(cusId);
+				logicCall.connect.updateCustomerId(custId,accountNo);
 		}
 		}
 		catch (CustomException e) {
 				e.printStackTrace();
 		}
-		finally
-		{
-			RequestDispatcher requ=request.getRequestDispatcher("AddCustomer.jsp");
-			requ.forward(request, response);
+		finally {
+				RequestDispatcher requ=request.getRequestDispatcher("AddAccount.jsp");
+				requ.forward(request, response);
 		}
-	  }	
+	 }
    }
-}
+ }
+

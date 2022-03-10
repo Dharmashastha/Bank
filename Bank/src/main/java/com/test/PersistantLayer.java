@@ -182,5 +182,11 @@ public long getCustomer(String userId) throws CustomException {
 }
 
 
+@Override
+public void updateCustomerId(long customerId, long accountNo) throws CustomException {
+	
+}
+
+
 
 }

@@ -11,12 +11,11 @@ import javax.servlet.http.HttpSession;
 
 import com.dbms.BankLogic;
 import com.test.CustomException;
+import com.test.HelperUtil;
 
 public class TransferAmount extends HttpServlet {
 	
-	private static final long serialVersionUID = 1L;
-       
-		
+	private static final long serialVersionUID = 1L;	
 	
     public TransferAmount() {
         super();
@@ -39,71 +38,79 @@ public class TransferAmount extends HttpServlet {
 		else
 		{	
 		String page=request.getParameter("page");
+		
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
 
-		
 		if(page.equals("submit"))
 		{	
 		try {
 			logicCall.writeDbInfo();
 			logicCall.readDbInfo();
-		}
-		catch (CustomException e) {
-			e.printStackTrace();
-		}
-		long fromAccount=Long.parseLong(request.getParameter("fromacc"));
-		long fromCustomer = 0;
-		long toCustomer = 0;
-		long toAccount=Long.parseLong(request.getParameter("toacc"));
 		
-		double amount=Double.parseDouble(request.getParameter("amount"));
-		try {
+		
+			String fromAcc=request.getParameter("fromacc");
+			String toAcc=request.getParameter("toacc");
+			String amoun=request.getParameter("amount");
+		
+			HelperUtil.checkString(fromAcc);
+			HelperUtil.checkString(toAcc);
+			HelperUtil.checkString(amoun);
+		
+			long fromCustomer = 0;
+			long toCustomer = 0;
+			long fromAccount=Long.parseLong(fromAcc);
+			long toAccount=Long.parseLong(toAcc);
+			double amount=Double.parseDouble(amoun);
+			
 			fromCustomer = logicCall.connect.getCustomerId(fromAccount);
 			toCustomer=logicCall.connect.getCustomerId(toAccount);
-		} catch (CustomException e1) {
-			e1.printStackTrace();
-		}
-		try {
+			
 			logicCall.dbWithdraw(fromCustomer, fromAccount, amount);
 			logicCall.dbDeposit(toCustomer, toAccount, amount);
-		} catch (CustomException e) {
-			e.printStackTrace();
-		}
-		RequestDispatcher req=request.getRequestDispatcher("TransfertoAccount.jsp");
-		req.forward(request, response);
-		}
-		else if(page.equals("Submit"))
-		{
-			
-			try {
-				logicCall.writeDbInfo();
-				logicCall.readDbInfo();
 			}
 			catch (CustomException e) {
 				e.printStackTrace();
 			}
-			long fromAccount=Long.parseLong(request.getParameter("fromAccNo"));
-			long fromCustomer = 0;
-			long toCustomer = 0;
-			long toAccount=Long.parseLong(request.getParameter("toAccNo"));
-			
-			double amount=Double.parseDouble(request.getParameter("Amount"));
+			finally {
+				RequestDispatcher req=request.getRequestDispatcher("TransfertoAccount.jsp");
+				req.forward(request, response);
+			}
+		}
+		else if(page.equals("Submit"))
+		{
 			try {
+				logicCall.writeDbInfo();
+				logicCall.readDbInfo();
+			
+				String fromAcc=request.getParameter("fromAccNo");
+				String toAcc=request.getParameter("toAccNo");
+				String amoun=request.getParameter("Amount");
+			
+				HelperUtil.checkString(fromAcc);
+				HelperUtil.checkString(toAcc);
+				HelperUtil.checkString(amoun);
+				
+				long fromCustomer = 0;
+				long toCustomer = 0;
+				long fromAccount=Long.parseLong(fromAcc);
+				long toAccount=Long.parseLong(toAcc);
+				double amount=Double.parseDouble(amoun);
+			
+			
 				fromCustomer = logicCall.connect.getCustomerId(fromAccount);
 				toCustomer=logicCall.connect.getCustomerId(toAccount);
-			} catch (CustomException e1) {
-				e1.printStackTrace();
-			}
-			try {
+				
 				logicCall.dbWithdraw(fromCustomer, fromAccount, amount);
 				logicCall.dbDeposit(toCustomer, toAccount, amount);
-			} catch (CustomException e) {
-				e.printStackTrace();
+				}
+				catch (CustomException e) {
+					e.printStackTrace();
+				}
+				finally {
+					RequestDispatcher req=request.getRequestDispatcher("TransferAccount.jsp");
+					req.forward(request, response);
+				}	
 			}
-			RequestDispatcher req=request.getRequestDispatcher("TransferAccount.jsp");
-			req.forward(request, response);
-			}	
-		}
+		}			
 	}
-			
-	}
+}	

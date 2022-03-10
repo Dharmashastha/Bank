@@ -44,6 +44,15 @@ button[type=submit]:hover
 	background-color:#f44336;
 	color: white; 
 }
+#No
+{
+	border: 2px solid #04AA6D;
+	padding: 3px 5px;
+}
+#No:hover
+{
+	background-color:#04AA6D;
+}
 #AccountDetails {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -84,7 +93,8 @@ button[type=submit]:hover
 <tr>
 	  <c:if test="${current1.value.isStatus()}">
       <td><input type="checkbox"  name="accountNo" value="${current1.key}"/></td>
-      <td><c:out value="${current1.key}"></c:out></td>
+      <td><button type="submit"  id="No" formaction="AddAccount.jsp?customerId=${current.key}" name="accno" value="<c:out value="${current1.key}"></c:out>">
+      <c:out value="${current1.key}"></c:out></button></td>
       <td><c:out value="${current1.value.getBalance()}"></c:out></td>
       <td><c:out value="${current.key}" ></c:out></td>
       </c:if>

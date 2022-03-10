@@ -91,7 +91,7 @@ font-style: italic;
 </head>
 <body>
 <%@include file="CustomerOptions.jsp" %>
-<form action="transferamount" method="post" style="">
+<form action="transferamount" method="post">
 <div>
 <fieldset>
 <label for="account">From AccountNo</label><br>

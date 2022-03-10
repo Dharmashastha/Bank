@@ -162,13 +162,13 @@ public void insertAccInfo(String insert,long accountNo,double balance,long custo
 		}
 }
 
-public void updatePrepared(double balance,long accountNo) throws CustomException 
-	{
-		String update="UPDATE AccountInfo SET balance=? WHERE AccountNo=?";
+public void updateCustomerId(long customerId,long accountNo) throws CustomException 
+{
+		String update="UPDATE AccountInfo SET customerId=? WHERE AccountNo=?";
 		//String update= "UPDATE Employee SET EmployeeName=? WHERE EmployeeId=?";
 		try(PreparedStatement state=ConnectionUtlity.getConnection().prepareStatement(update);)
 		{
-			state.setDouble(1,balance);
+			state.setLong(1,customerId);
 			state.setLong(2,accountNo);
 			int check=state.executeUpdate();
 			if(check != 0)
@@ -182,7 +182,29 @@ public void updatePrepared(double balance,long accountNo) throws CustomException
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+}
+
+public void updatePrepared(double balance,long accountNo) throws CustomException 
+{
+	String update="UPDATE AccountInfo SET balance=? WHERE AccountNo=?";
+	//String update= "UPDATE Employee SET EmployeeName=? WHERE EmployeeId=?";
+	try(PreparedStatement state=ConnectionUtlity.getConnection().prepareStatement(update);)
+	{
+		state.setDouble(1,balance);
+		state.setLong(2,accountNo);
+		int check=state.executeUpdate();
+		if(check != 0)
+		{
+			System.out.println(check+" Row Updated.");
+		}
+		else
+		{
+			System.out.println("No data");
+		}	
+	} catch (SQLException e) {
+		e.printStackTrace();
 	}
+}
 
 public void updateStatus(long accountNo) throws CustomException 
 {

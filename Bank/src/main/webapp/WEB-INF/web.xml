@@ -49,6 +49,10 @@
   <servlet-name>CustomerOptions</servlet-name>
    <servlet-class>com.bank.servlet.CustomerOptions</servlet-class>
 	 </servlet>
+	 <servlet> 
+  <servlet-name>AddAccount</servlet-name>
+   <servlet-class>com.bank.servlet.AddAccount</servlet-class>
+	 </servlet>
 	  
 	 
   <servlet-mapping>
@@ -88,6 +92,10 @@
   <servlet-mapping>
   <servlet-name>CustomerOptions</servlet-name>
   <url-pattern>/customeroptions</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>AddAccount</servlet-name>
+  <url-pattern>/addaccount</url-pattern>
   </servlet-mapping>	
  
 </web-app>

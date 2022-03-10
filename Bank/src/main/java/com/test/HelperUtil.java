@@ -31,6 +31,16 @@ throw new CustomException("String can't be empty and null");
 }
 }
 
+public static void checkStringArray(String[] inputString) throws CustomException {
+for(String input:inputString)
+{	
+if(input == null||input.isEmpty())
+{
+throw new CustomException("StringArray can't be empty and null");
+}
+}
+}
+
 public static void nullCheckStringBuilder(StringBuilder checkStrBuil) throws CustomException{
 if(checkStrBuil == null)
 {

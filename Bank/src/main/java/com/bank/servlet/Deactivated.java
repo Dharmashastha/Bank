@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dbms.BankLogic;
 import com.test.CustomException;
+import com.test.HelperUtil;
 
 public class Deactivated extends HttpServlet {
 	
@@ -39,41 +40,51 @@ public class Deactivated extends HttpServlet {
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
 		
 		String page=request.getParameter("page");
-	
+		
+		request.setAttribute("accMap", logicCall.accountMap);
+		
 		if(page.equals("deactivated"))
-		{	
-		String[] accountNo=request.getParameterValues("accountNo");
+		{
+		try {	
+			String[] accountNo=request.getParameterValues("accountNo");
+		
+			HelperUtil.checkStringArray(accountNo);
+		
 		for(String no:accountNo)
 		{
-			long accNo=Long.parseLong(no);
-			try {
+				HelperUtil.checkString(no);
+				long accNo=Long.parseLong(no);
 				logicCall.connect.updateStatus(accNo);
+		}		
 				logicCall.writeDbInfo();
 				logicCall.readDbInfo();
-			
-				request.setAttribute("cusMap",logicCall.customerMap);
 				request.setAttribute("accMap", logicCall.accountMap);
-			} catch (CustomException e) {
-				e.printStackTrace();
-			}
 		}
-		
-		RequestDispatcher req=request.getRequestDispatcher("AccountDetails.jsp");
-		req.forward(request, response);
+		catch (CustomException e) {
+				e.printStackTrace();
+		}
+		finally {
+				RequestDispatcher req=request.getRequestDispatcher("AccountDetails.jsp");
+				req.forward(request, response);
+		}
 		}
 		else if(page.equals("deactivatedaccountdetails"))
 		{
-			try {
+		try {
 				logicCall.writeDbInfo();
 				logicCall.readDbInfo();
-			}
-			catch (CustomException e) {
-				e.printStackTrace();
-			}
-			request.setAttribute("accMap", logicCall.accountMap);
-			RequestDispatcher req=request.getRequestDispatcher("ActiveAccount.jsp");
-			req.forward(request, response);
+				request.setAttribute("accMap", logicCall.accountMap);
+		}
+		catch (CustomException e) {
+			e.printStackTrace();
+		}
+		finally {
+				RequestDispatcher req=request.getRequestDispatcher("ActiveAccount.jsp");
+				req.forward(request, response);
 		}
 		}
 	}
-}
+		
+  }
+
+}	
