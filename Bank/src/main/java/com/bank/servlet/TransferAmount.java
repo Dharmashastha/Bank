@@ -43,11 +43,11 @@ public class TransferAmount extends HttpServlet {
 
 		if(page.equals("submit"))
 		{	
+			String message = null; 
 		try {
 			logicCall.writeDbInfo();
 			logicCall.readDbInfo();
-		
-		
+			
 			String fromAcc=request.getParameter("fromacc");
 			String toAcc=request.getParameter("toacc");
 			String amoun=request.getParameter("amount");
@@ -67,21 +67,26 @@ public class TransferAmount extends HttpServlet {
 			
 			logicCall.dbWithdraw(fromCustomer, fromAccount, amount);
 			logicCall.dbDeposit(toCustomer, toAccount, amount);
+			message="Transaction Successful";
 			}
 			catch (CustomException e) {
+				message="Transaction Failed";
 				e.printStackTrace();
 			}
 			finally {
+				request.setAttribute("TransferAmount", message);
 				RequestDispatcher req=request.getRequestDispatcher("TransfertoAccount.jsp");
 				req.forward(request, response);
 			}
 		}
 		else if(page.equals("Submit"))
 		{
+			String message = null;
 			try {
 				logicCall.writeDbInfo();
 				logicCall.readDbInfo();
-			
+				
+				
 				String fromAcc=request.getParameter("fromAccNo");
 				String toAcc=request.getParameter("toAccNo");
 				String amoun=request.getParameter("Amount");
@@ -102,11 +107,14 @@ public class TransferAmount extends HttpServlet {
 				
 				logicCall.dbWithdraw(fromCustomer, fromAccount, amount);
 				logicCall.dbDeposit(toCustomer, toAccount, amount);
+				message="Transaction Successful";
 				}
 				catch (CustomException e) {
+					message="Transaction Failed";
 					e.printStackTrace();
 				}
 				finally {
+					request.setAttribute("transferAmount", message);
 					RequestDispatcher req=request.getRequestDispatcher("TransferAccount.jsp");
 					req.forward(request, response);
 				}	

@@ -38,6 +38,7 @@ public class Amount extends HttpServlet {
 		{
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
 		long customerId = 0;
+		boolean check = false;
 		try {
 			logicCall.writeDbInfo();
 			logicCall.readDbInfo();
@@ -50,7 +51,7 @@ public class Amount extends HttpServlet {
 			HelperUtil.checkString(amoun);
 		
 			long accountNo=Long.parseLong(accNo);	
-			boolean check=Boolean.parseBoolean(status);
+			check=Boolean.parseBoolean(status);
 			double amount=Double.parseDouble(amoun);
 			customerId = logicCall.connect.getCustomerId(accountNo);
 	
@@ -62,8 +63,19 @@ public class Amount extends HttpServlet {
 		{
 			logicCall.dbWithdraw(customerId, accountNo, amount);
 		}
-		} catch (CustomException e) {
+		}
+		catch (CustomException e) {
+			
+		if(check)
+		{
+			request.setAttribute("Deposit", e.getMessage());
+		}
+		else
+		{	
+			request.setAttribute("Withdraw", e.getMessage());
+			System.out.println(e.getMessage());
 			e.printStackTrace();
+		}
 		}
 		finally {
 			RequestDispatcher req=request.getRequestDispatcher("Amount.jsp");

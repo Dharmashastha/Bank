@@ -29,6 +29,11 @@
 </style>
 </head>
 <body>
+<%if(session.getAttribute("userId")==null)
+{
+	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+	req.forward(request, response);	
+} %>
 <%@include file="CustomerOptions.jsp" %><br>
 <form action="customeroptions" method="post">
 <table id="AccountDetails">

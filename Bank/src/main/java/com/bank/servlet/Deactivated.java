@@ -45,6 +45,7 @@ public class Deactivated extends HttpServlet {
 		
 		if(page.equals("deactivated"))
 		{
+			String message = null;
 		try {	
 			String[] accountNo=request.getParameterValues("accountNo");
 		
@@ -55,15 +56,19 @@ public class Deactivated extends HttpServlet {
 				HelperUtil.checkString(no);
 				long accNo=Long.parseLong(no);
 				logicCall.connect.updateStatus(accNo);
+				
 		}		
 				logicCall.writeDbInfo();
 				logicCall.readDbInfo();
 				request.setAttribute("accMap", logicCall.accountMap);
+				message="Deactivated Successful";				
 		}
 		catch (CustomException e) {
+			message="Deactivated Failed";
 				e.printStackTrace();
 		}
 		finally {
+				request.setAttribute("deactivated", message);
 				RequestDispatcher req=request.getRequestDispatcher("AccountDetails.jsp");
 				req.forward(request, response);
 		}

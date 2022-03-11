@@ -1,7 +1,6 @@
 package com.bank.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -48,7 +47,6 @@ public void init(ServletConfig config)
 		//doGet(request, response);
 		
 		BankLogic logicCall=(BankLogic) request.getServletContext().getAttribute("logicCall");
-		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
 		
 		String userId=(request.getParameter("UserId"));
@@ -99,7 +97,9 @@ public void init(ServletConfig config)
 		}
 		else
 		{
-			out.print("UserId And Password Invalid");
+			request.setAttribute("Invalid","UserId And Password Invalid");
+			RequestDispatcher requ=request.getRequestDispatcher("BankLogin.jsp");
+			requ.forward(request, response);
 		}
 		
 		}

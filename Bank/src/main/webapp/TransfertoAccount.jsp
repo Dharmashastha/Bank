@@ -59,9 +59,23 @@ box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 font-style: italic;
 }
 </style>
+<script>
+function onTransaction() {
+	   <% String TransferAmount=(String)request.getAttribute("TransferAmount");%>
+	var msg="<%=TransferAmount%>";
+		if(msg != 'null'){
+			alert(msg);  
+		}
+}
+</script>
 <title>TransferAmount</title>
 </head>
-<body>
+<body onpageshow="onTransaction()">
+<%if(session.getAttribute("userId")==null)
+{
+	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+	req.forward(request, response);	
+} %>
 <%@include file="Menu.jsp" %>
 <fieldset>
 <form action="transferamount" method="post">

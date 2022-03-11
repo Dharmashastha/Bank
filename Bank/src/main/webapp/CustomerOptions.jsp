@@ -8,6 +8,11 @@
 <title>CustomerOptions</title>
 </head>
 <body>
+<%if(session.getAttribute("userId")==null)
+{
+	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+	req.forward(request, response);	
+} %>
 <div>
 <form action="customeroptions" method="post">
 <input type="submit" value="AccountDetails" name="page">

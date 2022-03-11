@@ -73,9 +73,23 @@ button[type=submit]:hover
   color: white;
 }
 </style>
+<script>
+function onDeactivated() {
+   <% String deactivated=(String)request.getAttribute("deactivated");%>
+var msg="<%=deactivated%>";
+	if(msg != 'null'){
+		alert(msg);  
+	}
+}
+</script>
 <title>AccountDetails</title>
 </head>
-<body>
+<body onpageshow="onDeactivated()">
+<%if(session.getAttribute("userId")==null)
+{
+	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+	req.forward(request, response);	
+} %>
 <%@include file="Menu.jsp" %>
 <a href="AddAccount.jsp" style="float: right;">Add Account</a>
 <form action="showdetails" method="post">

@@ -18,7 +18,12 @@
 <label for="password">Password</label><br>
 <input type="password" name="Password" id="password" maxlength=10 placeholder="Password" required="required"><br>
 <br><input type="submit" name="page" value="Login"><br>
-<input type="reset">
+<input type="reset"><br>
+<%String invalid=(String)request.getAttribute("Invalid");
+  if(invalid != null){
+	out.print("<label style=color:#f44336>UserId And Password Invalid</label>");  
+  }
+%>
 </fieldset>
 </form>
 </div>

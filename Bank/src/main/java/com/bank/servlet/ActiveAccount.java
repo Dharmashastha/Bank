@@ -41,6 +41,7 @@ public class ActiveAccount extends HttpServlet {
 		{
 		BankLogic logicCall = (BankLogic) request.getServletContext().getAttribute("logicCall");
 		request.setAttribute("accMap", logicCall.accountMap);
+		String message = null;
 		try {
 				String[] accountNo=request.getParameterValues("accountno");
 				HelperUtil.checkStringArray(accountNo);
@@ -49,15 +50,19 @@ public class ActiveAccount extends HttpServlet {
 					HelperUtil.checkString(no);
 					long accNo=Long.parseLong(no);
 					logicCall.connect.updateStatusActive(accNo);
+					
 			}
 				logicCall.writeDbInfo();
 				logicCall.readDbInfo();
 				request.setAttribute("accMap", logicCall.accountMap);
+				message="Activate Successful";
 			}
 			catch (CustomException e) {
+				message="Activate Failed";
 				e.printStackTrace();
 			}
 			finally {
+				request.setAttribute("activate", message);
 				RequestDispatcher req = request.getRequestDispatcher("ActiveAccount.jsp");
 				req.forward(request, response);
 			}

@@ -42,7 +42,8 @@ public class AddClient extends HttpServlet {
 			RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
 			req.forward(request, response);	
 		}
-		else {	
+		else {
+			String message= null;
 		try {
 			String customerName=request.getParameter("custName");
 			String dateOfBirth=request.getParameter("dob");
@@ -56,16 +57,28 @@ public class AddClient extends HttpServlet {
 		if(id==null || id.equals("null"))
 		{
 			String insert="INSERT INTO CustomerInfo VALUES(?,?,?,?)";
-			logicCall.connect.insertCustInfo(insert, customerName, dateOfBirth, address, customerId);				
+			logicCall.connect.insertCustInfo(insert, customerName, dateOfBirth, address, customerId);
+			message="New Customer Created";
 		}	
 		else  
 		{	
 				long custId=Long.parseLong(id);
 				logicCall.connect.updateCustomerInfo(customerName, dateOfBirth, address, custId);
+				message="CustomerDetails Updated";
 		}
+				request.setAttribute("Customer", message);
 		}
 		catch (CustomException e) {
-				e.printStackTrace();
+			if(id == null || id.equals("null"))
+			{
+				message="New Customer Creation Failed";
+				
+			}
+			else
+			{
+				message="CustomerDetails Update Failed";
+			}
+			request.setAttribute("Customer", message);
 		}
 		finally
 		{

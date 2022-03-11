@@ -46,8 +46,22 @@ button[type=submit]:hover
   color: white;
 }
 </style>
+<script>
+function onActivate() {
+   <% String activate=(String)request.getAttribute("activate");%>
+var msg="<%=activate%>";
+	if(msg != 'null'){
+		alert(msg);  
+	}
+}
+</script>
 </head>
-<body>
+<body onpageshow="onActivate()">
+<%if(session.getAttribute("userId")==null)
+{
+	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+	req.forward(request, response);	
+} %>
 <%@include file="Menu.jsp" %>
 <form action="activeaccount" method="post" >
 <button type="submit" formaction="activeaccount" formmethod="post" style="float: right;">Activate Account</button>

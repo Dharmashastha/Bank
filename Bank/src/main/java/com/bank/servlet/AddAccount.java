@@ -42,6 +42,7 @@ public class AddAccount extends HttpServlet {
 			req.forward(request, response);	
 		}
 		else {
+			String message= null;
 		try {
 			String cusId=request.getParameter("customerId");
 			HelperUtil.checkString(cusId);
@@ -55,18 +56,32 @@ public class AddAccount extends HttpServlet {
 				boolean status=accCall.isStatus();
 				String insert="INSERT INTO AccountInfo VALUES(?,?,?,?)";
 				logicCall.connect.insertAccInfo(insert, accountNo, balance, custId, status);
+				message="New Account Created";		
 		}	
 		else
 		{
 				long accountNo=Long.parseLong(accNo);
 				long custId=Long.parseLong(cusId);
 				logicCall.connect.updateCustomerId(custId,accountNo);
+				message="AccountDetails Updated";
+				
 		}
+				request.setAttribute("Account", message);
 		}
 		catch (CustomException e) {
-				e.printStackTrace();
+			if(accNo == null || accNo.equals("null"))
+			{
+				message="New Account Creation Failed";
+				
+			}
+			else
+			{
+				message="AccountDetails Update Failed";
+			}
+			request.setAttribute("Account", message);
 		}
 		finally {
+			
 				RequestDispatcher requ=request.getRequestDispatcher("AddAccount.jsp");
 				requ.forward(request, response);
 		}

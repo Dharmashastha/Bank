@@ -34,6 +34,11 @@ input[type=submit]:hover
 <title>Menu</title>
 </head>
 <body>
+<%if(session.getAttribute("userId")==null)
+{
+	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+	req.forward(request, response);	
+} %>
 <div>
 <form action="showdetails" method="post">
 <input type="submit" value="CustomerDetails" name="page">

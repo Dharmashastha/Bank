@@ -50,9 +50,23 @@ fieldset
 	border:none;
 }
 </style>
+<script>
+function onAddAccount() {
+   <% String account=(String)request.getAttribute("Account");%>
+var msg="<%=account%>";
+	if(msg != 'null'){
+		alert(msg);  
+	}
+}
+</script>
 <title>AddAccount</title>
 </head>
-<body>
+<body onpageshow="onAddAccount()">
+<%if(session.getAttribute("userId")==null)
+{
+	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+	req.forward(request, response);	
+} %>
 <%@include file="Menu.jsp" %>
 <fieldset>
 <form action="addaccount" method="post">

@@ -56,17 +56,22 @@ div
 }
 
 </style>
-<script type="text/javascript">
-/* function onTrim() {
-	var a=document.getElementById("custName").value;
-	a=a.trim();
-		document.getElementById("custName").value=a;
-	
-} */
-
+<script>
+function onAddCustomer() {
+   <% String customer=(String)request.getAttribute("Customer");%>
+var msg="<%=customer%>";
+	if(msg != 'null'){
+		alert(msg);  
+	}
+}
 </script>
 </head>
-<body>
+<body onpageshow="onAddCustomer()">
+<%if(session.getAttribute("userId")==null)
+{
+	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+	req.forward(request, response);	
+} %>
 <div>
 <%@include file="Menu.jsp" %>
 <fieldset>

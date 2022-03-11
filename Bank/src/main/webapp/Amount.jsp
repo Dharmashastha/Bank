@@ -64,11 +64,29 @@ fieldset
 	border:none;
 }
 </style>
-<script type="text/javascript">
+<script>
+function onAmount() {
+	   <% String deposit=(String)request.getAttribute("Deposit");%>
+	var msg="<%=deposit%>";
+		if(msg != 'null'){
+			alert(msg);  
+		}
+		
+		<% String withdraw=(String)request.getAttribute("Withdraw");%>
+		var check="<%=withdraw%>";
+			if(check != 'null'){
+				alert(check);  
+			}
+	}
 </script>
 <title>Amount</title>
 </head>
-<body>
+<body onpageshow="onAmount()">
+<%if(session.getAttribute("userId")==null)
+{
+	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
+	req.forward(request, response);	
+} %>
 <%@include file="Menu.jsp" %>
 <fieldset>
 <form action="amount" method="post">

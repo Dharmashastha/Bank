@@ -154,13 +154,13 @@ public double withdraw(long customerId,long accountNo,double withdraw) throws Cu
 	nullCheckAccMap(customerId);
 	AccountInfo acInfo = custMap.get(accountNo);
 	double balance=checkBalance(customerId, accountNo); 
-	if(balance > withdraw)
+	if(balance > withdraw && withdraw > 0)
 	{
 		balance-=withdraw;
 		acInfo.setBalance(balance);
 		return balance;
 	}
-	throw new CustomException("withdraw Invalid Amount");
+	throw new CustomException("Insufficient Balance OR withdraw Negative Amount");
 }
 
 public void checkStatus(AccountInfo acInfo) throws CustomException
