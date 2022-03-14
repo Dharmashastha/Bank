@@ -66,7 +66,7 @@ fieldset
 </style>
 <script>
 function onAmount() {
-	   <% String deposit=(String)request.getAttribute("Deposit");%>
+	   <%-- <% String deposit=(String)request.getAttribute("Deposit");%>
 	var msg="<%=deposit%>";
 		if(msg != 'null'){
 			alert(msg);  
@@ -76,12 +76,12 @@ function onAmount() {
 		var check="<%=withdraw%>";
 			if(check != 'null'){
 				alert(check);  
-			}
+			} --%>
 	}
 </script>
 <title>Amount</title>
 </head>
-<body onpageshow="onAmount()">
+<body>
 <%if(session.getAttribute("userId")==null)
 {
 	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
@@ -105,7 +105,17 @@ function onAmount() {
 <input type="radio" name="yesno" id="amount" value="false" required><i>Withdraw</i><br>
 <label for="amount">Amount</label><br>
 <input type="number" id="amount" placeholder="Amount" name="amount" min="100" max="100000" required><br>
-<br><input type="submit"> 
+<br><input type="submit">
+<% String deposit=(String)request.getAttribute("Deposit");
+   if(deposit != null)
+   {
+	   out.print("<label style=text-align: center;>"+deposit+"</label>");
+   }%>
+<% String withdraw=(String)request.getAttribute("Withdraw");
+   if(withdraw != null)
+   {
+	   out.print("<label style=text-align: center;>"+withdraw+"</label>");
+   }%>    
 </form>
 </fieldset>
 </body>

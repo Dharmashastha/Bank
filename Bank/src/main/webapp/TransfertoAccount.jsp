@@ -61,16 +61,16 @@ font-style: italic;
 </style>
 <script>
 function onTransaction() {
-	   <% String TransferAmount=(String)request.getAttribute("TransferAmount");%>
+	   <%-- <% String TransferAmount=(String)request.getAttribute("TransferAmount");%>
 	var msg="<%=TransferAmount%>";
 		if(msg != 'null'){
 			alert(msg);  
-		}
+		} --%>
 }
 </script>
 <title>TransferAmount</title>
 </head>
-<body onpageshow="onTransaction()">
+<body>
 <%if(session.getAttribute("userId")==null)
 {
 	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
@@ -102,6 +102,11 @@ function onTransaction() {
 <label for="Amount">Transfer Amount</label><br>
 <input type="number" id="Amount" placeholder="Amount" min="100" max="100000" required name="amount"><br>
 <br><input type="submit" name="page" value="submit">
+<% String transferAmount=(String)request.getAttribute("TransferAmount");
+   if(transferAmount != null)
+   {
+	   out.print("<label style=text-align: center;>"+transferAmount+"</label>");
+   }%>
 </form>
 </fieldset>
 </body>

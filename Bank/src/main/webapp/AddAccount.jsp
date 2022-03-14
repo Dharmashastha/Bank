@@ -52,16 +52,16 @@ fieldset
 </style>
 <script>
 function onAddAccount() {
-   <% String account=(String)request.getAttribute("Account");%>
+   <%-- <% String account=(String)request.getAttribute("Account");%>
 var msg="<%=account%>";
 	if(msg != 'null'){
 		alert(msg);  
-	}
+	} --%>
 }
 </script>
 <title>AddAccount</title>
 </head>
-<body onpageshow="onAddAccount()">
+<body>
 <%if(session.getAttribute("userId")==null)
 {
 	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
@@ -75,6 +75,11 @@ var msg="<%=account%>";
 <input type="number" id="custId" name="customerId" placeholder="customerId" min="100001" max="200000" required value="<%if(id != null){out.print(Long.parseLong(id));}%>"><br>
 <br><input type="submit" value="Register">
 <input type="hidden" name="accno" value="<% String s=request.getParameter("accno");%><% out.print(s);%>">
+<% String account=(String)request.getAttribute("Account");
+   if(account != null)
+   {
+	   out.print("<label style=text-align: center;>"+account+"</label>");
+   }%>
 </form>
 </fieldset>
 </body>

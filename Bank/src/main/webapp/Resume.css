@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+#EducationalQualifications {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#EducationalQualifications td, #EducationalQualifications th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+#EducationalQualifications th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #04AA6D;
+  color: white;
+}
+label{
+  background-color: #87CEFA; 
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-style: italic;
+}
+fieldset
+{	
+	text-align: center;
+	margin-left:800px;
+	width:200px;
+	height:150px;
+	border:none;
+	font-size: 18px;
+}
+p{
+	font-size: 18px;
+}
+h1,h4
+{
+	text-transform: uppercase;
+	text-align: center;
+}
+#email
+{
+	float: right;
+}
+ul{
+	font-size: 18px;
+}
+li{
+	padding: 5px;
+}
+input[type=date],input[type=text]
+{
+width:15%;
+padding:10px;
+border:0;
+box-shadow:0 0 15px 4px rgba(0,0,0,0.06);	
+font-style: italic;	
+}
+img{
+	width: 8%;
+	height:10%;
+	float: right;
+}
+#icon{
+	width: 2%;
+	height:1%;
+}
+
+
+

@@ -48,15 +48,15 @@ button[type=submit]:hover
 </style>
 <script>
 function onActivate() {
-   <% String activate=(String)request.getAttribute("activate");%>
+   <%-- <% String activate=(String)request.getAttribute("activate");%>
 var msg="<%=activate%>";
 	if(msg != 'null'){
 		alert(msg);  
-	}
+	} --%>
 }
 </script>
 </head>
-<body onpageshow="onActivate()">
+<body>
 <%if(session.getAttribute("userId")==null)
 {
 	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
@@ -65,6 +65,11 @@ var msg="<%=activate%>";
 <%@include file="Menu.jsp" %>
 <form action="activeaccount" method="post" >
 <button type="submit" formaction="activeaccount" formmethod="post" style="float: right;">Activate Account</button>
+<% String activate=(String)request.getAttribute("activate");
+   if(activate != null)
+   {
+	   out.print("<label style=color:#f44336;text-align: center;>"+activate+"</label>");
+   }%>
 <table id="AccountDetails">
 <tr>
 	<th>Select</th>

@@ -75,16 +75,16 @@ button[type=submit]:hover
 </style>
 <script>
 function onDeactivated() {
-   <% String deactivated=(String)request.getAttribute("deactivated");%>
+ 
+}<%--   <% String deactivated=(String)request.getAttribute("deactivated");%>
 var msg="<%=deactivated%>";
 	if(msg != 'null'){
 		alert(msg);  
-	}
-}
+	} --%>
 </script>
 <title>AccountDetails</title>
 </head>
-<body onpageshow="onDeactivated()">
+<body>
 <%if(session.getAttribute("userId")==null)
 {
 	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
@@ -95,6 +95,11 @@ var msg="<%=deactivated%>";
 <form action="showdetails" method="post">
 <button type="submit" formaction="deactivated" formmethod="post" style="float: right;" name="page" value="deactivated">Deactivated Account</button>
 <button type="submit" formaction="deactivated" formmethod="post" style="float: right;" name="page" value="deactivatedaccountdetails">DeactivatedAccountDetails</button>
+<%String deactivated=(String)request.getAttribute("deactivated");
+if(deactivated != null)
+{
+	out.print("<label style=color:#f44336;text-align: center;margin-left:800px;>"+deactivated+"</label>");
+}%>
 <table id="AccountDetails">
 <tr>
 	<th>Select</th>

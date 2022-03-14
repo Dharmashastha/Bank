@@ -58,15 +58,15 @@ div
 </style>
 <script>
 function onAddCustomer() {
-   <% String customer=(String)request.getAttribute("Customer");%>
+   <%-- <% String customer=(String)request.getAttribute("Customer");%>
 var msg="<%=customer%>";
 	if(msg != 'null'){
 		alert(msg);  
-	}
+	} --%>
 }
 </script>
 </head>
-<body onpageshow="onAddCustomer()">
+<body>
 <%if(session.getAttribute("userId")==null)
 {
 	RequestDispatcher req=request.getRequestDispatcher("BankLogin.jsp");
@@ -87,6 +87,11 @@ var msg="<%=customer%>";
 <input type="text" id="address" name="address" required="required" value="<%if(address != null){out.print(address);}%>"><br><br>
 <input type="submit" value="Register">
 <input type="hidden" name="id" value="<% String s=request.getParameter("id");%><% out.print(s);%>">
+<% String customer=(String)request.getAttribute("Customer");
+   if(customer != null)
+   {
+	   out.print("<label style=text-align: center;>"+customer+"</label>");
+   }%>
 </form>
 </fieldset>
 </div>

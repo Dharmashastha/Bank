@@ -58,10 +58,12 @@ public class Amount extends HttpServlet {
 		if(check)
 		{
 			logicCall.dbDeposit(customerId, accountNo, amount);
+			request.setAttribute("Deposit", "Deposit Successful");
 		}
 		else
 		{
 			logicCall.dbWithdraw(customerId, accountNo, amount);
+			request.setAttribute("Withdraw", "Withdraw Successful");
 		}
 		}
 		catch (CustomException e) {
