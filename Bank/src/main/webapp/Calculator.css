@@ -3,19 +3,18 @@ fieldset
 {	
 	text-align: center;
 	margin-left:800px;
-	width:200px;
-	height:150px;
-	border:none;
+	width:10%;
+	height:340px;
+	border:5px solid black;
 	font-size: 18px;
 }
 #Calculator {
   font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
   width: 100%;
 }
 
 #Calculator td{
-  border: 1px solid #ddd;
+  border: 1px solid black;
   padding: 8px;
   text-align: center;
 }
@@ -23,32 +22,44 @@ fieldset
 input[type=button]{
 	border: 2px solid black;
 	text-align: center;
-	font-size: 15px;
+	font-size: 20px;
   	cursor: pointer;
+  	box-sizing: border-box;
+  	border-radius: 25%;
+  	font-weight: 700;
+  	padding: 5px 8px;
 }
 
 #ac
 {
   background-color: red;
   color: black;
-  padding: 5px 8px;  
+  font-size: 18px;
 }
 
 #math
 {
   background-color: #87CEFA;
   color: black;
-  padding: 5px 8px;
 }
+
 #number
 {
   background-color: black;
   color: white;
-  padding: 6px 8px;
 }
+
 #operation
 {
   background-color: #bdbdbd;
   color: white;
-  padding: 6px 8px;
+}
+
+input[type=text]
+{
+width:90%;
+padding:7px;
+border:1;
+box-shadow:0 0 15px 4px rgba(0,0,0,0.06);	
+font-style: italic;	
 }

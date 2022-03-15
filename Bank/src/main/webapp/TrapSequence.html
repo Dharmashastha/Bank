@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			TrapSequence
+		</title>
+		<script src="TrapSequence.js">
+		</script>
+		<script>
+		function trap() {
+			let data=trapSequence(3,5,13);
+			for(var show of data){
+			document.getElementById("generate").innerHTML +="<ul><li>"+show+"</li></ul>";
+			}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="Generate" onclick="trap()">
+		<p id="generate">TrapSequence</p>
+	</body>
+</html>
