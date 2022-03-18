@@ -49,7 +49,31 @@ input[type=button]{
   color: white;
 }
 
-#operation
+#add
+{
+  background-color: #bdbdbd;
+  color: white;
+}
+
+#sub
+{
+  background-color: #bdbdbd;
+  color: white;
+}
+
+#mul
+{
+  background-color: #bdbdbd;
+  color: white;
+}
+
+#dive
+{
+  background-color: #bdbdbd;
+  color: white;
+}
+
+#equ
 {
   background-color: #bdbdbd;
   color: white;
@@ -62,4 +86,5 @@ padding:7px;
 border:1;
 box-shadow:0 0 15px 4px rgba(0,0,0,0.06);	
 font-style: italic;	
+text-align: right; 
 }

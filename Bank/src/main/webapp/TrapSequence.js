@@ -1,40 +1,57 @@
-function trapSequence(a,b,end)
+function trapSequence(start,b,end)
 {
-	var n=a;
+	var n1 = 0;
 	const map=new Map();
-	for(a;a <= end;a++)
+	for(n1=start;n1 <= end;n1++)
 		{
-			var c= getsum(a);	
-			if(a == b || a%b == 0 || b%a == 0 || c%b == 0 || b%c == 0)
+			let a= n1;
+			while(true)
+			{	
+			//console.log(c);	
+			if(a%b == 0 || b%a == 0)
 				{
 					//console.log(a+" "+b);
-					map.set(a,b);
-					b += 2;			
+					map.set(n1,b);
+					b=b+2;
+					break;			
 				}
 			else
 				{
-					if(b <= n)
-						{
-						}
-					else
-						{
-							b -= 1;
-							//console.log("b is "+b);
-						}	
+					
+					if(a < 10)
+					{
+						if(3 < b)
+							{
+								b--;
+							}
+							break;
+					}
+						var  c= getsum(a);
+						a=c;	
 				}
-			
+			}
 		}
-return map;				
-}
+return map;		
+}				
+
 
 function getsum(number)
 {
 	var sum = 0;
-     	while (number >= 1) 
+     	while (number > 0) 
 		{
              sum = sum + number % 10;
              number = Math.floor(number / 10);
 			 //console.log("sum is"+sum);
-        }
-        return sum;	
+        }	
+return sum;
+
+		/*if(number % 9 == 0)
+		{
+			return 9;
+		}
+		else
+		{
+			return number % 9;
+		}*/
 }

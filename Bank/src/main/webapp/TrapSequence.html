@@ -9,15 +9,17 @@
 		</script>
 		<script>
 		function trap() {
-			let data=trapSequence(3,5,13);
+			let data=trapSequence(200,7,300);
 			for(var show of data){
-			document.getElementById("generate").innerHTML +="<ul><li>"+show+"</li></ul>";
+				document.getElementById("generate").innerHTML +="<ul><li>"+show+"</li></ul>";
 			}
-			}
+			document.getElementById("output").innerHTML ="TrapSequence count is "+data.size;
+		}
 		</script>
 	</head>
 	<body>
 		<input type="button" value="Generate" onclick="trap()">
 		<p id="generate">TrapSequence</p>
+		<p id="output"></p>
 	</body>
 </html>

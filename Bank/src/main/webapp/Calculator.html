@@ -6,6 +6,119 @@
 			Calculator
 		</title>
 		<link rel="stylesheet" type="text/css" href="Calculator.css">
+		<script>
+			/* var x = document.getElementById("result");
+				x.addEventListener("click",display(number));
+				x.addEventListener("click",displayOperation);
+				x.addEventListener("click",solve);
+				x.addEventListener("click",clearInput); */
+				
+				var saved = '';
+				var output = new Array();
+				var stored = 0;
+			function clearInput() 
+				{
+ 					document.getElementById("result").value = "";	
+				}
+			function display(number) 
+				{
+					stored = document.getElementById("result").value += number;
+					//return saved;
+				}
+			 function displayOperation(operation) 
+				{
+				 	stored=parseFloat(stored);
+					output.push(stored);
+					
+					console.log("operation is "+operation);
+					
+					//if(operation == '+' || operation == '*' || operation == '/' || operation == '-')
+						//{
+							saved += operation;
+						//}
+					
+					
+					//console.log("saved is "+saved);
+					
+					if (!saved || operation != '-') 
+						{
+							document.getElementById("result").value = "";
+							saved = operation;
+							console.log("saved is "+saved);
+						} 
+					else
+						{
+							document.getElementById("result").value = "-";	
+						} 
+					
+					
+					
+					/* document.getElementById("add").style.backgroundColor = "#4CAF50";
+					document.getElementById("sub").style.backgroundColor = "#4CAF50";
+					document.getElementById("mul").style.backgroundColor = "#4CAF50";
+					document.getElementById("dive").style.backgroundColor = "#4CAF50"; */
+				
+				} 
+			
+			function solve() 
+				{
+					stored = parseFloat(stored);
+					output.push(stored);
+					//var number = 0;
+					//const storedNum = display(number);
+					//var operation = '';
+					//var storedOper= displayOperation(operation);
+					var result = 0;
+					for(let i = 0; i < output.length;i++)
+						{
+						
+					switch(saved)
+						{
+							case '+':
+								{
+									document.getElementById("add").style.backgroundColor = "#bdbdbd";
+									result = output[i-1] + output[i];
+									break;
+								}
+							case '-':
+								{
+									document.getElementById("sub").style.backgroundColor = "#bdbdbd";
+									result = output[i-1] - output[i];
+									break;
+								}
+							case '*':
+								{
+									document.getElementById("mul").style.backgroundColor = "#bdbdbd";
+									result = output[i-1] * output[i];
+									break;
+								}
+							case '/':
+								{
+									document.getElementById("dive").style.backgroundColor = "#bdbdbd";
+									result = output[i-1] / output[i];
+									break;
+								}
+							case '%':
+								{
+									result = output[i-1] % output[i];
+									break;
+								}
+							default:
+								return ;
+						}
+						}
+					document.getElementById("result").value = result;
+					output.push(result);
+					console.log(output);
+				}
+			function displayAC() 
+			{
+				document.getElementById("result").value = 0;
+				//return saved;
+			}
+	         	
+			
+		</script>
 	</head>
 	<body>
 		<fieldset>
@@ -13,34 +126,34 @@
 					<tr>
 						<td colspan="4"><input type="text" id="result"></td>
 					<tr>	
-						<td><input type="button" value="AC" id="ac"></td>
-						<td><input type="button" value="C" id="math"></td>
+						<td><input type="button" value="AC" id="ac" onclick="displayAC()"></td>
+						<td><input type="button" value="C" id="math" onclick="clearInput()"></td>
 						<td><input type="button" value="&#x221A;" id="math"></td>
-						<td><input type="button" value="%" id="math"></td>
+						<td><input type="button" value="%" id="math" onclick="displayOperation('%')"></td>
 					</tr>
 					<tr>	
-						<td><input type="button" value="7" id="number"></td>
-						<td><input type="button" value="8" id="number"></td>
-						<td><input type="button" value="9" id="number"></td>
-						<td><input type="button" value="&#247;" id="operation"></td>
+						<td><input type="button" value="7" id="number" onclick="display('7')"></td>
+						<td><input type="button" value="8" id="number" onclick="display('8')"></td>
+						<td><input type="button" value="9" id="number" onclick="display('9')"></td>
+						<td><input type="button" value="&#247;" id="dive" onclick="displayOperation('/')"></td>
 					</tr>
 					<tr>	
-						<td><input type="button" value="4" id="number"></td>
-						<td><input type="button" value="5" id="number"></td>
-						<td><input type="button" value="6" id="number"></td>
-						<td><input type="button" value="&#xd7;" id="operation"></td>
+						<td><input type="button" value="4" id="number" onclick="display('4')"></td>
+						<td><input type="button" value="5" id="number" onclick="display('5')"></td>
+						<td><input type="button" value="6" id="number" onclick="display('6')"></td>
+						<td><input type="button" value="&#xd7;" id="mul" onclick="displayOperation('*')"></td>
 					</tr>
 					<tr>	
-						<td><input type="button" value="1" id="number"></td>
-						<td><input type="button" value="2" id="number"></td>
-						<td><input type="button" value="3" id="number"></td>
-						<td><input type="button" value="-" id="operation"></td>
+						<td><input type="button" value="1" id="number" onclick="display('1')"></td>
+						<td><input type="button" value="2" id="number" onclick="display('2')"></td>
+						<td><input type="button" value="3" id="number" onclick="display('3')"></td>
+						<td><input type="button" value="-" id="sub" onclick="displayOperation('-')"></td>
 					</tr>
 					<tr>	
-						<td><input type="button" value="0" id="number"></td>
-						<td><input type="button" value="." id="number"></td>
-						<td><input type="button" value="=" id="operation"></td>
-						<td><input type="button" value="+" id="operation"></td>
+						<td><input type="button" value="0" id="number" onclick="display('0')"></td>
+						<td><input type="button" value="." id="number" onclick="display('.')"></td>
+						<td><input type="button" value="=" id="equ" onclick="solve()"></td>
+						<td><input type="button" value="+" id="add" onclick="displayOperation('+')"></td>
 					</tr>	
 				</table>
 		</fieldset>

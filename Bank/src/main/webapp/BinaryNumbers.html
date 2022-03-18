@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>BinaryNumbers</title>
+		<script>
+		function toBinary() {
+			var number = document.getElementById("number").value;
+			var output=binary(number);
+			document.getElementById("binary").innerHTML ="Binary count is "+ output;
+		}
+		function binary(number) {
+			let i,rem = 0;
+			var count = 0;
+			var saved ="";
+			while(number != 0)
+			{
+				rem = number % 2;
+				saved = rem + saved;
+				number = Math.floor(number / 2);
+				if(rem == 1)
+				{
+						count++;
+				}
+			}
+			//console.log(count);
+			return count;
+		}
+		</script>
+	</head>
+	<body>
+		<input type="number" id="number">
+		<input type="button" value="convert" onclick="toBinary()">
+		<p id="binary"></p>
+	</body>
+</html>

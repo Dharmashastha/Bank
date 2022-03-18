@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Generation</title>
+		<script>
+			function breakpoint() 
+				{
+					const br = document.createElement("br");
+					document.body.appendChild(br);
+				}
+			function numberOfGeneration() 
+			{
+				var length=document.getElementById("number").value;	
+				for(let i =0;i < length;i++)
+					{
+						breakpoint();
+						
+						const label=document.createElement("label");
+					    label.setAttribute("value","Parent");
+					    label.textContent="parent : ";
+					    document.body.appendChild(label);
+					      
+						const parent=document.createElement("input");
+						parent.setAttribute("type", "text");
+						parent.setAttribute("name", "parent");
+						document.body.appendChild(parent);
+						
+						const label1=document.createElement("label");
+					    label1.setAttribute("value","child");
+					    label1.textContent="son : ";
+					    document.body.appendChild(label1);
+						
+						const child=document.createElement("input");
+						child.setAttribute("type", "text");
+						child.setAttribute("name", "child");
+						document.body.appendChild(child);
+						breakpoint();
+					}
+				breakpoint();
+				const button=document.createElement("input");
+				button.setAttribute("type", "button");
+				button.setAttribute("id", "button");
+				button.setAttribute("name", "button");
+				button.setAttribute("value", "submit");
+				document.body.appendChild(button);
+				var x = document.getElementById("button");
+				//x.addEventListener("click",savedGeneration);
+				x.addEventListener("click",search);
+			}
+			function search() 
+			{
+				breakpoint();
+				const output=document.createElement("input");
+				output.setAttribute("type", "text");
+				output.setAttribute("name", "output");
+				output.setAttribute("id", "output");
+				document.body.appendChild(output);
+				
+				breakpoint();
+				
+				const search=document.createElement("input");
+				search.setAttribute("type", "button");
+				search.setAttribute("id", "search");
+				search.setAttribute("name", "search");
+				search.setAttribute("onclick", "getValue()");
+				search.setAttribute("value", "search");
+				document.body.appendChild(search);		
+			}
+			function savedGeneration() 
+			{
+				const storedParent = document.getElementsByName("parent");
+				const storedChild =  document.getElementsByName("child");
+				var map = new Map();
+				var list = new Array();
+				for(let i=0;i < storedParent.length;i++)
+					{
+						if(map.get(storedParent[i].value) == null)
+							{
+								list = new Array();
+								map.set(storedParent[i].value,list);
+							}
+						map.get(storedParent[i].value).push(storedChild[i].value);
+					}
+				return map;
+			}
+			
+			function getValue() 
+			{
+				var map=savedGeneration();
+				var value=document.getElementById("output").value;
+				var arr=map.get(value);
+			//	console.log(arr);
+				var stored = new Array();
+				var output = 0;
+				for(let i=0 ;i < arr.length ;i++)
+					{
+							stored.push(map.get(arr[i]));
+						 /* if(dummy != null)
+							{
+								output += dummy.length;
+							} */ 
+						 if(map.get(arr[i]) != null)
+							{
+								output += map.get(arr[i]).length;
+							} 
+							
+					}
+				/* for(var saved of stored)
+					{
+						output += saved; 
+					} */
+				if(output == 1)
+					{
+						document.getElementById("arr").innerHTML +="<label>There are "+output+" Grandson.They are "+stored+" Grandson.</label>";
+					}
+				else if(output > 1)
+					{
+						document.getElementById("arr").innerHTML +="<label>There are "+output+" Grandsons.They are "+stored+" Grandsons.</label>";
+					}
+				else
+					{
+						document.getElementById("arr").innerHTML +="<label>There are no Grandson.</label>";
+					}
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<p>How many generation you want:</p>
+		<input type="number" id="number"><br>
+		<input type="button" id="value" value="submit" onclick="numberOfGeneration()">
+		<p id="arr"></p>
+	</body>
+</html>
