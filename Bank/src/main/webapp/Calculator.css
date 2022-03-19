@@ -49,28 +49,11 @@ input[type=button]{
   color: white;
 }
 
-#add
-{
-  background-color: #bdbdbd;
-  color: white;
-}
 
-#sub
+.symbol
 {
-  background-color: #bdbdbd;
-  color: white;
-}
-
-#mul
-{
-  background-color: #bdbdbd;
-  color: white;
-}
-
-#dive
-{
-  background-color: #bdbdbd;
-  color: white;
+	background-color: #bdbdbd;
+  	color: white;
 }
 
 #equ

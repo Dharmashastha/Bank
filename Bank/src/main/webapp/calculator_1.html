@@ -20,10 +20,10 @@
 				{
  					document.getElementById("result").value = "";
  					saved = null;
- 					document.getElementById("+").style.backgroundColor = "#bdbdbd";
-					document.getElementById("-").style.backgroundColor = "#bdbdbd";
-					document.getElementById("*").style.backgroundColor = "#bdbdbd";
-					document.getElementById("/").style.backgroundColor = "#bdbdbd";
+ 					document.getElementById("add").style.backgroundColor = "#bdbdbd";
+					document.getElementById("sub").style.backgroundColor = "#bdbdbd";
+					document.getElementById("mul").style.backgroundColor = "#bdbdbd";
+					document.getElementById("dive").style.backgroundColor = "#bdbdbd";
 				}
 			function display(number) 
 				{
@@ -35,35 +35,27 @@
 				 	stored=parseFloat(stored);
 					output.push(stored);
 					
-					console.log("operation is "+ operation);
+					console.log("operation is "+operation);
 					
-					if(saved == null)
-					{
-						document.getElementById(operation).style.backgroundColor = "#4CAF50";
-					}
-					
-					if (!saved || operation != '-' && saved != '-') 
+					if (!saved || operation != '-') 
 						{
 							document.getElementById("result").value = "";
 							saved = operation;
 							console.log("saved is "+saved);
 						} 
-					else if(!saved && saved != '+' || saved != '*')
-						{
-							document.getElementById("result").value = "";
-							saved = operation;
-							console.log("saved is "+saved);
-						}
 					else
 						{
 							document.getElementById("result").value = "-";
 						}
 					
-					if(saved != null)
+					if(stored == 0)
 					{
-						document.getElementById(saved).style.backgroundColor = "#4CAF50";
+						document.getElementById("add").style.backgroundColor = "#bdbdbd";
+						document.getElementById("sub").style.backgroundColor = "#bdbdbd";
+						document.getElementById("mul").style.backgroundColor = "#bdbdbd";
+						document.getElementById("dive").style.backgroundColor = "#bdbdbd";
 					}
-					/* if(!saved || operation != '-')
+					if(!saved || operation != '-')
 						{
 							document.getElementById("add").style.backgroundColor = "#bdbdbd";
 							document.getElementById("sub").style.backgroundColor = "#4CAF50";
@@ -99,13 +91,14 @@
 							document.getElementById("dive").style.backgroundColor = "#4CAF50";
 						}
 					if(operation == '%')
-						{
-							document.getElementById("add").style.backgroundColor = "#bdbdbd";
-							document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-							document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-							document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-							document.getElementById("math").style.backgroundColor = "#87CEFA";
-						} */
+					{
+						document.getElementById("add").style.backgroundColor = "#bdbdbd";
+						document.getElementById("sub").style.backgroundColor = "#bdbdbd";
+						document.getElementById("mul").style.backgroundColor = "#bdbdbd";
+						document.getElementById("dive").style.backgroundColor = "#bdbdbd";
+						document.getElementById("math").style.backgroundColor = "#87CEFA";
+					}
+					
 				} 
 			
 			function solve() 
@@ -125,25 +118,25 @@
 						{
 							case '+':
 								{
-									document.getElementById("+").style.backgroundColor = "#bdbdbd";
+									document.getElementById("add").style.backgroundColor = "#bdbdbd";
 									result = output[i-1] + output[i];
 									break;
 								}
 							case '-':
 								{
-									document.getElementById("-").style.backgroundColor = "#bdbdbd";
+									document.getElementById("sub").style.backgroundColor = "#bdbdbd";
 									result = output[i-1] - output[i];
 									break;
 								}
 							case '*':
 								{
-									document.getElementById("*").style.backgroundColor = "#bdbdbd";
+									document.getElementById("mul").style.backgroundColor = "#bdbdbd";
 									result = output[i-1] * output[i];
 									break;
 								}
 							case '/':
 								{
-									document.getElementById("/").style.backgroundColor = "#bdbdbd";
+									document.getElementById("dive").style.backgroundColor = "#bdbdbd";
 									result = output[i-1] / output[i];
 									break;
 								}
@@ -165,10 +158,10 @@
 			{
 				document.getElementById("result").value = 0;
 				saved = null;
-				document.getElementById("+").style.backgroundColor = "#bdbdbd";
-				document.getElementById("-").style.backgroundColor = "#bdbdbd";
-				document.getElementById("*").style.backgroundColor = "#bdbdbd";
-				document.getElementById("/").style.backgroundColor = "#bdbdbd";
+				document.getElementById("add").style.backgroundColor = "#bdbdbd";
+				document.getElementById("sub").style.backgroundColor = "#bdbdbd";
+				document.getElementById("mul").style.backgroundColor = "#bdbdbd";
+				document.getElementById("dive").style.backgroundColor = "#bdbdbd";
 				//return saved;
 			}
 	         	
@@ -190,25 +183,25 @@
 						<td><input type="button" value="7" id="number" onclick="display('7')"></td>
 						<td><input type="button" value="8" id="number" onclick="display('8')"></td>
 						<td><input type="button" value="9" id="number" onclick="display('9')"></td>
-						<td><input type="button" value="&#247;" id="/" class="symbol" onclick="displayOperation('/')"></td>
+						<td><input type="button" value="&#247;" id="dive" onclick="displayOperation('/')"></td>
 					</tr>
 					<tr>	
 						<td><input type="button" value="4" id="number" onclick="display('4')"></td>
 						<td><input type="button" value="5" id="number" onclick="display('5')"></td>
 						<td><input type="button" value="6" id="number" onclick="display('6')"></td>
-						<td><input type="button" value="&#xd7;" class="symbol" id="*" onclick="displayOperation('*')"></td>
+						<td><input type="button" value="&#xd7;" id="mul" onclick="displayOperation('*')"></td>
 					</tr>
 					<tr>	
 						<td><input type="button" value="1" id="number" onclick="display('1')"></td>
 						<td><input type="button" value="2" id="number" onclick="display('2')"></td>
 						<td><input type="button" value="3" id="number" onclick="display('3')"></td>
-						<td><input type="button" value="-" class="symbol" id="-" onclick="displayOperation('-')"></td>
+						<td><input type="button" value="-" id="sub" onclick="displayOperation('-')"></td>
 					</tr>
 					<tr>	
 						<td><input type="button" value="0" id="number" onclick="display('0')"></td>
 						<td><input type="button" value="." id="number" onclick="display('.')"></td>
 						<td><input type="button" value="=" id="equ" onclick="solve()"></td>
-						<td><input type="button" value="+"  class="symbol" id="+" onclick="displayOperation('+')"></td>
+						<td><input type="button" value="+" id="add" onclick="displayOperation('+')"></td>
 					</tr>	
 				</table>
 		</fieldset>
