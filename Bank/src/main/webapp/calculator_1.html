@@ -13,17 +13,19 @@
 				x.addEventListener("click",solve);
 				x.addEventListener("click",clearInput); */
 				
-				var saved = null;
+				var saved = '';
 				var output = new Array();
 				var stored = 0;
 			function clearInput() 
 				{
  					document.getElementById("result").value = "";
- 					saved = null;
- 					document.getElementById("add").style.backgroundColor = "#bdbdbd";
-					document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-					document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-					document.getElementById("dive").style.backgroundColor = "#bdbdbd";
+ 					saved = '';
+ 					stored = 0;
+ 					output = new Array();
+ 					document.getElementById("+").style.backgroundColor = "#bdbdbd";
+					document.getElementById("-").style.backgroundColor = "#bdbdbd";
+					document.getElementById("*").style.backgroundColor = "#bdbdbd";
+					document.getElementById("/").style.backgroundColor = "#bdbdbd";
 				}
 			function display(number) 
 				{
@@ -33,111 +35,82 @@
 			 function displayOperation(operation) 
 				{
 				 	stored=parseFloat(stored);
-					output.push(stored);
+					if(stored != '')
+						{
+							output.push(stored);
+						}
+					console.log("output is "+ output);
+					console.log("operation is "+ operation);
 					
-					console.log("operation is "+operation);
+					if(stored != '' && saved == null || saved == '-' || saved != '*' && operation != '-' && saved != null)
+						{
+							document.getElementById(operation).style.backgroundColor = "#4CAF50";
+						}
+						
 					
-					if (!saved || operation != '-') 
+					if (stored != '' && saved == null || saved == '-' || saved != '*' && operation != '-' && saved != null) 
 						{
 							document.getElementById("result").value = "";
-							saved = operation;
+							saved += operation;
 							console.log("saved is "+saved);
 						} 
-					else
+					else if(operation == '-' && saved != null)
 						{
 							document.getElementById("result").value = "-";
 						}
+					/* if(stored != 0 && saved != null && output.length >= 2)
+						{
+							solve();
+						} */
 					
-					if(stored == 0)
-					{
-						document.getElementById("add").style.backgroundColor = "#bdbdbd";
-						document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-						document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-						document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-					}
-					if(!saved || operation != '-')
+					 /*  if(saved != null)
 						{
-							document.getElementById("add").style.backgroundColor = "#bdbdbd";
-							document.getElementById("sub").style.backgroundColor = "#4CAF50";
-							document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-							document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-						}
-					else
-						{
-							document.getElementById("add").style.backgroundColor = "#bdbdbd";
-							document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-							document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-							document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-						}
-					if(operation == '+')
-					{
-						document.getElementById("add").style.backgroundColor = "#4CAF50";
-						document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-						document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-						document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-					}
-					if(operation == '*')
-						{
-							document.getElementById("add").style.backgroundColor = "#bdbdbd";
-							document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-							document.getElementById("mul").style.backgroundColor = "#4CAF50";
-							document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-						}
-					if(operation == '/')
-						{
-							document.getElementById("add").style.backgroundColor = "#bdbdbd";
-							document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-							document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-							document.getElementById("dive").style.backgroundColor = "#4CAF50";
-						}
-					if(operation == '%')
-					{
-						document.getElementById("add").style.backgroundColor = "#bdbdbd";
-						document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-						document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-						document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-						document.getElementById("math").style.backgroundColor = "#87CEFA";
-					}
-					
+							document.getElementById(saved).style.backgroundColor = "#4CAF50";
+						} */  
 				} 
 			
 			function solve() 
 				{
-				
-					stored = parseFloat(stored);
-					output.push(stored);
+					  stored=parseFloat(stored);
+					if(stored != '')
+						{
+							output.push(stored);
+						} 
+					console.log("output is "+ output); 
 					//var number = 0;
 					//const storedNum = display(number);
 					//var operation = '';
 					//var storedOper= displayOperation(operation);
-					//var result = 0;
+					var result = 0;
+					
 					for(let i = 0; i < output.length;i++)
 						{
-						
-					switch(saved)
+								
+					switch(saved.charAt(i))
 						{
 							case '+':
 								{
-									document.getElementById("add").style.backgroundColor = "#bdbdbd";
-									result = output[i-1] + output[i];
+									document.getElementById("+").style.backgroundColor = "#bdbdbd";
+									output[i] = output[i] + output[i+1];
+									result = output[i];
 									break;
 								}
 							case '-':
 								{
-									document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-									result = output[i-1] - output[i];
+									document.getElementById("-").style.backgroundColor = "#bdbdbd";
+									result = result - output[i];
 									break;
 								}
 							case '*':
 								{
-									document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-									result = output[i-1] * output[i];
+									document.getElementById("*").style.backgroundColor = "#bdbdbd";
+									result = result * output[i];
 									break;
 								}
 							case '/':
 								{
-									document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-									result = output[i-1] / output[i];
+									document.getElementById("/").style.backgroundColor = "#bdbdbd";
+									result = result / output[i];
 									break;
 								}
 							case '%':
@@ -151,17 +124,20 @@
 						}
 					document.getElementById("result").value = result;
 					stored = result;
-					output.push(stored);
+					output=[];
+					//output.push(stored);
 					console.log(output);
 				}
 			function displayAC() 
 			{
 				document.getElementById("result").value = 0;
-				saved = null;
-				document.getElementById("add").style.backgroundColor = "#bdbdbd";
-				document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-				document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-				document.getElementById("dive").style.backgroundColor = "#bdbdbd";
+				saved = '';
+				stored = 0;
+				output = new Array();
+				document.getElementById("+").style.backgroundColor = "#bdbdbd";
+				document.getElementById("-").style.backgroundColor = "#bdbdbd";
+				document.getElementById("*").style.backgroundColor = "#bdbdbd";
+				document.getElementById("/").style.backgroundColor = "#bdbdbd";
 				//return saved;
 			}
 	         	

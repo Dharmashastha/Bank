@@ -13,13 +13,17 @@
 				x.addEventListener("click",solve);
 				x.addEventListener("click",clearInput); */
 				
-				var saved = null;
-				var output = new Array();
-				var stored = 0;
+				var saved = '';
+				var output1 = 0;
+			//	var stored = 0;
+				var output2 = 0;
 			function clearInput() 
 				{
  					document.getElementById("result").value = "";
- 					saved = null;
+ 					saved = '';
+ 				//	stored = 0;
+ 					output1 = 0;
+ 					output2 = 0;
  					document.getElementById("+").style.backgroundColor = "#bdbdbd";
 					document.getElementById("-").style.backgroundColor = "#bdbdbd";
 					document.getElementById("*").style.backgroundColor = "#bdbdbd";
@@ -27,144 +31,110 @@
 				}
 			function display(number) 
 				{
-					stored = document.getElementById("result").value += number;
+					if(output1 != 0 && output1 != null && saved != null && saved != '')
+						{
+							output2 = document.getElementById("result").value += number;
+							output2 = parseFloat(output2);
+						}
+					else
+						{
+							output1 =  document.getElementById("result").value += number;
+							output1 = parseFloat(output1);
+						}
 					//return saved;
 				}
 			 function displayOperation(operation) 
 				{
-				 	stored=parseFloat(stored);
-					output.push(stored);
-					
+				 	
 					console.log("operation is "+ operation);
 					
-					if(saved == null)
-					{
-						document.getElementById(operation).style.backgroundColor = "#4CAF50";
-					}
 					
-					if (!saved || operation != '-' && saved != '-') 
+					if(saved == null || saved == '-' || saved != '*' && operation != '-' && saved != null)
+						{
+							document.getElementById(operation).style.backgroundColor = "#4CAF50";
+						}
+					
+					if(saved != null && output1 != 0 && output2 != 0)
+					{
+						solve();
+						document.getElementById("result").value = "";
+					}
+											
+					if (saved == null || saved == '-' || saved != '*' && operation != '-' && saved != null) 
 						{
 							document.getElementById("result").value = "";
 							saved = operation;
 							console.log("saved is "+saved);
 						} 
-					else if(!saved && saved != '+' || saved != '*')
-						{
-							document.getElementById("result").value = "";
-							saved = operation;
-							console.log("saved is "+saved);
-						}
-					else
+					else if(operation == '-' && saved != null)
 						{
 							document.getElementById("result").value = "-";
 						}
-					
-					if(saved != null)
-					{
-						document.getElementById(saved).style.backgroundColor = "#4CAF50";
-					}
-					/* if(!saved || operation != '-')
+					    
+					   /* if(saved != null)
 						{
-							document.getElementById("add").style.backgroundColor = "#bdbdbd";
-							document.getElementById("sub").style.backgroundColor = "#4CAF50";
-							document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-							document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-						}
-					else
-						{
-							document.getElementById("add").style.backgroundColor = "#bdbdbd";
-							document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-							document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-							document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-						}
-					if(operation == '+')
-					{
-						document.getElementById("add").style.backgroundColor = "#4CAF50";
-						document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-						document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-						document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-					}
-					if(operation == '*')
-						{
-							document.getElementById("add").style.backgroundColor = "#bdbdbd";
-							document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-							document.getElementById("mul").style.backgroundColor = "#4CAF50";
-							document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-						}
-					if(operation == '/')
-						{
-							document.getElementById("add").style.backgroundColor = "#bdbdbd";
-							document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-							document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-							document.getElementById("dive").style.backgroundColor = "#4CAF50";
-						}
-					if(operation == '%')
-						{
-							document.getElementById("add").style.backgroundColor = "#bdbdbd";
-							document.getElementById("sub").style.backgroundColor = "#bdbdbd";
-							document.getElementById("mul").style.backgroundColor = "#bdbdbd";
-							document.getElementById("dive").style.backgroundColor = "#bdbdbd";
-							document.getElementById("math").style.backgroundColor = "#87CEFA";
-						} */
+							document.getElementById(saved).style.backgroundColor = "#4CAF50";
+						} */  
 				} 
 			
 			function solve() 
 				{
-				
-					stored = parseFloat(stored);
-					output.push(stored);
+					  /* stored=parseFloat(stored);
+					if(stored != '')
+						{
+							output2 = stored;
+						} 
+					console.log("output is "+ output2); */ 
 					//var number = 0;
 					//const storedNum = display(number);
 					//var operation = '';
 					//var storedOper= displayOperation(operation);
-					//var result = 0;
-					for(let i = 0; i < output.length;i++)
-						{
-						
+					var result = 0;
+					
 					switch(saved)
 						{
 							case '+':
 								{
 									document.getElementById("+").style.backgroundColor = "#bdbdbd";
-									result = output[i-1] + output[i];
+									result = output1 + output2;
 									break;
 								}
 							case '-':
 								{
 									document.getElementById("-").style.backgroundColor = "#bdbdbd";
-									result = output[i-1] - output[i];
+									result = output1 - output2;
 									break;
 								}
 							case '*':
 								{
 									document.getElementById("*").style.backgroundColor = "#bdbdbd";
-									result = output[i-1] * output[i];
+									result = output1 * output2;
 									break;
 								}
 							case '/':
 								{
 									document.getElementById("/").style.backgroundColor = "#bdbdbd";
-									result = output[i-1] / output[i];
+									result = output1 / output2;
 									break;
 								}
 							case '%':
 								{
-									result = output[i-1] % output[i];
+									result = output1 % output2;
 									break;
 								}
 							default:
 								return ;
 						}
-						}
 					document.getElementById("result").value = result;
-					stored = result;
-					output.push(stored);
-					console.log(output);
+					output1 = result;
+					console.log(output1);
 				}
 			function displayAC() 
 			{
 				document.getElementById("result").value = 0;
-				saved = null;
+				saved = '';
+				//stored = 0;
+				output1 = 0;
 				document.getElementById("+").style.backgroundColor = "#bdbdbd";
 				document.getElementById("-").style.backgroundColor = "#bdbdbd";
 				document.getElementById("*").style.backgroundColor = "#bdbdbd";
@@ -178,6 +148,9 @@
 	<body>
 		<fieldset>
 				<table id="Calculator">
+					<tr id="display">
+						<td colspan="4"><input type="text" id="result"></td>
+					<tr>
 					<tr>
 						<td colspan="4"><input type="text" id="result"></td>
 					<tr>	
