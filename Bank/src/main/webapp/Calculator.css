@@ -64,18 +64,38 @@ input[type=button]{
 
 input[type=text]
 {
-width:90%;
-padding:7px;
-border:1;
-box-shadow:0 0 15px 4px rgba(0,0,0,0.06);	
-font-style: italic;	
-text-align: right; 
+height: 20px;
+font-size: 23px; 
+width: 100%;
+text-align: right;
+}
+
+#result
+{
+font-weight: bold;
+font-size: 20px;
+width: 96%;
+border: none;
+height : 30px;
 }
 
 #display
 {
-width:90%;
-padding:none;
-border:none;
-box-shadow:none;
+height : 20px;	
+font-size: 15px;
+width: 96%;
+border: none;
+font-style: italic;
 }
+
+#output{
+height: 70px;
+width: 100%;
+padding: 3px;
+background-color: white;
+border-radius: 10px;
+box-shadow: 4px 8px black; 
+margin-right: -3px;
+}
+
+

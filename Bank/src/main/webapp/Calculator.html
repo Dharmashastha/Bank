@@ -13,17 +13,17 @@
 				x.addEventListener("click",solve);
 				x.addEventListener("click",clearInput); */
 				
-				var saved = '';
-				var output1 = 0;
+				var saved = null;
+				var output1 = "";
 			//	var stored = 0;
-				var output2 = 0;
+				var output2 = "";
 			function clearInput() 
 				{
  					document.getElementById("result").value = "";
- 					saved = '';
+ 					saved = null;
  				//	stored = 0;
- 					output1 = 0;
- 					output2 = 0;
+ 					output1 = "";
+ 					document.getElementById("display").value = "";
  					document.getElementById("+").style.backgroundColor = "#bdbdbd";
 					document.getElementById("-").style.backgroundColor = "#bdbdbd";
 					document.getElementById("*").style.backgroundColor = "#bdbdbd";
@@ -31,15 +31,27 @@
 				}
 			function display(number) 
 				{
-					if(output1 != 0 && output1 != null && saved != null && saved != '')
+					if(output1 != "" && output1 != null && saved != null && saved != '')
 						{
-							output2 = document.getElementById("result").value += number;
-							output2 = parseFloat(output2);
+							if(output2.includes(".") && number == ".")
+							{
+								number="";
+							}
+							output2 += number;
+							document.getElementById("result").value = commaOperation(output2);
+							document.getElementById("display").value = output1 + saved + output2;
+							//output2 = parseFloat(output2);
 						}
 					else
 						{
-							output1 =  document.getElementById("result").value += number;
-							output1 = parseFloat(output1);
+							if(output1.includes(".") && number == ".")
+							{
+								number="";
+							}
+							output1 += number;	//commaOperation(output1)
+							document.getElementById("result").value = commaOperation(output1);
+							document.getElementById("display").value = output1;
+							//output1 = parseFloat(output1);
 						}
 					//return saved;
 				}
@@ -48,33 +60,39 @@
 				 	
 					console.log("operation is "+ operation);
 					
-					
-					if(saved == null || saved == '-' || saved != '*' && operation != '-' && saved != null)
-						{
-							document.getElementById(operation).style.backgroundColor = "#4CAF50";
-						}
-					
 					if(saved != null && output1 != 0 && output2 != 0)
 					{
 						solve();
 						document.getElementById("result").value = "";
 					}
-											
-					if (saved == null || saved == '-' || saved != '*' && operation != '-' && saved != null) 
+					
+					if (saved == null && output1 != 0 || output1 != 0 && saved != null && operation != '-') 
 						{
 							document.getElementById("result").value = "";
 							saved = operation;
+							document.getElementById("display").value = output1 + saved;
+							document.getElementById(operation).style.backgroundColor = "#4CAF50";
 							console.log("saved is "+saved);
 						} 
-					else if(operation == '-' && saved != null)
+					else if(output1 != 0 && saved == '-' && operation == '-')
 						{
-							document.getElementById("result").value = "-";
+							document.getElementById("result").value = "";
+							document.getElementById('+').style.backgroundColor = "#4CAF50";
+							saved = '+';
+							document.getElementById("display").value =output1 + saved;
 						}
-					    
-					   /* if(saved != null)
+					else
 						{
-							document.getElementById(saved).style.backgroundColor = "#4CAF50";
-						} */  
+							document.getElementById(operation).style.backgroundColor = "#bdbdbd";
+							document.getElementById("result").value = "-";
+							document.getElementById("display").value =output1 + saved + '-';
+						}
+					
+					/* else if(saved == null && output1 == 0 && operation == '-' || output1 != 0 && saved != null && operation == '-')
+					{
+						document.getElementById("result").value = "-";
+					} */   
+					
 				} 
 			
 			function solve() 
@@ -89,6 +107,9 @@
 					//const storedNum = display(number);
 					//var operation = '';
 					//var storedOper= displayOperation(operation);
+					output1 = parseFloat(output1);
+					output2 = parseFloat(output2);
+					
 					var result = 0;
 					
 					switch(saved)
@@ -125,34 +146,75 @@
 							default:
 								return ;
 						}
-					document.getElementById("result").value = result;
+					
+										
+					
+					document.getElementById("result").value = commaOperation(result);
+					//document.getElementById("display").value = output1 + saved + output2;
+					
+					//result = parseFloat(result);
 					output1 = result;
+					output2 = "";
 					console.log(output1);
 				}
 			function displayAC() 
 			{
 				document.getElementById("result").value = 0;
-				saved = '';
+				saved = null;
 				//stored = 0;
-				output1 = 0;
+				output1 = "";
 				document.getElementById("+").style.backgroundColor = "#bdbdbd";
 				document.getElementById("-").style.backgroundColor = "#bdbdbd";
 				document.getElementById("*").style.backgroundColor = "#bdbdbd";
 				document.getElementById("/").style.backgroundColor = "#bdbdbd";
+				document.getElementById("display").value = ""
 				//return saved;
 			}
-	         	
 			
+	        function commaOperation(result) 
+	        {
+	        	let dummy = result.toString(); 
+				
+				let array = dummy.split('.');
+				
+				let ans = '';
+				
+				let tempResult = array[0];
+				
+				let length = tempResult.length - 1; 
+					
+				let last = tempResult.charAt(length);
+								
+				let count = 0;
+				
+				for(let i=length-1;i >= 0;i--)
+					{
+						ans = tempResult.charAt(i) + ans;
+						++count;
+						if(count % 2 == 0 && i > 0)
+							{
+								ans=','+ans;
+							}
+					}
+				if(array[1])
+					{
+						ans = ans + last + '.' + array[1];
+					}
+				else
+					{
+						ans += last;
+					}
+				return ans;
+			} 			
 		</script>
 	</head>
 	<body>
 		<fieldset>
+				<div id="output">
+					<input type="text"  id="display" readonly="readonly">
+					<input type="text"  id="result" placeholder="0" readonly="readonly">
+				</div><br>
 				<table id="Calculator">
-					<tr id="display">
-						<td colspan="4"><input type="text" id="result"></td>
-					<tr>
-					<tr>
-						<td colspan="4"><input type="text" id="result"></td>
 					<tr>	
 						<td><input type="button" value="AC" id="ac" onclick="displayAC()"></td>
 						<td><input type="button" value="C" id="math" onclick="clearInput()"></td>
