@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			Calculator
+		</title>
+		<link rel="stylesheet" type="text/css" href="Calculator.css">
+		<script>
+			/* var x = document.getElementById("result");
+				x.addEventListener("click",display(number));
+				x.addEventListener("click",displayOperation);
+				x.addEventListener("click",solve);
+				x.addEventListener("click",clearInput); */
+				
+				var saved = null;
+				var output1 = "";
+			//	var stored = 0;
+				var output2 = "";
+			function clearInput() 
+				{
+ 					document.getElementById("result").value = "";
+ 					saved = null;
+ 				//	stored = 0;
+ 					output1 = "";
+ 					document.getElementById("display").value = "";
+ 					document.getElementById("+").style.backgroundColor = "#bdbdbd";
+					document.getElementById("-").style.backgroundColor = "#bdbdbd";
+					document.getElementById("*").style.backgroundColor = "#bdbdbd";
+					document.getElementById("/").style.backgroundColor = "#bdbdbd";
+				}
+			function display(number) 
+				{
+					if(output1 != "" && output1 != null && saved != null && saved != '')
+						{
+							if(output2.includes(".") && number == ".")
+							{
+								number="";
+							}
+							output2 += number;//commaOperation(output2)
+							document.getElementById("result").value = commaOperation(output2);
+							document.getElementById("display").value = output1 + saved + output2;
+							//output2 = parseFloat(output2);
+						}
+					else
+						{
+							if(output1.includes(".") && number == ".")
+							{
+								number="";
+							}
+							output1 += number;	//commaOperation(output1)
+							document.getElementById("result").value = commaOperation(output1);
+							document.getElementById("display").value = output1;
+							//output1 = parseFloat(output1);
+						}
+					//return saved;
+				}
+			 function displayOperation(operation) 
+				{
+				 	
+					console.log("operation is "+ operation);
+					
+					if(saved != null && output1 != 0 && output2 != 0)
+					{
+						solve();
+						document.getElementById("result").value = "";
+					}
+					
+					if (saved == null && output1 != 0 || output1 != 0 && saved != null && operation != '-') 
+						{
+							document.getElementById("result").value = "";
+							saved = operation;
+							document.getElementById("display").value = output1 + saved;
+							document.getElementById(operation).style.backgroundColor = "#4CAF50";
+							console.log("saved is "+saved);
+						} 
+					else if(output1 != 0 && saved == '-' && operation == '-')
+						{
+							document.getElementById("result").value = "";
+							document.getElementById('+').style.backgroundColor = "#4CAF50";
+							saved = '+';
+							document.getElementById("display").value =output1 + saved;
+						}
+					else
+						{
+							document.getElementById(operation).style.backgroundColor = "#bdbdbd";
+							document.getElementById("result").value = '-';
+							document.getElementById("display").value =output1 + saved + '-';
+						}
+					
+					/* else if(saved == null && output1 == 0 && operation == '-' || output1 != 0 && saved != null && operation == '-')
+					{
+						document.getElementById("result").value = "-";
+					} */   
+					
+				} 
+			
+			function solve() 
+				{
+					  /* stored=parseFloat(stored);
+					if(stored != '')
+						{
+							output2 = stored;
+						} 
+					console.log("output is "+ output2); */ 
+					//var number = 0;
+					//const storedNum = display(number);
+					//var operation = '';
+					//var storedOper= displayOperation(operation);
+					output1 = parseFloat(output1);
+					output2 = parseFloat(output2);
+					
+					var result = 0;
+					
+					switch(saved)
+						{
+							case '+':
+								{
+									document.getElementById("+").style.backgroundColor = "#bdbdbd";
+									result = output1 + output2;
+									break;
+								}
+							case '-':
+								{
+									document.getElementById("-").style.backgroundColor = "#bdbdbd";
+									result = output1 - output2;
+									break;
+								}
+							case '*':
+								{
+									document.getElementById("*").style.backgroundColor = "#bdbdbd";
+									result = output1 * output2;
+									break;
+								}
+							case '/':
+								{
+									document.getElementById("/").style.backgroundColor = "#bdbdbd";
+									result = output1 / output2;
+									break;
+								}
+							case '%':
+								{
+									result = output1 % output2;
+									break;
+								}
+							default:
+								return ;
+						}
+					
+										
+					
+					document.getElementById("result").value = commaOperation(result);
+					//document.getElementById("display").value = output1 + saved + output2;
+					
+					//result = parseFloat(result);
+					output1 = result;
+					output2 = "";
+					console.log(output1);
+				}
+			function displayAC() 
+			{
+				document.getElementById("result").value = 0;
+				saved = null;
+				//stored = 0;
+				output1 = "";
+				document.getElementById("+").style.backgroundColor = "#bdbdbd";
+				document.getElementById("-").style.backgroundColor = "#bdbdbd";
+				document.getElementById("*").style.backgroundColor = "#bdbdbd";
+				document.getElementById("/").style.backgroundColor = "#bdbdbd";
+				document.getElementById("display").value = ""
+				//return saved;
+			}
+			
+	        function commaOperation(result) 
+	        {
+	        	let dummy = result.toString(); 
+				
+				let array = dummy.split('.');
+				
+				let ans = '';
+				
+				let tempResult = array[0];
+				
+				let length = tempResult.length - 1; 
+					
+				let last = tempResult.charAt(length);
+								
+				let count = 0;
+				
+				for(let i=length-1;i >= 0;i--)
+					{
+						ans = tempResult.charAt(i) + ans;
+						++count;
+						if(count % 2 == 0 && i > 0)
+							{
+								ans=','+ans;
+							}
+					}
+				if(array[1])
+					{
+						ans = ans + last + '.' + array[1];
+					}
+				else
+					{
+						ans += last;
+					}
+				return ans;
+			} 			
+		</script>
+	</head>
+	<body>
+		<fieldset>
+				<div id="output">
+					<input type="text"  id="display" readonly="readonly">
+					<input type="text"  id="result" placeholder="0" readonly="readonly">
+				</div><br>
+				<table id="Calculator">
+					<tr>	
+						<td><input type="button" value="AC" id="ac" onclick="displayAC()"></td>
+						<td><input type="button" value="C" id="math" onclick="clearInput()"></td>
+						<td><input type="button" value="&#x221A;" id="math"></td>
+						<td><input type="button" value="%" id="math" onclick="displayOperation('%')"></td>
+					</tr>
+					<tr>	
+						<td><input type="button" value="7" id="number" onclick="display('7')"></td>
+						<td><input type="button" value="8" id="number" onclick="display('8')"></td>
+						<td><input type="button" value="9" id="number" onclick="display('9')"></td>
+						<td><input type="button" value="&#247;" id="/" class="symbol" onclick="displayOperation('/')"></td>
+					</tr>
+					<tr>	
+						<td><input type="button" value="4" id="number" onclick="display('4')"></td>
+						<td><input type="button" value="5" id="number" onclick="display('5')"></td>
+						<td><input type="button" value="6" id="number" onclick="display('6')"></td>
+						<td><input type="button" value="&#xd7;" class="symbol" id="*" onclick="displayOperation('*')"></td>
+					</tr>
+					<tr>	
+						<td><input type="button" value="1" id="number" onclick="display('1')"></td>
+						<td><input type="button" value="2" id="number" onclick="display('2')"></td>
+						<td><input type="button" value="3" id="number" onclick="display('3')"></td>
+						<td><input type="button" value="-" class="symbol" id="-" onclick="displayOperation('-')"></td>
+					</tr>
+					<tr>	
+						<td><input type="button" value="0" id="number" onclick="display('0')"></td>
+						<td><input type="button" value="." id="number" onclick="display('.')"></td>
+						<td><input type="button" value="=" id="equ" onclick="solve()"></td>
+						<td><input type="button" value="+"  class="symbol" id="+" onclick="displayOperation('+')"></td>
+					</tr>	
+				</table>
+		</fieldset>
+	</body>
+</html>

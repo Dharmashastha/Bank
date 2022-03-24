@@ -13,199 +13,213 @@
 				x.addEventListener("click",solve);
 				x.addEventListener("click",clearInput); */
 				
-				var saved = null;
-				var output1 = "";
-			//	var stored = 0;
-				var output2 = "";
+				//var saved = [];
+				var output = [];
+				let stored = '';
+				let result = '';
 			function clearInput() 
 				{
+					//var saved = [];
+					output = [];
+					stored = '';
  					document.getElementById("result").value = "";
- 					saved = null;
- 				//	stored = 0;
- 					output1 = "";
- 					document.getElementById("display").value = "";
+			        document.getElementById("display").value = "";
  					document.getElementById("+").style.backgroundColor = "#bdbdbd";
 					document.getElementById("-").style.backgroundColor = "#bdbdbd";
 					document.getElementById("*").style.backgroundColor = "#bdbdbd";
 					document.getElementById("/").style.backgroundColor = "#bdbdbd";
+					document.getElementById("(").style.backgroundColor = "#bdbdbd";
+					document.getElementById(")").style.backgroundColor = "#bdbdbd";
 				}
+			
 			function display(number) 
 				{
-					if(output1 != "" && output1 != null && saved != null && saved != '')
+					if(stored.includes(".") && number == ".")
 						{
-							if(output2.includes(".") && number == ".")
-							{
-								number="";
-							}
-							output2 += number;
-							document.getElementById("result").value = commaOperation(output2);
-							document.getElementById("display").value = output1 + saved + output2;
-							//output2 = parseFloat(output2);
-						}
-					else
-						{
-							if(output1.includes(".") && number == ".")
-							{
-								number="";
-							}
-							output1 += number;	//commaOperation(output1)
-							document.getElementById("result").value = commaOperation(output1);
-							document.getElementById("display").value = output1;
-							//output1 = parseFloat(output1);
-						}
-					//return saved;
+							number="";
+						}	
+					
+					stored = document.getElementById("result").value += number;
+					console.log("saved is "+output);
+					
 				}
+			
 			 function displayOperation(operation) 
 				{
-				 	
-					console.log("operation is "+ operation);
-					
-					if(saved != null && output1 != 0 && output2 != 0)
-					{
-						solve();
-						document.getElementById("result").value = "";
-					}
-					
-					if (saved == null && output1 != 0 || output1 != 0 && saved != null && operation != '-') 
+				 	// stored = parseFloat(stored);
+				 	/* if(operation != '(' && operation != ')')
+				 		{
+				 			output.push(stored);
+				 		} */
+				 		output.push(stored);
+				 
+				 	console.log("saved is "+output);
+				 		
+					if (output == [] && stored != '' || stored != '' && output != [] && operation != '-' || operation == '(' || operation == ')') 
 						{
 							document.getElementById("result").value = "";
-							saved = operation;
-							document.getElementById("display").value = output1 + saved;
+							output.push(operation);
 							document.getElementById(operation).style.backgroundColor = "#4CAF50";
-							console.log("saved is "+saved);
-						} 
-					else if(output1 != 0 && saved == '-' && operation == '-')
+							//document.getElementById("display").value = stored + ;
+							console.log("saved is "+output);
+						}
+					
+					 /* else if(stored != '' && output[i] == '-' && operation == '-')
 						{
 							document.getElementById("result").value = "";
+							document.getElementById('-').style.backgroundColor = "#bdbdbd";
 							document.getElementById('+').style.backgroundColor = "#4CAF50";
-							saved = '+';
-							document.getElementById("display").value =output1 + saved;
-						}
+							output.push('+');
+							//document.getElementById("display").value =output1 + saved;
+						} */ 
 					else
 						{
 							document.getElementById(operation).style.backgroundColor = "#bdbdbd";
-							document.getElementById("result").value = "-";
-							document.getElementById("display").value =output1 + saved + '-';
+							document.getElementById("result").value = '-';
+							//document.getElementById("display").value = stored + saved + '-';
 						}
-					
+				 		
+					document.getElementById("display").value = result;
 					/* else if(saved == null && output1 == 0 && operation == '-' || output1 != 0 && saved != null && operation == '-')
 					{
 						document.getElementById("result").value = "-";
-					} */   
-					
+					} */   	
 				} 
-			
+			  
 			function solve() 
 				{
-					  /* stored=parseFloat(stored);
-					if(stored != '')
-						{
-							output2 = stored;
-						} 
-					console.log("output is "+ output2); */ 
-					//var number = 0;
-					//const storedNum = display(number);
-					//var operation = '';
-					//var storedOper= displayOperation(operation);
-					output1 = parseFloat(output1);
-					output2 = parseFloat(output2);
+					//stored = parseFloat(stored);
+			 		output.push(stored); 
+			 		console.log("saved is "+output);
+			 		
+			 		for(let i= 0; i< output.length;i++)
+					{
+						document.getElementById("display").value += output[i];
+					}
 					
-					var result = 0;
+			 		let values = [];
 					
-					switch(saved)
+					let operation = [];
+					
+					for(let i = 0; i < output.length; i++)
 						{
+							if(output[i] >= '0' && output[i] <= '9')
+								{
+									let dummy = '';
+									
+									while(i < output.length && output[i] >= '0' && output[i] <= '9')
+										{
+											dummy = dummy + output[i++];
+										}
+									values.push(parseFloat(dummy));
+									i--;	
+								}
+							
+							else if(output[i] == '(')
+									{
+										operation.push(output[i]);
+									}
+							
+							else if(output[i] == ')')
+									{
+										while(operation[operation.length -1] != '(')
+												{
+													values.push(applyOperation(operation.pop(),values.pop(),values.pop()));
+												}
+										operation.pop();
+									}
+							
+							else if (output[i] == '+' || output[i] == '-' || output[i] == '*' || output[i] == '/')
+				            {
+				                  
+				                while (operation.length > 0 && precedence(output[i], operation[operation.length - 1]))
+				                {
+				                	values.push(applyOperation(operation.pop(),values.pop(),values.pop()));
+				                }
+				  
+				                operation.push(output[i]);
+				            }
+				        }
+				  
+				        while (operation.length > 0)
+				        {
+				            values.push(applyOperation(operation.pop(),values.pop(),values.pop()));
+				        }
+				  		
+				        result = values.pop();
+				        
+				        document.getElementById("result").value = result;
+				        
+				        
+				        //return values.pop();
+				    }
+				  
+				    function precedence(operation1, operation2)
+				    {
+				        if (operation2 == '(' || operation2 == ')')
+				        {
+				            return false;
+				        }
+				        if ((operation1 == '*' || operation1 == '/') && (operation2 == '+' || operation2 == '-'))
+				        {
+				            return false;
+				        }
+				        else
+				        {
+				            return true;
+				        }
+				    }
+					
+					function applyOperation(operation, output2, output1)
+					{	
+						switch(operation)
+							{
 							case '+':
 								{
 									document.getElementById("+").style.backgroundColor = "#bdbdbd";
-									result = output1 + output2;
-									break;
+									return output1 + output2;
 								}
 							case '-':
 								{
 									document.getElementById("-").style.backgroundColor = "#bdbdbd";
-									result = output1 - output2;
-									break;
+									return output1 - output2;
 								}
 							case '*':
 								{
 									document.getElementById("*").style.backgroundColor = "#bdbdbd";
-									result = output1 * output2;
-									break;
+									return output1 * output2;
 								}
 							case '/':
 								{
 									document.getElementById("/").style.backgroundColor = "#bdbdbd";
-									result = output1 / output2;
-									break;
+									return output1 / output2;
 								}
 							case '%':
 								{
-									result = output1 % output2;
-									break;
+									return output1 % output2;
 								}
 							default:
 								return ;
 						}
-					
-										
-					
-					document.getElementById("result").value = commaOperation(result);
-					//document.getElementById("display").value = output1 + saved + output2;
-					
-					//result = parseFloat(result);
-					output1 = result;
-					output2 = "";
-					console.log(output1);
-				}
+						}
+									
 			function displayAC() 
 			{
+				//var saved = [];
+				output = [];
+				stored = '';
 				document.getElementById("result").value = 0;
-				saved = null;
-				//stored = 0;
-				output1 = "";
+		        document.getElementById("display").value = "";
 				document.getElementById("+").style.backgroundColor = "#bdbdbd";
 				document.getElementById("-").style.backgroundColor = "#bdbdbd";
 				document.getElementById("*").style.backgroundColor = "#bdbdbd";
 				document.getElementById("/").style.backgroundColor = "#bdbdbd";
-				document.getElementById("display").value = ""
+				document.getElementById("(").style.backgroundColor = "#bdbdbd";
+				document.getElementById(")").style.backgroundColor = "#bdbdbd";
+				//document.getElementById("display").value = ""
 				//return saved;
 			}
-			
-	        function commaOperation(result) 
-	        {
-	        	let dummy = result.toString(); 
-				
-				let array = dummy.split('.');
-				
-				let ans = '';
-				
-				let tempResult = array[0];
-				
-				let length = tempResult.length - 1; 
 					
-				let last = tempResult.charAt(length);
-								
-				let count = 0;
-				
-				for(let i=length-1;i >= 0;i--)
-					{
-						ans = tempResult.charAt(i) + ans;
-						++count;
-						if(count % 2 == 0 && i > 0)
-							{
-								ans=','+ans;
-							}
-					}
-				if(array[1])
-					{
-						ans = ans + last + '.' + array[1];
-					}
-				else
-					{
-						ans += last;
-					}
-				return ans;
-			} 			
 		</script>
 	</head>
 	<body>
@@ -220,6 +234,12 @@
 						<td><input type="button" value="C" id="math" onclick="clearInput()"></td>
 						<td><input type="button" value="&#x221A;" id="math"></td>
 						<td><input type="button" value="%" id="math" onclick="displayOperation('%')"></td>
+					</tr>
+					<tr>	
+						<td><input type="button" value="(" id="(" class="symbol"  onclick="displayOperation('(')"></td>
+						<td><input type="button" value=")" id=")" class="symbol" onclick="displayOperation(')')"></td>
+						<td><input type="button" value="^2" id="math" onclick=""></td>
+						<td><input type="button" value="^3" id="math" onclick=""></td>
 					</tr>
 					<tr>	
 						<td><input type="button" value="7" id="number" onclick="display('7')"></td>
