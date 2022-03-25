@@ -3,8 +3,8 @@ fieldset
 {	
 	text-align: center;
 	margin-left:800px;
-	width:10%;
-	height:450px;
+	width:20%;
+	height:430px;
 	border:5px solid black;
 	font-size: 18px;
 }
@@ -15,7 +15,7 @@ fieldset
 
 #Calculator td{
   border: 1px solid black;
-  padding: 8px;
+  padding: 6px;
   text-align: center;
 }
 
@@ -25,9 +25,17 @@ input[type=button]{
 	font-size: 20px;
   	cursor: pointer;
   	box-sizing: border-box;
-  	border-radius: 25%;
+  	border-radius: 50%;
   	font-weight: 700;
-  	padding: 5px 8px;
+  	padding: 2px 4px;
+  	height: 37px;
+    width: 37px;
+}
+
+input[type=button]:active
+{
+   transform:translateY(3px);
+   box-shadow:0px 4px #666;
 }
 
 #ac
@@ -52,14 +60,14 @@ input[type=button]{
 
 .symbol
 {
-	background-color: #bdbdbd;
-  	color: white;
+	background-color:#87CEFA;
+  	color: black;
 }
 
 #equ
 {
-  background-color: #bdbdbd;
-  color: white;
+  background-color: #87CEFA;
+  color: black;
 }
 
 input[type=text]
