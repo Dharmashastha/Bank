@@ -17,6 +17,7 @@
 				var output = [];
 				let stored = '';
 				let result = '';
+				
 			function clearInput() 
 				{
 					//var saved = [];
@@ -70,7 +71,13 @@
 							output.push(operation);
 							document.getElementById(operation).style.backgroundColor = "#4CAF50";
 						}
-						else if(output[output.length-1]=='+'|| output[output.length-1]=='*'|| output[output.length-1]=='-'|| output[output.length-1]==')'|| output[output.length-1]=='/' || output[output.length-1]=='²' || output[output.length-1]=='³' || output[output.length-1]=='√')
+					else if(operation=='(')
+							{
+								document.getElementById("result").value = "";
+								document.getElementById(operation).style.backgroundColor = "#4CAF50";
+								output.push(operation);
+							}
+						else if(output[output.length-1]==')' && ( operation=='+'||operation=='*'|| operation=='-' || operation=='/' || operation== '²' || operation== '³' || operation== '√'))
 							{
 								document.getElementById(operation).style.backgroundColor = "#4CAF50";
 								document.getElementById("result").value = "";
@@ -124,7 +131,7 @@
 			function solve() 
 				{
 					//stored = parseFloat(stored);
-					if(output[output.length-1] != ')')
+					if(output[output.length-1] != ')' && output[output.length-1] != '²' && output[output.length-1] != '³' && output[output.length-1] != '√')
 					{
 				 		output.push(stored); 
 					}
